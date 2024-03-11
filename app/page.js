@@ -1,13 +1,18 @@
 "use client";
+import cookie from "@/utils/cookies";
 import { formatNumber, formatSize } from "@/utils/format";
 import { getTranslations } from "@/utils/getTranslation";
+import getUserLanguageCode from "@/utils/userLanguageCode";
 import axios from "axios";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import cookie from "@/utils/cookies";
-import getUserLanguageCode from "@/utils/userLanguageCode";
+import Footer from "./components/Layout/Footer";
+import Header from "./components/Layout/Header";
 
 export default function Home() {
+  const searchParams = useSearchParams();
+  const referral = searchParams.get("referral");
   const [mainContentLoad, setMainContentLoad] = useState(false);
   const [alertsLoad, setAlertsLoad] = useState(false);
   const [alertOptions, setAlertOptions] = useState({ isPro: null, deviceExists: null, appdbLT: null, devices: null });
@@ -124,7 +129,8 @@ export default function Home() {
   };
 
   return (
-    <section className="dark:bg-gray-700 dark:text-gray-200 bg-white text-black">
+    <>
+      <Header />
       <main className="mx-5 md:mx-12 mt-5 grid grid-cols-4 mb-6 ">
         <div className="md:w-12/12 col-span-4 md:col-span-3 grid grid-cols-6">
           {alertsLoad && (
@@ -284,10 +290,7 @@ export default function Home() {
                       </svg>
                       <span>All the benefits of Signtunes & More</span>
                     </div>
-                    <a
-                      className="btn btn-sm text-white"
-                      href={`"/pro<?php if (isset($_GET['referral'])) echo "?referral=$_GET[referral]";?`}
-                    >
+                    <a className="btn btn-sm text-white" href={`/pro${referral ? `?referral=${referral}` : ""}`}>
                       Get Pro
                     </a>
                   </div>
@@ -935,10 +938,10 @@ export default function Home() {
                 We are facing increased censorship. Please save our TOR or I2P address in-case Signtunes becomes
                 inaccessible for you.
               </p>
-              <p className="text-sm text-gray-700 dark:text-gray-400">
+              <p className="text-[12px] text-gray-700 dark:text-gray-400">
                 signtunesjchffojqtmnngqgdwn4qtdpxrwg6t6ghjygqa2wjjvnlmyd.onion
               </p>
-              <p className="text-sm text-gray-700 dark:text-gray-400">
+              <p className="text-[12px] text-gray-700 dark:text-gray-400">
                 hsetkcdjjwcedxdhgx4cokv33t2okipejolpum2lvvbncjijk5wq.b32.i2p
               </p>
               <div className="card-actions justify-end">
@@ -968,6 +971,7 @@ export default function Home() {
                 </div> */}
         </div>
       </main>
-    </section>
+      <Footer />
+    </>
   );
 }

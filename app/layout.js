@@ -245,25 +245,7 @@ export default function RootLayout({ children }) {
 
         <Script
           dangerouslySetInnerHTML={{
-            __html: `function cookie(name){
-            var nameEQ = name + "=";
-            var ca = document.cookie.split(';');
-            for(var i=0;i < ca.length;i++) {
-                var c = ca[i];
-                while (c.charAt(0)==' ') c = c.substring(1,c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-            }
-            return null;
-        }
-        function setCookie(name,value,days){
-            var expires="";
-            if(days){
-                var date=new Date();
-                date.setTime(date.getTime() + (days*24*60*60*1000));
-                expires="; expires="+date.toUTCString();
-            }
-            document.cookie = name + "=" + (value || "")  + expires + "; path=/;domain=.signtunes.com";
-        }
+            __html: `
         if(localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches))
             document.documentElement.classList.add('dark');
         else
@@ -271,7 +253,7 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className + " dark:bg-gray-700 dark:text-gray-200 bg-white text-black"}>{children}</body>
     </html>
   );
 }
