@@ -9,6 +9,7 @@ export default function cookie(name) {
   return null;
 }
 export function setCookie(name, value, days) {
+  // TODO make set cookie to npm lib for cookie setting
   var expires = "";
   if (days) {
     var date = new Date();

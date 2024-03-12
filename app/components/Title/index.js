@@ -7,7 +7,7 @@ const TitleTags = ({ title = "Signtunes" }) => {
       <meta name="title" content={title} />
       <meta property="og:title" content={title} />
       <meta name="twitter:title" content={title} />
-      <meta itemprop="name" content={title} />
+      <meta itemProp="name" content={title} />
     </>
   );
 };

@@ -12,11 +12,14 @@ import Header from "./components/Layout/Header";
 
 export default function Home() {
   const searchParams = useSearchParams();
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [emailSuccess, setEmailSuccess] = useState({ success: false, message: "" });
   const referral = searchParams.get("referral");
   const [mainContentLoad, setMainContentLoad] = useState(false);
   const [alertsLoad, setAlertsLoad] = useState(false);
   const [alertOptions, setAlertOptions] = useState({ isPro: null, deviceExists: null, appdbLT: null, devices: null });
   const [email, setEmail] = useState("");
+  const [statsLoad, setStatsLoad] = useState(false);
   const [genreData, setGenreData] = useState({
     popular: [],
     trending: [],
@@ -96,16 +99,19 @@ export default function Home() {
 
   // Get Stats
   const getStats = async () => {
-    try {
-      const response = await axios.get("https://api2.starfiles.co/statistics?extension=ipa");
-      setCount((prev) => {
-        prev["uploadCount"] = formatNumber(response.data.upload_count);
-        prev["sizeUpload"] = formatNumber(response.data.download_count);
-        prev["downloadCount"] = formatSize(response.data?.bits_uploaded / 8);
-        return { ...prev };
-      });
-    } catch (err) {
-      console.error(err.message);
+    if (document.cookie.indexOf("udid") === -1) {
+      try {
+        const response = await axios.get("https://api2.starfiles.co/statistics?extension=ipa");
+        setCount((prev) => {
+          prev["uploadCount"] = formatNumber(response.data.upload_count);
+          prev["downloadCount"] = formatNumber(response.data.download_count);
+          prev["sizeUpload"] = formatSize(response.data?.bits_uploaded / 8);
+          return { ...prev };
+        });
+        setStatsLoad(true);
+      } catch (err) {
+        console.error(err.message);
+      }
     }
   };
 
@@ -136,7 +142,7 @@ export default function Home() {
           {alertsLoad && (
             <div className="col-span-6" id="alerts">
               <div className="alert bg-teal-100 text-black shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium">
-                <div>
+                <div className="alert-child">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="flex-shrink-0 w-6 h-6">
                     <linearGradient
                       id="StripeClimate-gradient-a"
@@ -186,17 +192,17 @@ export default function Home() {
                   </svg>
                   <span>{translationList?.co2_notice}</span>
                 </div>
-                <div>
-                  <a className="btn btn-sm text-white" href="https://climate.stripe.com/j4bbsV">
+                <div className="alert-child">
+                  <a className="alert-btn" href="https://climate.stripe.com/j4bbsV">
                     {translationList?.details}
                   </a>
-                  <a className="btn btn-sm text-white" href="/purchase">
+                  <a className="alert-btn" href="/purchase">
                     {translationList?.purchase}
                   </a>
                 </div>
               </div>
               <div className="alert alert-info shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium bg-violet-500">
-                <div>
+                <div className="alert-child">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -204,23 +210,20 @@ export default function Home() {
                     className="stroke-current flex-shrink-0 w-6 h-6"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     ></path>
                   </svg>
                   <span>We are on TOR and I2P!</span>
                 </div>
-                <div>
-                  <a
-                    className="btn btn-sm text-white"
-                    href="http://signtunesjchffojqtmnngqgdwn4qtdpxrwg6t6ghjygqa2wjjvnlmyd.onion"
-                  >
+                <div className="alert-child">
+                  <a className="alert-btn" href="http://signtunesjchffojqtmnngqgdwn4qtdpxrwg6t6ghjygqa2wjjvnlmyd.onion">
                     TOR
                   </a>
                   <a
-                    className="btn btn-sm text-white"
+                    className="alert-btn"
                     href="http://signtunes.i2p/?i2paddresshelper=hsetkcdjjwcedxdhgx4cokv33t2okipejolpum2lvvbncjijk5wq.b32.i2p"
                   >
                     I2P
@@ -229,7 +232,7 @@ export default function Home() {
               </div>
               {document.cookie.indexOf("udid") === -1 && (
                 <div className="alert alert-info shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium">
-                  <div>
+                  <div className="alert-child">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -237,15 +240,15 @@ export default function Home() {
                       className="stroke-current flex-shrink-0 w-6 h-6"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                       ></path>
                     </svg>
                     <span>{translationList?.welcome}</span>
                   </div>
-                  <a className="btn btn-sm text-white" href="/purchase">
+                  <a className="alert-btn" href="/purchase">
                     {translationList?.get_started}
                   </a>
                 </div>
@@ -253,7 +256,7 @@ export default function Home() {
               {alertOptions.deviceExists === "true" ? (
                 !getUserLanguageCode().startsWith("en") ? (
                   <div className="alert alert-info shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium">
-                    <div>
+                    <div className="alert-child">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -261,20 +264,20 @@ export default function Home() {
                         className="stroke-current flex-shrink-0 w-6 h-6"
                       >
                         <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                           d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
                         ></path>
                       </svg>
                       <span>{help_translate}</span>
                     </div>
-                    <a className="btn btn-sm text-white" href="https://crowdin.com/project/signtunes">
+                    <a className="alert-btn" href="https://crowdin.com/project/signtunes">
                       {translate}
                     </a>
                   </div>
                 ) : alertOptions.isPro === "false" ? (
                   <div className="alert alert-success shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium">
-                    <div>
+                    <div className="alert-child">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -282,15 +285,15 @@ export default function Home() {
                         className="stroke-current flex-shrink-0 w-6 h-6"
                       >
                         <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
                           d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                         ></path>
                       </svg>
                       <span>All the benefits of Signtunes & More</span>
                     </div>
-                    <a className="btn btn-sm text-white" href={`/pro${referral ? `?referral=${referral}` : ""}`}>
+                    <a className="alert-btn" href={`/pro${referral ? `?referral=${referral}` : ""}`}>
                       Get Pro
                     </a>
                   </div>
@@ -302,18 +305,18 @@ export default function Home() {
                           <>
                             {!device["p12_validation_result"] && (
                               <div className="alert alert-warning shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium">
-                                <div>
+                                <div className="alert-child">
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
-                                    stroke-width="1.5"
+                                    strokeWidth="1.5"
                                     stroke="currentColor"
                                     className="stroke-current flex-shrink-0 w-6 h-6"
                                   >
                                     <path
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
                                       d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
                                     ></path>
                                   </svg>
@@ -321,11 +324,11 @@ export default function Home() {
                                     Your ${device["nice_idevice_model"]} (${device["name"]}) isn't linked to Signtunes.
                                   </span>
                                 </div>
-                                <div>
-                                  <a className="btn btn-sm text-white" href="/link_appdb">
+                                <div className="alert-child">
+                                  <a className="alert-btn" href="/link_appdb">
                                     Link
                                   </a>
-                                  <a className="btn btn-sm text-white" href="/purchase">
+                                  <a className="alert-btn" href="/purchase">
                                     {purchase}
                                   </a>
                                 </div>
@@ -378,7 +381,8 @@ export default function Home() {
               ) : (
                 <></>
               )}
-              {document.cookie.indexOf("udid") !== -1 && deviceExists !== "true" && (
+              {/* TODO COMMENT OUT AFTER DEVELOPMENT AND TESTING */}
+              {/* {document.cookie.indexOf("udid") !== -1 && alertOptions.deviceExists !== "true" && (
                 <div
                   aria-hidden="true"
                   className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full bg-[#000000db] h-[100vh]"
@@ -389,63 +393,68 @@ export default function Home() {
                         <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Email Required</h3>
                       </div>
                       <div className="p-6 space-y-6">
-                        <div id="email_confirmation" className="m-0">
-                          <h3 className="text-xl font-semibold">Email</h3>
-                          <p>Please enter your email address.</p>
-                          <input
-                            className="rounded-lg border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full text-black"
-                            placeholder="Email"
-                            type="email"
-                            id="email"
-                            required
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                          />
-                          <button
-                            className="block text-center w-[100%] rounded-md bg-primary  hover:bg-secondaryborder-none px-5 py-2.5 text-sm font-medium text-white shadow mt-4 mb-8"
-                            id="check_email"
-                            onClick={async () => {
-                              if (email.trim().length < 1) {
-                                alert("Email required");
-                              } else {
-                                const res = await axios.get(
-                                  "https://api.starfiles.co/device_enrolments/link_email?email=" +
-                                    document.getElementById("email").value +
-                                    "&udid=" +
-                                    cookie("udid")
-                                );
-                                document.getElementById("email_confirmation").style.display = "none";
-                                if (response.length === 0) {
-                                  document.getElementById("success").style.display = "block";
+                        {!emailSubmitted && (
+                          <div id="email_confirmation" className="m-0">
+                            <h3 className="text-xl font-semibold">Email</h3>
+                            <p>Please enter your email address.</p>
+                            <input
+                              className="rounded-lg border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full text-black"
+                              placeholder="Email"
+                              type="email"
+                              id="email"
+                              required
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <button
+                              className="block text-center w-[100%] rounded-md bg-primary  hover:bg-secondaryborder-none px-5 py-2.5 text-sm font-medium text-white shadow mt-4 mb-8"
+                              id="check_email"
+                              onClick={async () => {
+                                if (email.trim().length < 1) {
+                                  alert("Email required");
                                 } else {
-                                  document.getElementById("error").style.display = "block";
-                                  document.getElementById("error_message").innerHTML = res.data;
+                                  const response = await axios.get(
+                                    "https://api.starfiles.co/device_enrolments/link_email?email=" +
+                                      document.getElementById("email").value +
+                                      "&udid=" +
+                                      cookie("udid")
+                                  );
+                                  if (response?.length === 0) {
+                                    setEmailSuccess({ success: true, message: "" });
+                                  } else {
+                                    setEmailSuccess({ success: false, message: response.data });
+                                  }
+                                  setEmailSubmitted(true);
                                 }
-                              }
-                            }}
-                          >
-                            Submit
-                          </button>
-                        </div>
-                        <div id="success" className="flex flex-col text-center gap-2 m-0">
-                          <h3 className="text-xl font-semibold">Email Successfully Linked</h3>
-                          <p>Your email has been successfully linked to your UDID.</p>
-                          <a className="btn btn-sm bg-primary hover:bg-secondary border-none text-white" href="?">
-                            Close
-                          </a>
-                        </div>
-                        <div id="error" style={{ display: "none" }} className="m-0">
-                          <h3 className="text-xl font-semibold">An Error Occurred</h3>
-                          <p id="error_message"></p>
-                          <a className={`btn btn-sm bg-primary hover:bg-secondary`} href="?">
-                            Retry
-                          </a>
-                        </div>
+                              }}
+                            >
+                              Submit
+                            </button>
+                          </div>
+                        )}
+                        {emailSubmitted && emailSuccess.success && (
+                          <div id="success" className="flex flex-col text-center gap-2 m-0">
+                            <h3 className="text-xl font-semibold">Email Successfully Linked</h3>
+                            <p>Your email has been successfully linked to your UDID.</p>
+                            <a className="btn btn-sm bg-primary hover:bg-secondary border-none text-white" href="?">
+                              Close
+                            </a>
+                          </div>
+                        )}
+                        {emailSubmitted && !emailSuccess.success && (
+                          <div id="error" className="m-0">
+                            <h3 className="text-xl font-semibold">An Error Occurred</h3>
+                            <p id="error_message">{emailSuccess?.message}</p>
+                            <a className={`btn btn-sm bg-primary hover:bg-secondary`} href="?">
+                              Retry
+                            </a>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
           )}
           <aside aria-label="Sidebar" className="hidden xl:block xl:col-span-1">
@@ -502,29 +511,31 @@ export default function Home() {
           </aside>
           {mainContentLoad && (
             <div className="col-span-6 xl:col-span-5" id="maincontent">
-              <dl
-                className="grid grid-cols-3 gap-2 px-4 pb-4 text-center text-gray-900 dark:text-white md:hidden"
-                id="stats_1"
-              >
-                <div className="flex flex-col items-center justify-center">
-                  <dt className="mb-2 text-3xl font-semibold" id="upload_count_1">
-                    {count.uploadCount}
-                  </dt>
-                  <dd className="font-light text-gray-500 dark:text-gray-400">{translationList?.ipas_hosted}</dd>
-                </div>
-                <div className="flex flex-col items-center justify-center">
-                  <dt className="mb-2 text-3xl font-semibold" id="download_count_1">
-                    {count.downloadCount}
-                  </dt>
-                  <dd className="font-light text-gray-500 dark:text-gray-400">{translationList?.ipas_served}</dd>
-                </div>
-                <div className="flex flex-col items-center justify-center">
-                  <dt className="mb-2 text-3xl font-semibold" id="size_uploaded_1">
-                    {count.sizeUpload}
-                  </dt>
-                  <dd className="font-light text-gray-500 dark:text-gray-400">{translationList?.ipas_stored}</dd>
-                </div>
-              </dl>
+              {statsLoad && (
+                <dl
+                  className="grid grid-cols-3 gap-2 px-4 pb-4 text-center text-gray-900 dark:text-white md:hidden"
+                  id="stats_1"
+                >
+                  <div className="flex flex-col items-center justify-center">
+                    <dt className="mb-2 text-3xl font-semibold" id="upload_count_1">
+                      {count.uploadCount}
+                    </dt>
+                    <dd className="font-light text-gray-500 dark:text-gray-400">{translationList?.ipas_hosted}</dd>
+                  </div>
+                  <div className="flex flex-col items-center justify-center">
+                    <dt className="mb-2 text-3xl font-semibold" id="download_count_1">
+                      {count.downloadCount}
+                    </dt>
+                    <dd className="font-light text-gray-500 dark:text-gray-400">{translationList?.ipas_served}</dd>
+                  </div>
+                  <div className="flex flex-col items-center justify-center">
+                    <dt className="mb-2 text-3xl font-semibold" id="size_uploaded_1">
+                      {count.sizeUpload}
+                    </dt>
+                    <dd className="font-light text-gray-500 dark:text-gray-400">{translationList?.ipas_stored}</dd>
+                  </div>
+                </dl>
+              )}
               <ul
                 className="flex flex-row gap-x-2 gap-y-2 text-sm font-medium block xl:hidden col-span-4 py-1 px-2 flex-wrap rounded-lg"
                 id="categories_mobile"
@@ -764,38 +775,40 @@ export default function Home() {
           )}
         </div>
         <div className="hidden md:block md:ml-3" id="sidebar">
-          <dl
-            className="grid grid-cols-3 md:gap-8 gap-2 px-4 pb-4 xl:pb-6 xl:px-4 text-center text-gray-900 dark:text-white"
-            id="stats_2"
-          >
-            <div className="flex flex-col items-center justify-center">
-              <dt
-                className="mb-2 md:text-xl lg:text-3xl xl:text-4xl md:font-bold xl:font-extrabold"
-                id="upload_count_2"
-              >
-                {count.uploadCount}
-              </dt>
-              <dd className="font-light text-gray-500 dark:text-gray-400">{translationList?.ipas_hosted}</dd>
-            </div>
-            <div className="flex flex-col items-center justify-center">
-              <dt
-                className="mb-2 md:text-xl lg:text-3xl xl:text-4xl md:font-bold xl:font-extrabold"
-                id="download_count_2"
-              >
-                {count.downloadCount}
-              </dt>
-              <dd className="font-light text-gray-500 dark:text-gray-400">{translationList?.ipas_served}</dd>
-            </div>
-            <div className="flex flex-col items-center justify-center">
-              <dt
-                className="mb-2 md:text-xl lg:text-3xl xl:text-4xl md:font-bold xl:font-extrabold"
-                id="size_uploaded_2"
-              >
-                {count.sizeUpload}
-              </dt>
-              <dd className="font-light text-gray-500 dark:text-gray-400">{translationList?.ipas_stored}</dd>
-            </div>
-          </dl>
+          {statsLoad && (
+            <dl
+              className="grid grid-cols-3 md:gap-8 gap-2 px-4 pb-4 xl:pb-6 xl:px-4 text-center text-gray-900 dark:text-white"
+              id="stats_2"
+            >
+              <div className="flex flex-col items-center justify-center">
+                <dt
+                  className="mb-2 md:text-xl lg:text-3xl xl:text-4xl md:font-bold xl:font-extrabold"
+                  id="upload_count_2"
+                >
+                  {count.uploadCount}
+                </dt>
+                <dd className="font-light text-gray-500 dark:text-gray-400">{translationList?.ipas_hosted}</dd>
+              </div>
+              <div className="flex flex-col items-center justify-center">
+                <dt
+                  className="mb-2 md:text-xl lg:text-3xl xl:text-4xl md:font-bold xl:font-extrabold"
+                  id="download_count_2"
+                >
+                  {count.downloadCount}
+                </dt>
+                <dd className="font-light text-gray-500 dark:text-gray-400">{translationList?.ipas_served}</dd>
+              </div>
+              <div className="flex flex-col items-center justify-center">
+                <dt
+                  className="mb-2 md:text-xl lg:text-3xl xl:text-4xl md:font-bold xl:font-extrabold"
+                  id="size_uploaded_2"
+                >
+                  {count.sizeUpload}
+                </dt>
+                <dd className="font-light text-gray-500 dark:text-gray-400">{translationList?.ipas_stored}</dd>
+              </div>
+            </dl>
+          )}
           <div className="rounded-xl shadow-md bg-gray-100 dark:bg-gray-900 mb-4">
             <div className="grid grid-cols-6">
               <img loading="lazy" src="https://sts.st/bi/com.rockstargames.bully" className="w-[100%] rounded-tl-xl" />

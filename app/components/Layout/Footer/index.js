@@ -41,7 +41,10 @@ function Footer() {
         </li>
       </ul>
       <button
-        onclick="setCookie('lang', 'English (upside down)');window.location.reload()"
+        onClick={() => {
+          setCookie("lang", "English (upside down)");
+          window.location.reload();
+        }}
         className="flex items-center gap-2 font-semibold m-auto mt-8"
       >
         {translationList?.help_translate}

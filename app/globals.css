@@ -15,7 +15,21 @@
   }
 }
 
+@layer components {
+  .alert {
+    @apply flex justify-between text-left flex-col md:flex-row;
+  }
+  .alert-child {
+    @apply flex gap-[0.5rem];
+  }
+  .alert-btn {
+    @apply btn btn-sm text-white uppercase bg-[#3d4451] border-0 outline-0 hover:bg-[#292d36];
+  }
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji" !important;
 }

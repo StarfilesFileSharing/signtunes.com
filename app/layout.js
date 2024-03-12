@@ -10,8 +10,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta charSet="UTF-8" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         {/* Title */}
@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
         <meta name="description" content="The #1 Signing Service for iPhone, iPad, Mac, and Apple TV" />
         <meta name="twitter:description" content="The #1 Signing Service for iPhone, iPad, Mac, and Apple TV" />
         <meta name="abstract" content="The #1 Signing Service for iPhone, iPad, Mac, and Apple TV" />
-        <meta itemprop="description" content="The #1 Signing Service for iPhone, iPad, Mac, and Apple TV" />
+        <meta itemProp="description" content="The #1 Signing Service for iPhone, iPad, Mac, and Apple TV" />
 
         {/* Fetch DNS Async */}
         <link rel="preconnect" href="https://api.starfiles.co" />
@@ -71,7 +71,7 @@ export default function RootLayout({ children }) {
         <meta property="og:image:height" content="256" />
         <meta property="og:image:alt" content="The Starfiles logo (a star)." />
         <meta
-          itemprop="image"
+          itemProp="image"
           content="//cdn.jsdelivr.net/gh/QuixThe2nd/Starfiles-JSDelivr@latest/images/logo-128.png"
         />
         <link
@@ -171,7 +171,7 @@ export default function RootLayout({ children }) {
         />
 
         {/* meta */}
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary" />
         <meta name="keywords" content="signtunes, ios, sideload, sideloading, jailbreak, ipa" />
@@ -208,18 +208,6 @@ export default function RootLayout({ children }) {
               "\t"
             ),
           }}
-        />
-
-        <link
-          href="https://cdn.jsdelivr.net/combine/npm/flowbite@1/dist/flowbite.min.css,npm/daisyui@2/dist/full.css"
-          rel="stylesheet"
-        />
-
-        <Script
-          async
-          defer
-          src="https://cdn.jsdelivr.net/combine/npm/flowbite@1/dist/flowbite.min.js,npm/@fortawesome/fontawesome-free@6/js/all.min.js"
-          data-cfasync="false"
         />
 
         {/*Cloudflare Web Analytics*/}
