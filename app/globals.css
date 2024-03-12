@@ -17,7 +17,7 @@
 
 @layer components {
   .alert {
-    @apply flex justify-between text-left flex-col md:flex-row;
+    @apply flex justify-between text-left flex-col md:flex-row outline-0 border-0;
   }
   .alert-child {
     @apply flex gap-[0.5rem];
