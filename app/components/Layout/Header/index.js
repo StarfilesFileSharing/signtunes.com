@@ -40,20 +40,20 @@ function Header() {
   // Get Translations
   const getTranslationList = async () => {
     try {
-      const translations = await getTranslations("en-English.json");
+      const translations = await getTranslations();
       setTranslationList(translations);
     } catch (err) {
       console.error(err.message);
     }
   };
 
-  // Check Cookie
+  // Check Cookie If User Exists
   const checkCookie = async () => {
     if (document.cookie.indexOf("udid=") !== 1) {
       try {
-        if (cookie("pro") == null) {
+        if (cookie("pro") === null) {
           const response = await axios.get("https://api.starfiles.co/device_enrolments/is_pro?udid=" + cookie("udid"));
-          setCookie("pro", response.data, 7);
+          setCookie("pro", `${response.data}`, 7);
         }
         const devices = await axios.get(
           "https://api.starfiles.co/device_enrolments/list_devices?udid=" + cookie("udid")

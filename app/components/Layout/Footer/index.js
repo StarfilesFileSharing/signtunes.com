@@ -1,22 +1,49 @@
+import cookie, { setCookie } from "@/utils/cookies";
 import { getTranslations } from "@/utils/getTranslation";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 function Footer() {
   const [translationList, setTranslationList] = useState(null);
+  const [translationButtons, setTranslationButtons] = useState(null);
+  let initialRun = false;
 
   useEffect(() => {
-    getTranslationList();
+    if (!initialRun) {
+      // Get Translations
+      getTranslationList();
+      // Check Cookie
+      checkCookie();
+      initialRun = true;
+    }
   }, []);
 
   // Get Translations
   const getTranslationList = async () => {
     try {
-      const translations = await getTranslations("en-English.json");
+      const translations = await getTranslations();
       setTranslationList(translations);
+      const translationButtons = await getTranslations(true);
+      setTranslationButtons(translationButtons);
     } catch (err) {
       console.error(err.message);
     }
   };
+
+  // Check Cookie
+  const checkCookie = () => {
+    try {
+      if (cookie("lang") === "English (upside down)") {
+        var _jipt = [["project", "signtunes"]];
+        var script = document.createElement("script");
+        script.src = "//cdn.crowdin.com/jipt/jipt.js";
+        document.head.appendChild(script);
+      }
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   return (
     <footer className="bg-gray-100 dark:bg-gray-800 px-4 py-16 sm:px-6 lg:px-8">
       <div className="text-center">
@@ -49,7 +76,38 @@ function Footer() {
       >
         {translationList?.help_translate}
       </button>
-      <div id="translation-list" className="mt-2 flex justify-center gap-4 text-center flex-wrap"></div>
+      {translationButtons && (
+        <div id="translation-list" className="mt-2 flex justify-center gap-4 text-center flex-wrap">
+          {translationButtons.map((item, index) => {
+            if (
+              !item.name.endsWith(".json") ||
+              item.name === "en_source.json" ||
+              item.name === "en-English (upside down).json"
+            ) {
+              return <></>;
+            } else {
+              let language_name = item.name.split("-")[1].replace(".json", "");
+              return (
+                <button
+                  key={index}
+                  className="flex items-center gap-2 font-semibold"
+                  onClick={() => {
+                    setCookie("lang", item.name);
+                    window.location.reload();
+                  }}
+                >
+                  <img
+                    loading="lazy"
+                    src={`https://signtunes.com/localisations/${language_name}.svg`}
+                    className="w-8"
+                  />
+                  {language_name}
+                </button>
+              );
+            }
+          })}
+        </div>
+      )}
       <p className="mx-auto mt-3 max-w-md text-center text-gray-500">
         © 2020 - {new Date().getFullYear()} Copyright Signtunes
         <br />

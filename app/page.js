@@ -90,7 +90,7 @@ export default function Home() {
   // Get Translations
   const getTranslationList = async () => {
     try {
-      const translations = await getTranslations("en-English.json");
+      const translations = await getTranslations();
       setTranslationList(translations);
     } catch (err) {
       console.error(err.message);
