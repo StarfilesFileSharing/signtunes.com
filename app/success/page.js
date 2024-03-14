@@ -4,7 +4,7 @@ import TitleTags from "../components/Title";
 import { useSearchParams } from "next/navigation";
 import { getTranslations } from "@/utils/getTranslation";
 
-function ProPurchaseButton({ purchaseButton = <></>, period = "monthly" }) {
+function ProPurchaseButton({ purchaseButton = <></> }) {
   const searchParams = useSearchParams();
   const referral = searchParams.get("referral");
 
@@ -33,7 +33,7 @@ function ProPurchaseButton({ purchaseButton = <></>, period = "monthly" }) {
   );
 }
 
-function Pro() {
+function Success() {
   const [translationList, setTranslationList] = useState(null);
   const searchParams = useSearchParams();
   const referral = searchParams.get("referral");
@@ -56,7 +56,7 @@ function Pro() {
   return (
     <>
       <head>
-        <TitleTags title="Purchase Signatures Pro" />
+        <TitleTags title="Purchase Successfully Completed" />
       </head>
       <div className="mx-5 md:mx-10 mt-5">
         <div class="flex flex-col py-4 lg:pt-8 text-center">
@@ -83,7 +83,7 @@ function Pro() {
             </button>
           }
         />
-        <div className="block lg:mx-96 mb-12 dark:text-gray-900 rounded-xl p-8 shadow-xl bg-[#CAF0F8]">
+        <div className="block lg:mx-96 mb-12 dark:text-gray-900 rounded-xl p-8 shadow-xl bg-bright">
           <h3 class="text-xl font-semibold">Get Certificate Files</h3>
           <p class="text-lg mb-4">As a pro member you get access to certificate files to use as you wish</p>
           <h3 class="text-xl font-semibold">Priority Support</h3>
@@ -114,4 +114,4 @@ function Pro() {
   );
 }
 
-export default Pro;
+export default Success;

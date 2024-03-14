@@ -86,7 +86,7 @@ function Pro() {
             </button>
           }
         />
-        <div className="block lg:mx-96 mb-12 dark:text-gray-900 rounded-xl p-8 shadow-xl bg-[#CAF0F8]">
+        <div className="block lg:mx-96 mb-12 dark:text-gray-900 rounded-xl p-8 shadow-xl bg-bright">
           <h3 className="text-xl font-semibold">{translationList?.get_certificate_files}</h3>
           <p className="text-lg mb-4">{translationList?.pro_member_certificate_files_access}</p>
           <h3 className="text-xl font-semibold">{translationList?.priority_support}</h3>
