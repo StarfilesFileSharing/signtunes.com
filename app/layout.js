@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import CanonicalTag from "./components/Canonical";
+import DefaulTheme from "./components/DefualtTheme";
 import TitleTags from "./components/Title";
 import "./globals.css";
 
@@ -241,7 +242,9 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className={inter.className + " dark:bg-gray-700 dark:text-gray-200 bg-white text-black"}>{children}</body>
+      <body className={inter.className + " dark:bg-gray-700 dark:text-gray-200 bg-white text-black"}>
+        <DefaulTheme>{children}</DefaulTheme>
+      </body>
     </html>
   );
 }

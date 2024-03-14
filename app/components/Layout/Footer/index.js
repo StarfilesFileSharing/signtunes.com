@@ -1,3 +1,4 @@
+"use client";
 import cookie, { setCookie } from "@/utils/cookies";
 import { getTranslations } from "@/utils/getTranslation";
 import Image from "next/image";
