@@ -140,7 +140,7 @@ function AppleTV() {
                 className="block text-center w-[100%] rounded-md bg-primary hover:bg-[#023E8A] px-5 py-2.5 text-sm font-medium text-white shadow mt-4 mb-8"
                 type="submit"
                 id="tvos_profile_installed"
-                onClick={() => tvosClicked(true)}
+                onClick={() => setTvosClicked(true)}
               >
                 Next
               </button>
