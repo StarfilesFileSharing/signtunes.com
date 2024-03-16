@@ -20,7 +20,9 @@ function ProPurchaseButton({ purchaseButton = <></>, period = "monthly" }) {
         type="hidden"
         name="price"
         value={`${
-          period === "yearly" ? process.env.NEXT_PUBLIC_SIGNTUNES_PRICE_YEARLY : process.env.NEXT_PUBLIC_SIGNTUNES_PRICE
+          period === "yearly"
+            ? process.env.NEXT_PUBLIC_SIGNTUNES_PRO_PRICE_YEARLY
+            : process.env.NEXT_PUBLIC_SIGNTUNES_PRO_PRICE
         }`}
       />
       <input type="hidden" name="p3" value={`${period == "yearly" ? "1" : "4"}`} />
@@ -82,7 +84,7 @@ function Pro() {
               className="flex m-auto mb-4 rounded-md hover:bg-[#023E8A] px-5 py-2.5 text-sm font-medium text-white shadow bg-primary"
               type="submit"
             >
-              <span>{translationList?.join_signtunes_pro}</span>&nbsp;${process.env.NEXT_PUBLIC_SIGNTUNES_PRICE}
+              <span>{translationList?.join_signtunes_pro}</span>&nbsp;${process.env.NEXT_PUBLIC_SIGNTUNES_PRO_PRICE}
             </button>
           }
         />
@@ -105,7 +107,7 @@ function Pro() {
                     className="rounded-md bg-primary hover:bg-[#023E8A] px-5 py-2.5 text-sm font-medium text-white shadow"
                     type="submit"
                   >
-                    Signtunes Pro ${process.env.NEXT_PUBLIC_SIGNTUNES_PRICE}
+                    Signtunes Pro ${process.env.NEXT_PUBLIC_SIGNTUNES_PRO_PRICE}
                   </button>
                 </div>
               }

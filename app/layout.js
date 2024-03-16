@@ -4,10 +4,16 @@ import CanonicalTag from "./components/Canonical";
 import DefaulTheme from "./components/DefualtTheme";
 import TitleTags from "./components/Title";
 import "./globals.css";
+import TagManager from "react-gtm-module";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
+  const tagManagerArgs = {
+    gtmId: "G-EFD6HMSKRC",
+  };
+  // TagManager.initialize(tagManagerArgs);
+
   return (
     <html lang="en">
       <head>

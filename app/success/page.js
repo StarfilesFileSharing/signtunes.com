@@ -15,7 +15,7 @@ function ProPurchaseButton({ purchaseButton = <></> }) {
       <input type="hidden" name="item_number" value="signtunes_1y_pro" />
       <input type="hidden" name="currency_code" value="USD" />
 
-      <input type="hidden" name="price" value={process.env.NEXT_PUBLIC_SIGNTUNES_PRICE} />
+      <input type="hidden" name="price" value={process.env.NEXT_PUBLIC_SIGNTUNES_PRO_PRICE} />
       <input type="hidden" name="p3" value="1" />
       <input type="hidden" name="t3" value="M" />
 
@@ -79,7 +79,7 @@ function Success() {
               className="flex m-auto mb-4 rounded-md hover:bg-[#023E8A] px-5 py-2.5 text-sm font-medium text-white shadow bg-primary"
               type={`submit${referral ? `?referral=${referral}` : ""}}`}
             >
-              <span>{translationList?.join_signtunes_pro}</span>&nbsp;${process.env.NEXT_PUBLIC_SIGNTUNES_PRICE}
+              <span>{translationList?.join_signtunes_pro}</span>&nbsp;${process.env.NEXT_PUBLIC_SIGNTUNES_PRO_PRICE}
             </button>
           }
         />

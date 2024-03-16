@@ -5,7 +5,7 @@ import { useEffect } from "react";
 function AppDB() {
   const router = useRouter();
   useEffect(() => {
-    router.push("/pro");
+    router.push("/purchase");
   }, []);
 
   return <div></div>;

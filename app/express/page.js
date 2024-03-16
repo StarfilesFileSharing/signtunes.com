@@ -61,6 +61,7 @@ function Express() {
   };
 
   // Check Cookie
+  // TODO page referral
   const checkCookie = () => {
     let referral = window.location.href.replace(/\/+$/, "").split("/").slice(-1)[0];
     if (referral !== "purchase" && cookie("referral") === null) setCookie("referral", referral, 7);
