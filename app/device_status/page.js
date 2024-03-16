@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import TitleTags from "../components/Title";
 
-function FAQ() {
+function DeviceStatus() {
   const [translationList, setTranslationList] = useState(null);
   const [udid, setUdid] = useState("");
   const router = useRouter();
@@ -238,7 +238,7 @@ function FAQ() {
   return (
     <>
       <head>
-        <TitleTags title="Frequently Asked Questions" />
+        <TitleTags title="Device Status" />
       </head>
       <div className="mx-5 md:mx-10 mt-5" id="device_status">
         <div className="lg:mx-96 mb-8 flex items-center mb-8">
@@ -313,4 +313,4 @@ function FAQ() {
   );
 }
 
-export default FAQ;
+export default DeviceStatus;
