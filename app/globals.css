@@ -31,3 +31,47 @@ body {
   font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     "Noto Color Emoji" !important;
 }
+
+#device_status .step {
+  display: flex;
+  gap: 16px;
+  height: 14px;
+}
+#device_status .state {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+#device_status .node {
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  display: inline-block;
+  transition: all 1000ms ease;
+  background: rgb(173 178 184);
+}
+#device_status .divider {
+  height: 40px;
+  width: 4px;
+  margin-left: 5px;
+  transition: all 800ms ease;
+  background: rgb(173 178 184);
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+#device_status .step p {
+  display: inline-block;
+  line-height: 14px;
+  font-size: 14px;
+  color: rgb(65, 69, 82);
+  margin: 0;
+}
+#device_status .step p.timeframe {
+  font-size: 12px;
+}
+#device_status .green {
+  background: rgb(36, 180, 126);
+}
+#device_status .yellow {
+  background: rgb(250, 200, 0);
+}

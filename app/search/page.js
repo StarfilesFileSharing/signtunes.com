@@ -49,16 +49,16 @@ function Search() {
         <TitleTags title="Search" />
       </head>
       <div className="mx-5 md:mx-10 mt-5">
-        <form class="p-0 hidden md:flex lg:hidden" action="/search">
-          <div class="relative m-auto w-64">
+        <form className="p-0 hidden md:flex lg:hidden" action="/search">
+          <div className="relative m-auto w-64">
             <input
-              class="h-10 rounded-lg border-gray-200 pr-10 text-sm placeholder-gray-400 bg-gray-200 p-4 w-[100%]"
+              className="h-10 rounded-lg border-gray-200 pr-10 text-sm placeholder-gray-400 bg-gray-200 p-4 w-[100%]"
               placeholder="Search"
               type="text"
               name="q"
             />
-            <button type="submit" class="absolute inset-y-0 right-0 mr-px rounded-r-lg p-2 text-gray-600">
-              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <button type="submit" className="absolute inset-y-0 right-0 mr-px rounded-r-lg p-2 text-gray-600">
+              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path
                   clip-rule="evenodd"
                   d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
@@ -68,8 +68,8 @@ function Search() {
             </button>
           </div>
         </form>
-        <h1 class="text-3xl font-semibold mb-2">{translationList?.search_results}</h1>
-        <div class="grid grid-cols-3 md:grid-cols-4 lg:md:grid-cols-8 gap-2" id="apps">
+        <h1 className="text-3xl font-semibold mb-2">{translationList?.search_results}</h1>
+        <div className="grid grid-cols-3 md:grid-cols-4 lg:md:grid-cols-8 gap-2" id="apps">
           {searchData ? (
             <>
               {searchData.map((app, index) => {
@@ -91,25 +91,25 @@ function Search() {
                     <img
                       src={`https://sts.st/bi/${app?.bundle_id}`}
                       alt={name}
-                      class="shadow rounded-[24%] md:h-28 md:w-28 h-20 w-20 align-middle border-none"
+                      className="shadow rounded-[24%] md:h-28 md:w-28 h-20 w-20 align-middle border-none"
                       loading="lazy"
                       onError={({ currentTarget }) => {
                         currentTarget.onerror = null;
                         currentTarget.src = "https://cdn.starfiles.co/images/dark-icon.png";
                       }}
                     />
-                    <p class="font-semibold md:text-base text-xs">{name}</p>
-                    {/* <p class="text-sm">Company LLC</p> */}
+                    <p className="font-semibold md:text-base text-xs">{name}</p>
+                    {/* <p className="text-sm">Company LLC</p> */}
                   </Link>
                 );
               })}
             </>
           ) : (
-            <span class="w-4 h-4 mx-auto my-8">
+            <span className="w-4 h-4 mx-auto my-8">
               <span role="status">
                 <svg
                   aria-hidden="true"
-                  class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-[#0096C7]"
+                  className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-[#0096C7]"
                   viewBox="0 0 100 101"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +123,7 @@ function Search() {
                     fill="currentFill"
                   />
                 </svg>
-                <span class="sr-only">Loading...</span>
+                <span className="sr-only">Loading...</span>
               </span>
             </span>
           )}
