@@ -176,7 +176,7 @@ function FAQ() {
             </div>
           )}
           {showIosUdid && (
-            <div id="ios_udid" style="display:none">
+            <div id="ios_udid">
               <h3 className="text-xl font-semibold">Device UDID</h3>
               <input
                 className="rounded-lg border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full"
@@ -197,7 +197,7 @@ function FAQ() {
             </div>
           )}
           {showICloudUnlock && (
-            <div id="icloud_unlock" style="display:none">
+            <div id="icloud_unlock">
               <h3 className="text-xl font-semibold">Device Serial Number</h3>
               <input
                 className="rounded-lg border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full"
@@ -226,13 +226,13 @@ function FAQ() {
             </div>
           )}
           {successMessage && (
-            <div id="success" style="display:none">
+            <div id="success">
               <h3 className="text-xl font-semibold">Success</h3>
               <p id="success_message">{successMessage}</p>
             </div>
           )}
           {errorMessage && (
-            <div id="error" style="display:none">
+            <div id="error">
               <h3 className="text-xl font-semibold">Error</h3>
               <p id="error_message">{errorMessage}</p>
             </div>
