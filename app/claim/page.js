@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import TitleTags from "../components/Title";
 
-function FAQ() {
+function Claim() {
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
   const [translationList, setTranslationList] = useState(null);
@@ -243,4 +243,4 @@ function FAQ() {
   );
 }
 
-export default FAQ;
+export default Claim;

@@ -274,7 +274,7 @@ export default function Home() {
                       {translate}
                     </a>
                   </div>
-                ) : alertOptions.isPro === "false" ? (
+                ) : alertOptions.isPro === false ? (
                   <div className="alert alert-success shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium">
                     <div className="alert-child">
                       <svg

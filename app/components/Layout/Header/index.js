@@ -346,7 +346,7 @@ function Header() {
                     <svg
                       className="w-4 h-4 mr-2 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
                       aria-hidden="true"
-                      focusable="false"
+                      focusable={false}
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
@@ -496,7 +496,7 @@ function Header() {
           <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown_account_btn">
             <li>
               <Link
-                href="https:/settings/devices"
+                href="/settings?current=devices"
                 className="nav_btn block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 loader-ignore-click="true"
               >
@@ -505,7 +505,7 @@ function Header() {
             </li>
             <li>
               <Link
-                href="https:/settings/certificates"
+                href="/settings?current=certificates"
                 className="nav_btn block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 loader-ignore-click="true"
               >
@@ -514,7 +514,7 @@ function Header() {
             </li>
             <li>
               <Link
-                href="https:/settings/configure"
+                href="/settings?current=configure"
                 className="nav_btn block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 loader-ignore-click="true"
               >
