@@ -84,6 +84,7 @@ function Claim() {
   function deleteCookie(name) {
     // if (get_cookie(name)) {
     document.cookie = name + "=" + ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+    window.location.reload();
     // }
   }
 
@@ -135,7 +136,9 @@ function Claim() {
                   href="#"
                   onClick={() => setCurrentSetting("devices")}
                   loader-ignore-click="true"
-                  className="block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap<?php if($page == 'devices')echo ' bg-gray-200 dark:bg-gray-700';?>"
+                  className={`block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${
+                    currentSetting === "devices" ? "bg-gray-200 dark:bg-gray-700" : ""
+                  }`}
                 >
                   <span className="ml-3">Devices</span>
                 </a>
@@ -145,7 +148,9 @@ function Claim() {
                   href="#"
                   onClick={() => setCurrentSetting("certificates")}
                   loader-ignore-click="true"
-                  className="block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap<?php if($page == 'certificates')echo ' bg-gray-200 dark:bg-gray-700';?>"
+                  className={`block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${
+                    currentSetting === "certificates" ? "bg-gray-200 dark:bg-gray-700" : ""
+                  }`}
                 >
                   <span className="ml-3">Certificates</span>
                 </a>
@@ -155,7 +160,9 @@ function Claim() {
                   href="#"
                   onClick={() => setCurrentSetting("configure")}
                   loader-ignore-click="true"
-                  className="block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap<?php if($page == 'configure')echo ' bg-gray-200 dark:bg-gray-700';?>"
+                  className={`block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${
+                    currentSetting === "configure" ? "bg-gray-200 dark:bg-gray-700" : ""
+                  }`}
                 >
                   <span className="ml-3">Configure</span>
                 </a>
@@ -165,7 +172,7 @@ function Claim() {
                   href="?"
                   onClick={() => deleteCookie("udid")}
                   loader-ignore-click="true"
-                  className="block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap<?php if($page == 'configure')echo ' bg-gray-200 dark:bg-gray-700';?>"
+                  className="block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap"
                 >
                   <span className="ml-3">Logout</span>
                 </a>
@@ -180,190 +187,193 @@ function Claim() {
                 ) : (
                   <div className="flex flex-col gap-2" id="devices">
                     {devices.map((device, index) => {
-                      <div
-                        key={index}
-                        className="bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700"
-                      >
-                        <div className="px-5 py-5">
-                          <h5 className="flex justify-center items-center text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                            {device["name"]?.length ? device["name"] : device["udid"]}
-                            {device["revoked"] ? (
-                              <span className="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded ml-1">
-                                REVOKED
-                              </span>
-                            ) : device["enrolled"] ? (
-                              <span
-                                className={`${
-                                  device["eligible"]
-                                    ? `bg-green-100 text-green-800`
-                                    : device["processed"]
-                                    ? `bg-red-100 text-red-800`
-                                    : `bg-yellow-100 text-yellow-800`
-                                } text-xs font-semibold px-2.5 py-0.5 rounded ml-1`}
-                              >
-                                {device["eligible"] ? "ENABLED" : device["processed"] ? "INELIGIBLE" : "PROCESSING"}
-                              </span>
+                      return (
+                        <div
+                          key={index}
+                          className="bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700"
+                        >
+                          <div className="px-5 py-5">
+                            <h5 className="flex justify-center items-center text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                              {device["name"]?.length ? device["name"] : device["udid"]}
+                              {device["revoked"] ? (
+                                <span className="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded ml-1">
+                                  REVOKED
+                                </span>
+                              ) : device["enrolled"] ? (
+                                <span
+                                  className={`${
+                                    device["eligible"]
+                                      ? `bg-green-100 text-green-800`
+                                      : device["processed"]
+                                      ? `bg-red-100 text-red-800`
+                                      : `bg-yellow-100 text-yellow-800`
+                                  } text-xs font-semibold px-2.5 py-0.5 rounded ml-1`}
+                                >
+                                  {device["eligible"] ? "ENABLED" : device["processed"] ? "INELIGIBLE" : "PROCESSING"}
+                                </span>
+                              ) : (
+                                ``
+                              )}
+                            </h5>
+                            {!device["signed"] && device["enrolled"] ? (
+                              <ul className="steps mb-2">
+                                <li className={`step w-24 md:w-32 ${device["enrolled"] ? ` step-primary` : ""}`}>
+                                  Enrolled
+                                </li>
+                                <li className={`step w-24 md:w-32 ${device["processed"] ? ` step-primary` : ""}`}>
+                                  Processed
+                                  {!device["processed"] && device["signed_time"] ? (
+                                    <>
+                                      <br />
+                                      Maximum{" "}
+                                      {Math.round(
+                                        (device["signed_time"] + 60 * 60 * 24 * 3 - +new Date() / 1000) / 60 / 60
+                                      )}{" "}
+                                      Hours
+                                    </>
+                                  ) : (
+                                    ""
+                                  )}
+                                </li>
+                                <li className="step w-24 md:w-32">
+                                  Eligible{" "}
+                                  {device["processed"] ? (
+                                    <>
+                                      <br />
+                                      {device["hold_expires"]
+                                        ? device["hold_expires"]
+                                        : days_till_signed(device["signed_time"])}{" "}
+                                      Days
+                                    </>
+                                  ) : (
+                                    ""
+                                  )}
+                                </li>
+                              </ul>
                             ) : (
                               ``
                             )}
-                          </h5>
-                          {!device["signed"] && device["enrolled"] ? (
-                            <ul className="steps mb-2">
-                              <li className={`step w-24 md:w-32 ${device["enrolled"] ? ` step-primary` : ""}`}>
-                                Enrolled
-                              </li>
-                              <li className={`step w-24 md:w-32 ${device["processed"] ? ` step-primary` : ""}`}>
-                                Processed
-                                {!device["processed"] && device["signed_time"] ? (
-                                  <>
-                                    <br />
-                                    Maximum{" "}
-                                    {Math.round(
-                                      (device["signed_time"] + 60 * 60 * 24 * 3 - +new Date() / 1000) / 60 / 60
-                                    )}{" "}
-                                    Hours
-                                  </>
-                                ) : (
-                                  ""
-                                )}
-                              </li>
-                              <li className="step w-24 md:w-32">
-                                Eligible{" "}
-                                {device["processed"] ? (
-                                  <>
-                                    <br /> +
-                                    {device["hold_expires"]
-                                      ? device["hold_expires"]
-                                      : days_till_signed(device["signed_time"])}{" "}
-                                    Days
-                                  </>
-                                ) : (
-                                  ""
-                                )}
-                              </li>
-                            </ul>
-                          ) : (
-                            ``
-                          )}
-                          <p>
-                            {device["nice_idevice_model"]
-                              ? device["nice_idevice_model"]
-                              : device["model"]
-                              ? device["model"]
-                              : ""}{" "}
-                            +
-                            {device["ios_version"] ? (
-                              <>
-                                {" "}
-                                -{" "}
-                                {device["is_apple_silicon"] == "yes"
-                                  ? "mac"
-                                  : device["model"].startsWith("AppleTV")
-                                  ? "tv"
-                                  : "i"}
-                                OS {device["ios_version"]}
-                                <br />
-                              </>
-                            ) : (
-                              ""
-                            )}
-                          </p>
-                          {typeof device["name"] != "undefined" && typeof device["udid"] != "undefined" ? (
-                            <p className="text-sm mb-2">{device["udid"]}</p>
-                          ) : (
-                            ""
-                          )}
-                          {device["signed_till"] ? (
-                            <p className="text-xs">
-                              Expires In: {Math.ceil((device["signed_till"] - +new Date() / 1000) / 60 / 60 / 24)} Days
-                              <br />
-                              Account: {device["developer_account"]}
-                            </p>
-                          ) : (
-                            ""
-                          )}
-                          {device["plus_till"] && Date.parse(device["plus_till"]) < +new Date() ? (
-                            <p className="text-xs mt-1">
-                              AppDB Signs Left:
-                              {device["free_signs_left"]}
-                              <br />
-                              {Date.parse(device["free_signs_reset_at"]) && device["free_signs_left"] < 30 ? (
+                            <p>
+                              {device["nice_idevice_model"]
+                                ? device["nice_idevice_model"]
+                                : device["model"]
+                                ? device["model"]
+                                : ""}{" "}
+                              {device["ios_version"] ? (
                                 <>
-                                  AppDB Signs Reset in
-                                  {Math.round(
-                                    (Date.parse(device["free_signs_reset_at"]) - +new Date()) / 1000 / 60 / 60 / 24,
-                                    1
-                                  )}
-                                  Days
+                                  {" "}
+                                  -{" "}
+                                  {device["is_apple_silicon"] == "yes"
+                                    ? "mac"
+                                    : device["model"].startsWith("AppleTV")
+                                    ? "tv"
+                                    : "i"}
+                                  OS {device["ios_version"]}
                                   <br />
                                 </>
                               ) : (
                                 ""
                               )}
-                              Upgrade for unlimited signs through AppDB.
                             </p>
-                          ) : (
-                            ""
-                          )}
-                          <div className="flex gap-1 mt-2 justify-center">
-                            (typeof device["status"] == "undefined" ?{" "}
-                            <a
-                              className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center"
-                              href="/purchase"
-                            >
-                              Purchase Signtunes
-                            </a>
-                            :{" "}
-                            <>
-                              {device["pro"] ? (
+                            {typeof device["name"] != "undefined" && typeof device["udid"] != "undefined" ? (
+                              <p className="text-sm mb-2">{device["udid"]}</p>
+                            ) : (
+                              ""
+                            )}
+                            {device["signed_till"] ? (
+                              <p className="text-xs">
+                                Expires In: {Math.ceil((device["signed_till"] - +new Date() / 1000) / 60 / 60 / 24)}{" "}
+                                Days
+                                <br />
+                                Account: {device["developer_account"]}
+                              </p>
+                            ) : (
+                              ""
+                            )}
+                            {device["plus_till"] && Date.parse(device["plus_till"]) < +new Date() ? (
+                              <p className="text-xs mt-1">
+                                AppDB Signs Left:
+                                {device["free_signs_left"]}
+                                <br />
+                                {Date.parse(device["free_signs_reset_at"]) && device["free_signs_left"] < 30 ? (
+                                  <>
+                                    AppDB Signs Reset in
+                                    {Math.round(
+                                      (Date.parse(device["free_signs_reset_at"]) - +new Date()) / 1000 / 60 / 60 / 24,
+                                      1
+                                    )}
+                                    Days
+                                    <br />
+                                  </>
+                                ) : (
+                                  ""
+                                )}
+                                Upgrade for unlimited signs through AppDB.
+                              </p>
+                            ) : (
+                              ""
+                            )}
+                            <div className="flex gap-1 mt-2 justify-center">
+                              {typeof device["status"] == "undefined" ? (
                                 <a
-                                  href="/vip"
                                   className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center"
+                                  href="/purchase"
                                 >
-                                  Signtunes VIP
+                                  Purchase Signtunes
                                 </a>
                               ) : (
-                                <a
-                                  href="/pro"
-                                  className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center"
-                                >
-                                  Signtunes PRO
-                                </a>
+                                <>
+                                  {device["pro"] ? (
+                                    <a
+                                      href="/vip"
+                                      className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center"
+                                    >
+                                      Signtunes VIP
+                                    </a>
+                                  ) : (
+                                    <a
+                                      href="/pro"
+                                      className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center"
+                                    >
+                                      Signtunes PRO
+                                    </a>
+                                  )}
+                                  {!device["link_token"] || !device["name"] ? (
+                                    <a
+                                      href="/link_appdb"
+                                      className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center"
+                                    >
+                                      Link AppDB
+                                    </a>
+                                  ) : device["plus_till"] && Date.parse(device["plus_till"]) < +new Date() ? (
+                                    <a
+                                      href="/appdb_plus"
+                                      className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center"
+                                    >
+                                      AppDB PLUS
+                                    </a>
+                                  ) : (
+                                    ""
+                                  )}
+                                </>
                               )}
-                              {!device["link_token"] || !device["name"] ? (
-                                <a
-                                  href="/link_appdb"
-                                  className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center"
-                                >
-                                  Link AppDB
-                                </a>
-                              ) : device["plus_till"] && Date.parse(device["plus_till"]) < +new Date() ? (
-                                <a
-                                  href="/appdb_plus"
-                                  className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center"
-                                >
-                                  AppDB PLUS
-                                </a>
-                              ) : (
-                                ""
-                              )}
-                            </>
+                            </div>
+                            {device["udid"] && cookie("udid") != device["udid"] ? (
+                              <button
+                                onClick={() => {
+                                  setCookie("udid", device["udid"], 365);
+                                  window.location.reload();
+                                }}
+                                className="text-white bg-secondary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-8 py-3 text-center mt-2"
+                              >
+                                Switch
+                              </button>
+                            ) : (
+                              ""
+                            )}
                           </div>
-                          {device["udid"] && cookie("udid") != device["udid"] ? (
-                            <button
-                              onClick={() => {
-                                setCookie("udid", device["udid"], 365);
-                                window.location.reload();
-                              }}
-                              className="text-white bg-secondary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-8 py-3 text-center mt-2"
-                            >
-                              Switch
-                            </button>
-                          ) : (
-                            ""
-                          )}
                         </div>
-                      </div>;
+                      );
                     })}
                   </div>
                 )}
@@ -388,7 +398,7 @@ function Claim() {
                   onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   id="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="my-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@email.com"
                   required
                 />
