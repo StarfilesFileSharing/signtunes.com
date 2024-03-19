@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import TitleTags from "../components/Title";
 
-function Claim() {
+function Settings() {
   const searchParams = useSearchParams();
   const current = searchParams.get("current");
   const [translationList, setTranslationList] = useState(null);
@@ -587,4 +587,4 @@ function Claim() {
   );
 }
 
-export default Claim;
+export default Settings;
