@@ -51,6 +51,7 @@ function App() {
   const [features, setFeatures] = useState(null);
   const [advisories, setAdvisories] = useState(null);
   const [screenshots, setScreenshots] = useState(null);
+  const [downloadLinks, setDownloadLinks] = useState(null);
 
   useEffect(() => {
     // Get Translations
@@ -221,7 +222,7 @@ function App() {
               setIcon("https://sts.st/bi/" + data.bundle_id);
               if (data.description) setDescription(data.description.substring(0, 200) + "...");
               else if (appdb_data.description) setDescription(appdb_data.description.substring(0, 200) + "...");
-              else setDescription("");
+              else setDescription(<></>);
               if (typeof appdb_data.whatsnew != "undefined") setReleaseNotes(appdb_data.whatsnew);
               else setShowReleaseNotes(false);
               setShowScreenshots(false);
@@ -249,88 +250,87 @@ function App() {
           return true;
         }
 
-        fetch("//api.dbservices.to/v1.6/search?type=cydia&bundle_ids=" + data.bundle_id)
-          .then((response) => response.text())
-          .then((response) => {
-            if (!isJson(response) || typeof JSON.parse(response).data[0] == "undefined") {
-              fetch("//api.dbservices.to/v1.6/search?type=ios&bundle_ids=" + data.bundle_id)
-                .then((response) => response.text())
-                .then((response) => {
-                  if (!isJson(response) || typeof JSON.parse(response).data[0] == "undefined") {
-                    fetch("//api.dbservices.to/v1.6/search?type=osx&bundle_ids=" + data.bundle_id)
-                      .then((response) => response.text())
-                      .then((response) => {
-                        if (!isJson(response) || typeof JSON.parse(response).data[0] == "undefined") {
-                          fetch("//api.dbservices.to/v1.6/search?type=standalone&bundle_ids=" + data.bundle_id)
-                            .then((response) => response.text())
-                            .then((response) => {
-                              if (!isJson(response) || typeof JSON.parse(response).data[0] == "undefined") {
-                                fetch("//api.dbservices.to/v1.6/search?type=tvos&bundle_ids=" + data.bundle_id)
-                                  .then((response) => response.text())
-                                  .then((response) => {
-                                    if (isJson(response) && typeof JSON.parse(response).data[0] != "undefined")
-                                      appdb_data = JSON.parse(response).data[0];
-                                    else appdb_checked = true;
-                                  });
-                              } else appdb_data = JSON.parse(response).data[0];
-                            });
-                        } else appdb_data = JSON.parse(response).data[0];
-                      });
-                  } else appdb_data = JSON.parse(response).data[0];
-                });
-            } else appdb_data = JSON.parse(response).data[0];
-          });
-        fetch("//api.starfiles.co/bundle_id/" + data.bundle_id)
-          .then((response) => response.json())
-          .then((bundle_id_data) => {
-            document.getElementById("download_links").innerHTML = "";
-            for (var version in bundle_id_data.apps) {
-              if (bundle_id_data.apps.hasOwnProperty(version)) {
-                str = "";
-                for (i = 0; i < bundle_id_data.apps[version].length; i++) {
-                  str +=
-                    `<div class="flex items-center justify-between">
+        // TODO Check Network Error
+        // let cydiaRes = await axios.get("https://api.dbservices.to/v1.6/search?type=cydia&bundle_ids=" + data.bundle_id);
+        // if (!isJson(cydiaRes.data) || typeof JSON.parse(cydiaRes.data).data[0] == "undefined") {
+        //   let iosRes = await axios.get("https://api.dbservices.to/v1.6/search?type=ios&bundle_ids=" + data.bundle_id);
+        //   if (!isJson(iosRes.data) || typeof JSON.parse(iosRes.data).data[0] == "undefined") {
+        //     let osRes = await axios.get("https://api.dbservices.to/v1.6/search?type=osx&bundle_ids=" + data.bundle_id);
+        //     if (!isJson(osRes.data) || typeof JSON.parse(osRes.data).data[0] == "undefined") {
+        //       let standalone = await axios.get(
+        //         "https://api.dbservices.to/v1.6/search?type=standalone&bundle_ids=" + data.bundle_id
+        //       );
+        //       if (!isJson(standalone.data) || typeof JSON.parse(standalone.data).data[0] == "undefined") {
+        //         let bundle = await axios.get(
+        //           "https://api.dbservices.to/v1.6/search?type=tvos&bundle_ids=" + data.bundle_id
+        //         );
+        //         if (isJson(bundle.data) && typeof JSON.parse(bundle.data).data[0] != "undefined")
+        //           appdb_data = JSON.parse(bundle.data).data[0];
+        //         else appdb_checked = true;
+        //       } else {
+        //         appdb_data = JSON.parse(standalone.data).data[0];
+        //       }
+        //     } else {
+        //       appdb_data = JSON.parse(osRes.data).data[0];
+        //     }
+        //   } else {
+        //     appdb_data = JSON.parse(iosRes.data).data[0];
+        //   }
+        // } else {
+        //   appdb_data = JSON.parse(cydiaRes.data).data[0];
+        // }
+
+        await axios.get("https://api.starfiles.co/bundle_id/" + data.bundle_id).then((bundleData) => {
+          let bundle_id_data = bundleData.data;
+          setDownloadLinks(<></>);
+          document.getElementById("download_links").innerHTML = "";
+          for (var version in bundle_id_data.apps) {
+            if (bundle_id_data.apps.hasOwnProperty(version)) {
+              str = "";
+              for (i = 0; i < bundle_id_data.apps[version].length; i++) {
+                str +=
+                  `<div class="flex items-center justify-between">
                                 <div>
                                     <p class="text-l">` +
-                    bundle_id_data.apps[version][i].clean_ipa_filename +
-                    `</p>
+                  bundle_id_data.apps[version][i].clean_ipa_filename +
+                  `</p>
                                     <p class="text-xs">Uploaded ` +
-                    timeDifference(bundle_id_data.apps[version][i].upload_time) +
-                    ` • ` +
-                    bundle_id_data.apps[version][i].views +
-                    ` Views • ` +
-                    bundle_id_data.apps[version][i].downloads +
-                    ` Downloads</p>
+                  timeDifference(bundle_id_data.apps[version][i].upload_time) +
+                  ` • ` +
+                  bundle_id_data.apps[version][i].views +
+                  ` Views • ` +
+                  bundle_id_data.apps[version][i].downloads +
+                  ` Downloads</p>
                                 </div>
                                 <div class="flex flex-col md:flex-row text-right gap-1">` +
-                    (document.cookie.indexOf("udid=") === -1
-                      ? `<a href="/purchase" type="button" class="text-white bg-[#<?php echo $theme['secondary'];?>] hover:bg-[#0096C7] md:font-medium text-xs rounded-lg py-2.5 text-center w-[5rem]">Install</a>`
-                      : `<a href="/signer#` +
-                        bundle_id_data.apps[version][i].id +
-                        `" type="button" class="text-white bg-[#<?php echo $theme['secondary'];?>] hover:bg-[#0096C7] md:font-medium text-xs rounded-lg py-2.5 text-center w-[5rem]">Install</a>`) +
-                    `<a href="//starfiles.co/file/` +
-                    bundle_id_data.apps[version][i].id +
-                    `" type="button" class="text-white bg-[#0096C7] hover:bg-[#<?php echo $theme['primary'];?>] md:font-medium text-xs rounded-lg py-2.5 text-center w-[5rem]">Download</a>
+                  (document.cookie.indexOf("udid=") === -1
+                    ? `<a href="/purchase" type="button" class="text-white bg-[#<?php echo $theme['secondary'];?>] hover:bg-[#0096C7] md:font-medium text-xs rounded-lg py-2.5 text-center w-[5rem]">Install</a>`
+                    : `<a href="/signer#` +
+                      bundle_id_data.apps[version][i].id +
+                      `" type="button" class="text-white bg-[#<?php echo $theme['secondary'];?>] hover:bg-[#0096C7] md:font-medium text-xs rounded-lg py-2.5 text-center w-[5rem]">Install</a>`) +
+                  `<a href="//starfiles.co/file/` +
+                  bundle_id_data.apps[version][i].id +
+                  `" type="button" class="text-white bg-[#0096C7] hover:bg-[#<?php echo $theme['primary'];?>] md:font-medium text-xs rounded-lg py-2.5 text-center w-[5rem]">Download</a>
                                 </div>
                             </div>`;
-                  if (i == bundle_id_data.apps.len && id != bundle_id_data.apps[version][i].id)
-                    window.location.href = "/app/" + bundle_id_data.apps[version][i].id;
-                }
-                document.getElementById("download_links").innerHTML +=
-                  '<h3 class="text-xl font-semibold mt-4">' +
-                  version +
-                  '</h3><div class="grid grid-cols-1 gap-1">' +
-                  str +
-                  "</div>";
+                if (i == bundle_id_data.apps.len && id != bundle_id_data.apps[version][i].id)
+                  window.location.href = "/app/" + bundle_id_data.apps[version][i].id;
               }
+              document.getElementById("download_links").innerHTML +=
+                '<h3 class="text-xl font-semibold mt-4">' +
+                version +
+                '</h3><div class="grid grid-cols-1 gap-1">' +
+                str +
+                "</div>";
             }
-            document.getElementById("views").innerHTML =
-              bundle_id_data.views > 1000 ? Math.round(bundle_id_data.views / 1000) + "K" : bundle_id_data.views;
-            document.getElementById("downloads").innerHTML =
-              bundle_id_data.downloads > 1000
-                ? Math.round(bundle_id_data.downloads / 1000) + "K"
-                : bundle_id_data.downloads;
-          });
+          }
+          document.getElementById("views").innerHTML =
+            bundle_id_data.views > 1000 ? Math.round(bundle_id_data.views / 1000) + "K" : bundle_id_data.views;
+          document.getElementById("downloads").innerHTML =
+            bundle_id_data.downloads > 1000
+              ? Math.round(bundle_id_data.downloads / 1000) + "K"
+              : bundle_id_data.downloads;
+        });
       }
     } catch (err) {
       alert(err.message);
@@ -502,42 +502,48 @@ function App() {
                     </p>
                   </div>
                 )}
-                <div>
-                  <p class="font-semibold text-lg">Age Rating</p>
-                  <p id="age_rating">
-                    {ageRating ? (
-                      ageRating
-                    ) : (
-                      <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                        Loading...
-                      </span>
-                    )}
-                  </p>
-                </div>
-                <div>
-                  <p class="font-semibold text-lg">Latest Version</p>
-                  <p id="version">
-                    {version ? (
-                      version
-                    ) : (
-                      <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                        Loading...
-                      </span>
-                    )}
-                  </p>
-                </div>
-                <div>
-                  <p class="font-semibold text-lg">Rating</p>
-                  <p id="rating">
-                    {rating ? (
-                      rating
-                    ) : (
-                      <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                        Loading...
-                      </span>
-                    )}
-                  </p>
-                </div>
+                {showAgeRating && (
+                  <div>
+                    <p class="font-semibold text-lg">Age Rating</p>
+                    <p id="age_rating">
+                      {ageRating ? (
+                        ageRating
+                      ) : (
+                        <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                          Loading...
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                )}
+                {showVersion && (
+                  <div>
+                    <p class="font-semibold text-lg">Latest Version</p>
+                    <p id="version">
+                      {version ? (
+                        version
+                      ) : (
+                        <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                          Loading...
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                )}
+                {showRating && (
+                  <div>
+                    <p class="font-semibold text-lg">Rating</p>
+                    <p id="rating">
+                      {rating ? (
+                        rating
+                      ) : (
+                        <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                          Loading...
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                )}
                 {showSize && (
                   <div>
                     <p class="font-semibold text-lg">Size</p>
@@ -552,54 +558,62 @@ function App() {
                     </p>
                   </div>
                 )}
-                <div>
-                  <p class="font-semibold text-lg">Minimum iOS</p>
-                  <p id="minimum_ios">
-                    {minimumIos ? (
-                      minimumIos
-                    ) : (
-                      <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                        Loading...
-                      </span>
-                    )}
-                  </p>
-                </div>
-                <div>
-                  <p class="font-semibold text-lg">Release Date</p>
-                  <p id="release_date">
-                    {releaseDate ? (
-                      releaseDate
-                    ) : (
-                      <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                        Loading...
-                      </span>
-                    )}
-                  </p>
-                </div>
-                <div>
-                  <p class="font-semibold text-lg">Version Release Date</p>
-                  <p id="version_release_date">
-                    {versionReleaseDate ? (
-                      versionReleaseDate
-                    ) : (
-                      <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                        Loading...
-                      </span>
-                    )}
-                  </p>
-                </div>
-                <div>
-                  <p class="font-semibold text-lg">Genres</p>
-                  <p id="genres">
-                    {genres ? (
-                      genres
-                    ) : (
-                      <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                        Loading...
-                      </span>
-                    )}
-                  </p>
-                </div>
+                {showMinimumIos && (
+                  <div>
+                    <p class="font-semibold text-lg">Minimum iOS</p>
+                    <p id="minimum_ios">
+                      {minimumIos ? (
+                        minimumIos
+                      ) : (
+                        <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                          Loading...
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                )}
+                {showReleaseDate && (
+                  <div>
+                    <p class="font-semibold text-lg">Release Date</p>
+                    <p id="release_date">
+                      {releaseDate ? (
+                        releaseDate
+                      ) : (
+                        <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                          Loading...
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                )}
+                {showVersionReleaseDate && (
+                  <div>
+                    <p class="font-semibold text-lg">Version Release Date</p>
+                    <p id="version_release_date">
+                      {versionReleaseDate ? (
+                        versionReleaseDate
+                      ) : (
+                        <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                          Loading...
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                )}
+                {showGenres && (
+                  <div>
+                    <p class="font-semibold text-lg">Genres</p>
+                    <p id="genres">
+                      {genres ? (
+                        genres
+                      ) : (
+                        <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                          Loading...
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                )}
                 {showFeatures && (
                   <div>
                     <p class="font-semibold text-lg">Features</p>
