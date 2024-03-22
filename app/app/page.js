@@ -289,9 +289,11 @@ function App() {
 
         await axios.get("https://api.starfiles.co/bundle_id/" + data.bundle_id).then((bundleData) => {
           let bundle_id_data = bundleData.data;
+          let highestVersion = null;
           setDownloadLinks(
             <>
               {Object.keys(bundle_id_data?.apps)?.map((version, versionIndex) => {
+                if (!highestVersion) highestVersion = version;
                 if (bundle_id_data.apps.hasOwnProperty(version))
                   return (
                     <>
@@ -348,6 +350,7 @@ function App() {
               })}
             </>
           );
+          setStarfilesVersion(highestVersion);
           setViews(bundle_id_data.views > 1000 ? Math.round(bundle_id_data.views / 1000) + "K" : bundle_id_data.views);
           setDownloads(
             bundle_id_data.downloads > 1000
