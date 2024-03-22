@@ -66,9 +66,11 @@ function SignerProgress() {
   const [showAppFeedback, setShowAppFeedback] = useState(false);
   const [showAppFeedbackReason, setShowAppFeedbackReason] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
+  const [showFeedbackInitial, setShowFeedbackInitial] = useState(true);
 
   const [log, setLog] = useState(<></>);
   const [progressWidth, setProgressWidth] = useState("0");
+  const [wired, setWired] = useState(<></>);
 
   useEffect(() => {
     // Get Translations
@@ -146,22 +148,25 @@ function SignerProgress() {
         if (!formatted_output.split("<span").slice(-1)[0].includes("</span")) formatted_output += "</span>";
         let i = formatted_output.count("<span") - formatted_output.count("</span");
         formatted_output += "</span>".repeat(i < 0 ? 0 : i);
-        document.getElementById("log").innerHTML =
-          '<pre data-prefix=">"><code>' +
-          formatted_output.replace("&gt;&gt;&gt;", "").trim() +
-          "</code></pre>" +
-          document.getElementById("log").innerHTML;
+        setLog((prev) => (
+          <>
+            <pre data-prefix=">">
+              <code dangerouslySetInnerHTML={{ __html: formatted_output.replace("&gt;&gt;&gt;", "").trim() }} />
+            </pre>
+            {prev}
+          </>
+        ));
         if (data.url !== undefined) {
           window.location.href = data.url;
           document.getElementById("wired_install").innerHTML =
             '<pre data-prefix="#"><code>Wired Install</code></pre><pre data-prefix="$"><code>bash <(curl -s https://signtunes.com/wired_install.sh/' +
             data.url.split("/")[6] +
             ")</code></pre>";
-          document.getElementById("wired_install").style = "";
-          document.getElementById("progress_bar").parentElement.style.display = "none";
+          setShowWired(true);
+          setShowProgress(false);
           updateStatusText("Complete!");
           eventSource.close();
-          document.getElementById("app_feedback").style.display = "block";
+          showAppFeedback(true);
           alert(
             "Please reopen this page after app install to give feedback on whether or not the install was successful"
           );
@@ -176,9 +181,10 @@ function SignerProgress() {
     };
   }
 
-  function app_feedback(working, reason = null) {
-    document.getElementById("app_feedback_initial_prompt").style.display = "none";
+  async function app_feedback(working, reason = null) {
+    setShowFeedbackInitial(false);
     let ipa;
+    let udid;
     window.location.hash
       .split("?")[1]
       .split("&")
@@ -188,24 +194,24 @@ function SignerProgress() {
         else if (split[0] == "udid") udid = split[1];
       });
     if (working) {
-      document.getElementById("app_feedback_thanks").style.display = "unset";
-      fetch("//api.starfiles.co/ipa_feedback/" + ipa, {
-        method: "POST",
-        body: new URLSearchParams("udid=" + udid + "&working=true"),
-      });
+      setShowFeedback(true);
+      await axios.post(
+        "https://api.starfiles.co/ipa_feedback/" + ipa,
+        new URLSearchParams("udid=" + udid + "&working=true")
+      );
     } else if (reason == null) {
-      document.getElementById("app_feedback_reason").style.display = "unset";
-      fetch("//api.starfiles.co/ipa_feedback/" + ipa, {
-        method: "POST",
-        body: new URLSearchParams("udid=" + udid + "&working=false"),
-      });
+      setShowAppFeedbackReason(true);
+      await axios.post(
+        "https://api.starfiles.co/ipa_feedback/" + ipa,
+        new URLSearchParams("udid=" + udid + "&working=false")
+      );
     } else {
-      document.getElementById("app_feedback_reason").style.display = "none";
-      document.getElementById("app_feedback_thanks").style.display = "unset";
-      fetch("//api.starfiles.co/ipa_feedback/" + ipa, {
-        method: "POST",
-        body: new URLSearchParams("udid=" + udid + "&working=false&reason=" + reason),
-      });
+      setShowAppFeedbackReason(false);
+      setShowFeedback(true);
+      await axios.post(
+        "https://api.starfiles.co/ipa_feedback/" + ipa,
+        new URLSearchParams("udid=" + udid + "&working=false&reason=" + reason)
+      );
     }
   }
 
@@ -214,7 +220,7 @@ function SignerProgress() {
       <head>
         <TitleTags title="Purchase Signatures Pro" />
       </head>
-      <div className="mx-5 mt-24 mb-12">
+      <div className="mx-5 mt-24 mb-12" id="signer-progress">
         <div class="text-center">
           <div class="duration-500" id="status">
             {statusComponent}
@@ -226,26 +232,28 @@ function SignerProgress() {
           )}
           {showAppFeedback && (
             <div class="mt-4 mb-1 px-4 py-2 leading-none rounded-2xl bg-[hsl(var(--n))]" role="alert" id="app_feedback">
-              <div class="flex flex-col" id="app_feedback_initial_prompt">
-                <span class="text-lg font-bold">Is the app working?</span>
-                <p class="text-xs">Feedback helps improve our app suggestion algorithm.</p>
-                <div class="flex justify-center mt-2 gap-4">
-                  <button
-                    class="flex rounded-full bg-primary hover:bg-secondary uppercase px-8 py-2 text-xs font-bold"
-                    id="app_feedback_working"
-                    onClick={() => app_feedback(true)}
-                  >
-                    Yes
-                  </button>
-                  <button
-                    class="flex rounded-full bg-primary hover:bg-secondary uppercase px-8 py-2 text-xs font-bold"
-                    id="app_feedback_broken"
-                    onClick={() => app_feedback(false)}
-                  >
-                    No
-                  </button>
+              {setShowFeedbackInitial && (
+                <div class="flex flex-col" id="app_feedback_initial_prompt">
+                  <span class="text-lg font-bold">Is the app working?</span>
+                  <p class="text-xs">Feedback helps improve our app suggestion algorithm.</p>
+                  <div class="flex justify-center mt-2 gap-4">
+                    <button
+                      class="flex rounded-full bg-primary hover:bg-secondary uppercase px-8 py-2 text-xs font-bold"
+                      id="app_feedback_working"
+                      onClick={() => app_feedback(true)}
+                    >
+                      Yes
+                    </button>
+                    <button
+                      class="flex rounded-full bg-primary hover:bg-secondary uppercase px-8 py-2 text-xs font-bold"
+                      id="app_feedback_broken"
+                      onClick={() => app_feedback(false)}
+                    >
+                      No
+                    </button>
+                  </div>
                 </div>
-              </div>
+              )}
               {showAppFeedbackReason && (
                 <div class="flex flex-col gap-2" id="app_feedback_reason">
                   <span class="text-lg font-bold">What is the issue?</span>
@@ -288,7 +296,11 @@ function SignerProgress() {
               )}
             </div>
           )}
-          {showWired && <div class="mockup-code mt-4 text-left w-min max-w-[100%] mx-auto" id="wired_install"></div>}
+          {showWired && (
+            <div class="mockup-code mt-4 text-left w-min max-w-[100%] mx-auto" id="wired_install">
+              {wired}
+            </div>
+          )}
           {showLog && (
             <div class="mockup-code mt-4 text-left w-min max-w-[100%] mx-auto" id="log">
               {log}

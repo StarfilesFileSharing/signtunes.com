@@ -75,3 +75,21 @@ body {
 #device_status .yellow {
   background: rgb(250, 200, 0);
 }
+
+#signer-progress * {
+  transition: all 250ms;
+}
+
+#signer-progress #status > p:first-child {
+  display: block !important;
+}
+
+#signer-progress #status > p:nth-child(2) {
+  display: block !important;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+#signer-progress #status > p {
+  display: none;
+}
