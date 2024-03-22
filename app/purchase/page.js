@@ -43,7 +43,7 @@ function PurchaseButton({ purchaseButton = <></>, redirect = null }) {
                 "name":"udid",
                 "type":"text",
                 "placeholder":"UDID",
-                "required": "true",
+                "required": true,
                 "text":"A UDID is your device identifier. We need your UDID to get your device registered with Apple.",
                 "link":{
                     "text":"Get your UDID",
