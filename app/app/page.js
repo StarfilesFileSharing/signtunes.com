@@ -53,14 +53,18 @@ function App() {
   const [advisories, setAdvisories] = useState(null);
   const [screenshots, setScreenshots] = useState(null);
   const [downloadLinks, setDownloadLinks] = useState(null);
+  let calledOnce = false;
 
   useEffect(() => {
-    // Get Translations
-    getTranslationList();
-    // Check Title
-    checkTitle();
-    // Get Data
-    getData();
+    if (!calledOnce) {
+      // Get Translations
+      getTranslationList();
+      // Check Title
+      checkTitle();
+      // Get Data
+      getData();
+      calledOnce = true;
+    }
   }, []);
 
   // Get Translations
@@ -250,36 +254,38 @@ function App() {
           }
           return true;
         }
+        let formData = new FormData();
+        formData.append("type", "cydia");
+        formData.append("bundle_ids", data.bundle_id);
 
-        // TODO Check Network Error
-        // let cydiaRes = await axios.get("https://api.dbservices.to/v1.6/search?type=cydia&bundle_ids=" + data.bundle_id);
-        // if (!isJson(cydiaRes.data) || typeof JSON.parse(cydiaRes.data).data[0] == "undefined") {
-        //   let iosRes = await axios.get("https://api.dbservices.to/v1.6/search?type=ios&bundle_ids=" + data.bundle_id);
-        //   if (!isJson(iosRes.data) || typeof JSON.parse(iosRes.data).data[0] == "undefined") {
-        //     let osRes = await axios.get("https://api.dbservices.to/v1.6/search?type=osx&bundle_ids=" + data.bundle_id);
-        //     if (!isJson(osRes.data) || typeof JSON.parse(osRes.data).data[0] == "undefined") {
-        //       let standalone = await axios.get(
-        //         "https://api.dbservices.to/v1.6/search?type=standalone&bundle_ids=" + data.bundle_id
-        //       );
-        //       if (!isJson(standalone.data) || typeof JSON.parse(standalone.data).data[0] == "undefined") {
-        //         let bundle = await axios.get(
-        //           "https://api.dbservices.to/v1.6/search?type=tvos&bundle_ids=" + data.bundle_id
-        //         );
-        //         if (isJson(bundle.data) && typeof JSON.parse(bundle.data).data[0] != "undefined")
-        //           appdb_data = JSON.parse(bundle.data).data[0];
-        //         else appdb_checked = true;
-        //       } else {
-        //         appdb_data = JSON.parse(standalone.data).data[0];
-        //       }
-        //     } else {
-        //       appdb_data = JSON.parse(osRes.data).data[0];
-        //     }
-        //   } else {
-        //     appdb_data = JSON.parse(iosRes.data).data[0];
-        //   }
-        // } else {
-        //   appdb_data = JSON.parse(cydiaRes.data).data[0];
-        // }
+        let cydiaRes = await axios.post("https://api.dbservices.to/v1.6/search/", formData);
+        if (!isJson(cydiaRes.data) || typeof JSON.parse(cydiaRes.data).data[0] == "undefined") {
+          formData.set("type", "ios");
+          let iosRes = await axios.post("https://api.dbservices.to/v1.6/search/", formData);
+          if (!isJson(iosRes.data) || typeof JSON.parse(iosRes.data).data[0] == "undefined") {
+            formData.set("type", "osx");
+            let osRes = await axios.post("https://api.dbservices.to/v1.6/search/", formData);
+            if (!isJson(osRes.data) || typeof JSON.parse(osRes.data).data[0] == "undefined") {
+              formData.set("type", "standalone");
+              let standalone = axios.post("https://api.dbservices.to/v1.6/search/", formData);
+              if (!isJson(standalone.data) || typeof JSON.parse(standalone.data).data[0] == "undefined") {
+                formData.set("type", "tvos");
+                let bundle = await axios.post("https://api.dbservices.to/v1.6/search/", formData);
+                if (isJson(bundle.data) && typeof JSON.parse(bundle.data).data[0] != "undefined")
+                  appdb_data = JSON.parse(bundle.data).data[0];
+                else appdb_checked = true;
+              } else {
+                appdb_data = JSON.parse(standalone.data).data[0];
+              }
+            } else {
+              appdb_data = JSON.parse(osRes.data).data[0];
+            }
+          } else {
+            appdb_data = JSON.parse(iosRes.data).data[0];
+          }
+        } else {
+          appdb_data = JSON.parse(cydiaRes.data).data[0];
+        }
 
         await axios.get("https://api.starfiles.co/bundle_id/" + data.bundle_id).then((bundleData) => {
           let bundle_id_data = bundleData.data;
