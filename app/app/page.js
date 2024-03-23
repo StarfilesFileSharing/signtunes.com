@@ -57,13 +57,13 @@ function App() {
 
   useEffect(() => {
     if (!calledOnce) {
+      calledOnce = true;
       // Get Translations
       getTranslationList();
       // Check Title
       checkTitle();
       // Get Data
       getData();
-      calledOnce = true;
     }
   }, []);
 

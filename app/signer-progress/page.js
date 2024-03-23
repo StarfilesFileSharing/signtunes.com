@@ -72,11 +72,16 @@ function SignerProgress() {
   const [progressWidth, setProgressWidth] = useState("0");
   const [wired, setWired] = useState(<></>);
 
+  let calledOnce = false;
+
   useEffect(() => {
-    // Get Translations
-    getTranslationList();
-    // Connect Event Source
-    connectEventSource();
+    if (!calledOnce) {
+      calledOnce = true;
+      // Get Translations
+      getTranslationList();
+      // Connect Event Source
+      connectEventSource();
+    }
   }, []);
 
   // Get Translations
@@ -158,10 +163,16 @@ function SignerProgress() {
         ));
         if (data.url !== undefined) {
           window.location.href = data.url;
-          document.getElementById("wired_install").innerHTML =
-            '<pre data-prefix="#"><code>Wired Install</code></pre><pre data-prefix="$"><code>bash <(curl -s https://signtunes.com/wired_install.sh/' +
-            data.url.split("/")[6] +
-            ")</code></pre>";
+          setWired(
+            <>
+              <pre data-prefix="#">
+                <code>Wired Install</code>
+              </pre>
+              <pre data-prefix="$">
+                <code>{`bash <(curl -s https://signtunes.com/wired_install.sh/${data.url.split("/")[6]}`}</code>
+              </pre>
+            </>
+          );
           setShowWired(true);
           setShowProgress(false);
           updateStatusText("Complete!");
