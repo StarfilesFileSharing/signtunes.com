@@ -16,7 +16,7 @@ function ProPurchaseButton({ purchaseButton = <></> }) {
       <input type="hidden" name="item_number" value="signtunes_1y" />
       <input type="hidden" name="currency_code" value="USD" />
 
-      {/* Set the terms of the regular subscription.  */}
+      {/* Set the terms of the regular subscription. */}
       <input type="hidden" name="price" value={process.env.NEXT_PUBLIC_SIGNTUNES_PRICE} />
       <input type="hidden" name="p3" value="1" />
       <input type="hidden" name="t3" value="Y" />
@@ -58,7 +58,7 @@ function SignerProgress() {
   const [translationList, setTranslationList] = useState(null);
   const [status, setStatus] = useState("");
   const [statusComponent, setStatusComponent] = useState(
-    <p class="text-2xl font-semibold">Sit tight, we are signing your app!</p>
+    <p className="text-2xl font-semibold">Sit tight, we are signing your app!</p>
   );
   const [showLog, setShowLog] = useState(false);
   const [showProgress, setShowProgress] = useState(true);
@@ -71,6 +71,9 @@ function SignerProgress() {
   const [log, setLog] = useState(<></>);
   const [progressWidth, setProgressWidth] = useState("0");
   const [wired, setWired] = useState(<></>);
+
+  const [showError, setShowError] = useState(false);
+  const [errors, setErrors] = useState("");
 
   let calledOnce = false;
 
@@ -124,7 +127,7 @@ function SignerProgress() {
             <ProPurchaseButton
               purchaseButton={
                 <Link
-                  class="rounded-md bg-primary hover:bg-[#023E8A] px-2.5 py-2.5 text-lg text-white shadow"
+                  className="rounded-md bg-primary hover:bg-[#023E8A] px-2.5 py-2.5 text-lg text-white shadow"
                   href="/purchase"
                 >
                   Purchase Signtunes
@@ -187,6 +190,7 @@ function SignerProgress() {
     eventSource.onerror = function (error) {
       updateStatusText("Error: Disconnected from Signer (Retrying)");
       console.error(error);
+      setErrors((prev) => prev + " " + err.message);
       eventSource.close();
       setTimeout(connectEventSource, 2000);
     };
@@ -204,25 +208,30 @@ function SignerProgress() {
         if (split[0] == "ipa") ipa = split[1];
         else if (split[0] == "udid") udid = split[1];
       });
-    if (working) {
-      setShowFeedback(true);
-      await axios.post(
-        "https://api.starfiles.co/ipa_feedback/" + ipa,
-        new URLSearchParams("udid=" + udid + "&working=true")
-      );
-    } else if (reason == null) {
-      setShowAppFeedbackReason(true);
-      await axios.post(
-        "https://api.starfiles.co/ipa_feedback/" + ipa,
-        new URLSearchParams("udid=" + udid + "&working=false")
-      );
-    } else {
-      setShowAppFeedbackReason(false);
-      setShowFeedback(true);
-      await axios.post(
-        "https://api.starfiles.co/ipa_feedback/" + ipa,
-        new URLSearchParams("udid=" + udid + "&working=false&reason=" + reason)
-      );
+    try {
+      if (working) {
+        setShowFeedback(true);
+        await axios.post(
+          "https://api.starfiles.co/ipa_feedback/" + ipa,
+          new URLSearchParams("udid=" + udid + "&working=true")
+        );
+      } else if (reason == null) {
+        setShowAppFeedbackReason(true);
+        await axios.post(
+          "https://api.starfiles.co/ipa_feedback/" + ipa,
+          new URLSearchParams("udid=" + udid + "&working=false")
+        );
+      } else {
+        setShowAppFeedbackReason(false);
+        setShowFeedback(true);
+        await axios.post(
+          "https://api.starfiles.co/ipa_feedback/" + ipa,
+          new URLSearchParams("udid=" + udid + "&working=false&reason=" + reason)
+        );
+      }
+    } catch (err) {
+      console.error(err.message);
+      setErrors((prev) => prev + " " + err.message);
     }
   }
 
@@ -232,31 +241,35 @@ function SignerProgress() {
         <TitleTags title="Purchase Signatures Pro" />
       </head>
       <div className="mx-5 mt-24 mb-12" id="signer-progress">
-        <div class="text-center">
-          <div class="duration-500" id="status">
+        <div className="text-center">
+          <div className="duration-500" id="status">
             {statusComponent}
           </div>
           {showProgress && (
-            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-300 mt-4 max-w-[400px] mx-auto">
-              <div class="bg-primary h-2.5 rounded-full" style={{ width: progressWidth }} id="progress_bar"></div>
+            <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-300 mt-4 max-w-[400px] mx-auto">
+              <div className="bg-primary h-2.5 rounded-full" style={{ width: progressWidth }} id="progress_bar"></div>
             </div>
           )}
           {showAppFeedback && (
-            <div class="mt-4 mb-1 px-4 py-2 leading-none rounded-2xl bg-[hsl(var(--n))]" role="alert" id="app_feedback">
+            <div
+              className="mt-4 mb-1 px-4 py-2 leading-none rounded-2xl bg-[hsl(var(--n))]"
+              role="alert"
+              id="app_feedback"
+            >
               {setShowFeedbackInitial && (
-                <div class="flex flex-col" id="app_feedback_initial_prompt">
-                  <span class="text-lg font-bold">Is the app working?</span>
-                  <p class="text-xs">Feedback helps improve our app suggestion algorithm.</p>
-                  <div class="flex justify-center mt-2 gap-4">
+                <div className="flex flex-col" id="app_feedback_initial_prompt">
+                  <span className="text-lg font-bold">Is the app working?</span>
+                  <p className="text-xs">Feedback helps improve our app suggestion algorithm.</p>
+                  <div className="flex justify-center mt-2 gap-4">
                     <button
-                      class="flex rounded-full bg-primary hover:bg-secondary uppercase px-8 py-2 text-xs font-bold"
+                      className="flex rounded-full bg-primary hover:bg-secondary uppercase px-8 py-2 text-xs font-bold"
                       id="app_feedback_working"
                       onClick={() => app_feedback(true)}
                     >
                       Yes
                     </button>
                     <button
-                      class="flex rounded-full bg-primary hover:bg-secondary uppercase px-8 py-2 text-xs font-bold"
+                      className="flex rounded-full bg-primary hover:bg-secondary uppercase px-8 py-2 text-xs font-bold"
                       id="app_feedback_broken"
                       onClick={() => app_feedback(false)}
                     >
@@ -266,32 +279,32 @@ function SignerProgress() {
                 </div>
               )}
               {showAppFeedbackReason && (
-                <div class="flex flex-col gap-2" id="app_feedback_reason">
-                  <span class="text-lg font-bold">What is the issue?</span>
-                  <div class="flex gap-1 justify-center flex-wrap">
+                <div className="flex flex-col gap-2" id="app_feedback_reason">
+                  <span className="text-lg font-bold">What is the issue?</span>
+                  <div className="flex gap-1 justify-center flex-wrap">
                     <button
-                      class="flex rounded-full bg-primary hover:bg-secondary uppercase px-4 py-2 text-xs font-bold"
+                      className="flex rounded-full bg-primary hover:bg-secondary uppercase px-4 py-2 text-xs font-bold"
                       id="app_feedback_crash"
                       onClick={() => app_feedback(false, "crash")}
                     >
                       Crashing
                     </button>
                     <button
-                      class="flex rounded-full bg-primary hover:bg-secondary uppercase px-4 py-2 text-xs font-bold"
+                      className="flex rounded-full bg-primary hover:bg-secondary uppercase px-4 py-2 text-xs font-bold"
                       id="app_feedback_integrity"
                       onClick={() => app_feedback(false, "integrity")}
                     >
                       Integrity Error
                     </button>
                     <button
-                      class="flex rounded-full bg-primary hover:bg-secondary uppercase px-4 py-2 text-xs font-bold"
+                      className="flex rounded-full bg-primary hover:bg-secondary uppercase px-4 py-2 text-xs font-bold"
                       id="app_feedback_unable"
                       onClick={() => app_feedback(false, "unable")}
                     >
                       Unable to Install
                     </button>
                     <button
-                      class="flex rounded-full bg-primary hover:bg-secondary uppercase px-4 py-2 text-xs font-bold"
+                      className="flex rounded-full bg-primary hover:bg-secondary uppercase px-4 py-2 text-xs font-bold"
                       id="app_feedback_other"
                       onClick={() => app_feedback(false, "other")}
                     >
@@ -301,22 +314,31 @@ function SignerProgress() {
                 </div>
               )}
               {showFeedback && (
-                <span class="text-lg font-bold" id="app_feedback_thanks">
+                <span className="text-lg font-bold" id="app_feedback_thanks">
                   Thank you for your feedback!
                 </span>
               )}
             </div>
           )}
           {showWired && (
-            <div class="mockup-code mt-4 text-left w-min max-w-[100%] mx-auto" id="wired_install">
+            <div className="mockup-code mt-4 text-left w-min max-w-[100%] mx-auto" id="wired_install">
               {wired}
             </div>
           )}
           {showLog && (
-            <div class="mockup-code mt-4 text-left w-min max-w-[100%] mx-auto" id="log">
+            <div className="mockup-code mt-4 text-left w-min max-w-[100%] mx-auto" id="log">
               {log}
             </div>
           )}
+          {errors?.trim()?.length > 0 && (
+            <button
+              onClick={() => setShowError((prev) => !prev)}
+              className="rounded-md mt-5 inline-block bg-red-600 hover:bg-red-400 px-2.5 py-2.5 text-lg text-white shadow"
+            >
+              Show Error
+            </button>
+          )}
+          {showError && <code className="p-3 mt-10 inline-block bg-gray-200 rounded-lg mx-[10%]">{errors}</code>}
         </div>
       </div>
     </>
