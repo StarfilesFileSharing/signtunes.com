@@ -93,3 +93,37 @@ body {
 #signer-progress #status > p {
   display: none;
 }
+
+#signer .progressbar {
+  width: 100%;
+  background: rgb(229 231 235);
+  border-radius: 100px;
+  height: 0.625rem;
+}
+
+#signer .progressbarfill {
+  height: 100%;
+  border-radius: 100px;
+  background: #0096c7;
+}
+
+#signer #output {
+  line-height: 0;
+}
+
+#signer #output > a {
+  text-align: center;
+  color: white;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  margin-top: 0.5rem;
+  display: block;
+  border-radius: 0.5rem;
+  background: rgb(29 78 216);
+}
+
+#signer #output > svg {
+  display: none;
+}
