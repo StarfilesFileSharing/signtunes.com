@@ -8,7 +8,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Home({ searchParams }) {
-  const { referral } = searchParams();
+  const { referral } = searchParams;
+  console.log("referral2", referral);
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [emailSuccess, setEmailSuccess] = useState({ success: false, message: "" });
   const [mainContentLoad, setMainContentLoad] = useState(false);

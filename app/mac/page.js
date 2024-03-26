@@ -1,15 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import TitleTags from "../components/Title";
-import { useSearchParams } from "next/navigation";
 import { getTranslations } from "@/utils/getTranslation";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import TitleTags from "../components/Title";
 
-function Mac() {
+function Mac({ searchParams }) {
   const [translationList, setTranslationList] = useState(null);
-  const searchParams = useSearchParams();
-  const UDID = searchParams.get("UDID");
-  const chip = searchParams.get("Chip")?.toLowerCase();
+  const { UDID, chip } = searchParams;
 
   useEffect(() => {
     // Get Translations

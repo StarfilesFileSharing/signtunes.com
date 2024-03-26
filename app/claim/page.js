@@ -2,13 +2,11 @@
 import { getTranslations } from "@/utils/getTranslation";
 import axios from "axios";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import TitleTags from "../components/Title";
 
-function Claim() {
-  const searchParams = useSearchParams();
-  const code = searchParams.get("code");
+function Claim({ searchParams }) {
+  const { code } = searchParams;
   const [translationList, setTranslationList] = useState(null);
   const [codeInput, setCodeInput] = useState(code ? code : "");
   const [udid, setUdid] = useState("");

@@ -1,13 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import TitleTags from "../components/Title";
-import { useSearchParams } from "next/navigation";
 import { getTranslations } from "@/utils/getTranslation";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import TitleTags from "../components/Title";
 
-function ProPurchaseButton({ purchaseButton = <></> }) {
-  const searchParams = useSearchParams();
-  const referral = searchParams.get("referral");
+function ProPurchaseButton({ purchaseButton = <></>, searchParams }) {
+  const { referral } = searchParams;
 
   return (
     <form action="https://api.starfiles.co/payments/purchase" method="POST" className="inline-block">
@@ -54,7 +52,7 @@ function ProPurchaseButton({ purchaseButton = <></> }) {
   );
 }
 
-function SignerProgress() {
+function SignerProgress({ searchParams }) {
   const [translationList, setTranslationList] = useState(null);
   const [status, setStatus] = useState("");
   const [statusComponent, setStatusComponent] = useState(
@@ -125,6 +123,7 @@ function SignerProgress() {
         if (data.message == "Device not registered") {
           updateStatusText(
             <ProPurchaseButton
+              searchParams={searchParams}
               purchaseButton={
                 <Link
                   className="rounded-md bg-primary hover:bg-[#023E8A] px-2.5 py-2.5 text-lg text-white shadow"

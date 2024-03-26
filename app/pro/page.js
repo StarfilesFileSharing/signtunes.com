@@ -1,12 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import TitleTags from "../components/Title";
-import { useSearchParams } from "next/navigation";
 import { getTranslations } from "@/utils/getTranslation";
+import { useEffect, useState } from "react";
+import TitleTags from "../components/Title";
 
-function ProPurchaseButton({ purchaseButton = <></>, period = "monthly" }) {
-  const searchParams = useSearchParams();
-  const referral = searchParams.get("referral");
+function ProPurchaseButton({ purchaseButton = <></>, period = "monthly", searchParams }) {
+  const { referral } = searchParams;
 
   return (
     <form action="https://api.starfiles.co/payments/purchase" method="POST">
@@ -42,7 +40,7 @@ function ProPurchaseButton({ purchaseButton = <></>, period = "monthly" }) {
   );
 }
 
-function Pro() {
+function Pro({ searchParams }) {
   const [translationList, setTranslationList] = useState(null);
 
   useEffect(() => {
@@ -87,6 +85,7 @@ function Pro() {
               <span>{translationList?.join_signtunes_pro}</span>&nbsp;${process.env.NEXT_PUBLIC_SIGNTUNES_PRO_PRICE}
             </button>
           }
+          searchParams={searchParams}
         />
         <div className="block lg:mx-96 mb-12 dark:text-gray-900 rounded-xl p-8 shadow-xl bg-bright">
           <h3 className="text-xl font-semibold">{translationList?.get_certificate_files}</h3>
@@ -111,6 +110,7 @@ function Pro() {
                   </button>
                 </div>
               }
+              searchParams={searchParams}
             />
           </div>
         </div>

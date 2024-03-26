@@ -2,14 +2,11 @@
 import cookie, { setCookie } from "@/utils/cookies";
 import { getTranslations } from "@/utils/getTranslation";
 import axios from "axios";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import TitleTags from "../components/Title";
 
-function Settings() {
-  const searchParams = useSearchParams();
-  const current = searchParams.get("current");
+function Settings({ searchParams }) {
+  const { current } = searchParams;
   const [translationList, setTranslationList] = useState(null);
   const [currentSetting, setCurrentSetting] = useState(current ? current : "devices");
   const [email, setEmail] = useState("");

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 function Header() {
   const searchParams = useSearchParams();
   const referral = searchParams.get("referral");
+  console.log("referral1", referral);
   const [translationList, setTranslationList] = useState(null);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [cookieChecked, setCookieChecked] = useState(false);
@@ -17,13 +18,18 @@ function Header() {
   const [hideDeviceName, setHideDeviceName] = useState(false);
   const [deviceInfo, setDeviceInfo] = useState(null);
 
+  let isCalled = false;
+
   useEffect(() => {
-    // Check Dark Theme
-    checkDarkTheme();
-    // Get Translations
-    getTranslationList();
-    // Check Cookie
-    checkCookie();
+    if (!isCalled) {
+      isCalled = true;
+      // Check Dark Theme
+      checkDarkTheme();
+      // Get Translations
+      getTranslationList();
+      // Check Cookie
+      checkCookie();
+    }
   }, []);
 
   // Check Dark THeme

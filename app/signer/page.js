@@ -1,15 +1,14 @@
 "use client";
-import cookie, { setCookie } from "@/utils/cookies";
+import cookie from "@/utils/cookies";
 import { getTranslations } from "@/utils/getTranslation";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Script from "next/script";
 import { useEffect, useState } from "react";
 import TitleTags from "../components/Title";
 
-function Signer() {
+function Signer({ searchParams }) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+  const { id } = searchParams;
 
   const [translationList, setTranslationList] = useState(null);
 

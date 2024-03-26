@@ -1,14 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import TitleTags from "../components/Title";
-import { useSearchParams } from "next/navigation";
-import { getTranslations } from "@/utils/getTranslation";
 import cookie, { setCookie } from "@/utils/cookies";
+import { getTranslations } from "@/utils/getTranslation";
+import { useEffect, useState } from "react";
+import TitleTags from "../components/Title";
 
-function PurchaseButton({ purchaseButton = <></>, redirect = null }) {
-  const searchParams = useSearchParams();
-  const referral = searchParams.get("referral");
-  const id = searchParams.get("id");
+function PurchaseButton({ purchaseButton = <></>, redirect = null, searchParams }) {
+  const { referral, id } = searchParams;
 
   return (
     <form action="https://api.starfiles.co/payments/purchase" method="POST" className="flex justify-center">
@@ -66,10 +63,9 @@ function PurchaseButton({ purchaseButton = <></>, redirect = null }) {
   );
 }
 
-function Purchase() {
+function Purchase({ searchParams }) {
   const [translationList, setTranslationList] = useState(null);
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+  const { id } = searchParams;
 
   useEffect(() => {
     // Get Translations
@@ -179,6 +175,7 @@ function Purchase() {
             )}
           </p>
           <PurchaseButton
+            searchParams={searchParams}
             purchaseButton={
               <button
                 type="submit"
@@ -194,6 +191,7 @@ function Purchase() {
           />
           or
           <PurchaseButton
+            searchParams={searchParams}
             purchaseButton={
               <button
                 type="submit"

@@ -1,14 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import TitleTags from "../components/Title";
-import { useSearchParams } from "next/navigation";
-import { getTranslations } from "@/utils/getTranslation";
 import cookie, { setCookie } from "@/utils/cookies";
+import { getTranslations } from "@/utils/getTranslation";
+import { useEffect, useState } from "react";
+import TitleTags from "../components/Title";
 
-function ProPurchaseButton({ purchaseButton = <></> }) {
-  const searchParams = useSearchParams();
-  const referral = searchParams.get("referral");
-  const id = searchParams.get("id");
+function ProPurchaseButton({ purchaseButton = <></>, searchParams }) {
+  const { referral, id } = searchParams;
 
   return (
     <form action="https://api.starfiles.co/payments/purchase" method="POST">
@@ -40,7 +37,7 @@ function ProPurchaseButton({ purchaseButton = <></> }) {
   );
 }
 
-function Express() {
+function Express({ searchParams }) {
   const [translationList, setTranslationList] = useState(null);
   let isCalled = false;
 
@@ -86,6 +83,7 @@ function Express() {
           Skip hold times on new devices.
         </h2>
         <ProPurchaseButton
+          searchParams={searchParams}
           purchaseButton={
             <button
               className="flex m-auto mb-4 rounded-md hover:bg-[#023E8A] px-5 py-2.5 text-sm font-medium text-white shadow bg-primary"

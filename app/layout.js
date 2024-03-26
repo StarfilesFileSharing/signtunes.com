@@ -1,13 +1,14 @@
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import CanonicalTag from "./components/Canonical";
-import DefaulTheme from "./components/DefualtTheme";
+import DefaultTheme from "./components/DefualtTheme";
 import TitleTags from "./components/Title";
 import "./globals.css";
 import TagManager from "react-gtm-module";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
-
+export const runtime = "edge";
 export default function RootLayout({ children }) {
   const tagManagerArgs = {
     gtmId: "G-EFD6HMSKRC",
@@ -256,7 +257,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={inter.className + " dark:bg-gray-700 dark:text-gray-200 bg-white text-black"}>
-        <DefaulTheme>{children}</DefaulTheme>
+        <DefaultTheme>{children}</DefaultTheme>
       </body>
     </html>
   );

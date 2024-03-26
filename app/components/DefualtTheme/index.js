@@ -1,15 +1,17 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Footer from "../Layout/Footer";
 import Header from "../Layout/Header";
 
-function DefaulTheme({ children }) {
+function DefaultTheme({ children }) {
   return (
     <div>
-      <Header />
+      <Suspense>
+        <Header />
+      </Suspense>
       {children}
       <Footer />
     </div>
   );
 }
 
-export default DefaulTheme;
+export default DefaultTheme;

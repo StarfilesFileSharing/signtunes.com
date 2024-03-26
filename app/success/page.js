@@ -1,12 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import TitleTags from "../components/Title";
-import { useSearchParams } from "next/navigation";
 import { getTranslations } from "@/utils/getTranslation";
+import { useEffect, useState } from "react";
+import TitleTags from "../components/Title";
 
-function ProPurchaseButton({ purchaseButton = <></> }) {
-  const searchParams = useSearchParams();
-  const referral = searchParams.get("referral");
+function ProPurchaseButton({ purchaseButton = <></>, searchParams }) {
+  const { referral } = searchParams;
 
   return (
     <form action="https://api.starfiles.co/payments/purchase" method="POST">
@@ -33,10 +31,9 @@ function ProPurchaseButton({ purchaseButton = <></> }) {
   );
 }
 
-function Success() {
+function Success({ searchParams }) {
   const [translationList, setTranslationList] = useState(null);
-  const searchParams = useSearchParams();
-  const referral = searchParams.get("referral");
+  const { referral } = searchParams;
 
   useEffect(() => {
     // Get Translations
@@ -74,6 +71,7 @@ function Success() {
         </div>
 
         <ProPurchaseButton
+          searchParams={searchParams}
           purchaseButton={
             <button
               className="flex m-auto mb-4 rounded-md hover:bg-[#023E8A] px-5 py-2.5 text-sm font-medium text-white shadow bg-primary"
@@ -97,6 +95,7 @@ function Success() {
           <h3 className="text-xl font-semibold">Special Discord Role</h3>
           <p className="text-lg mb-4">Get a special role on our Discord server for everyone to see</p>
           <ProPurchaseButton
+            searchParams={searchParams}
             purchaseButton={
               <div className="flex justify-center">
                 <button
