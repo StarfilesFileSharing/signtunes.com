@@ -2,6 +2,7 @@
 import cookie, { setCookie } from "@/utils/cookies";
 import { getTranslations } from "@/utils/getTranslation";
 import { useEffect, useState } from "react";
+import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
 
 function ProPurchaseButton({ purchaseButton = <></>, searchParams }) {
@@ -74,6 +75,7 @@ function Express({ searchParams }) {
       <head>
         <TitleTags title="Purchase Signtunes Express" />
       </head>
+      <Header searchParams={searchParams} />
       <div className="mx-5 md:mx-10 mt-5">
         <h1 className="text-5xl font-extrabold dark:text-white text-center">
           Signtunes

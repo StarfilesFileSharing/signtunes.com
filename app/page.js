@@ -6,6 +6,7 @@ import getUserLanguageCode from "@/utils/userLanguageCode";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Header from "./components/Layout/Header";
 
 export default function Home({ searchParams }) {
   const { referral } = searchParams;
@@ -143,6 +144,7 @@ export default function Home({ searchParams }) {
 
   return (
     <>
+      <Header searchParams={searchParams} />
       <main className="mx-5 md:mx-12 mt-5 grid grid-cols-4 mb-6 ">
         <div className="md:w-12/12 col-span-4 md:col-span-3 grid grid-cols-6">
           {alertsLoad && (

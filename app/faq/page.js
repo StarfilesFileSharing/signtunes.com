@@ -1,9 +1,10 @@
 "use client";
 import { getTranslations } from "@/utils/getTranslation";
 import { useEffect, useState } from "react";
+import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
 
-function FAQ() {
+function FAQ({ searchParams }) {
   const [translationList, setTranslationList] = useState(null);
 
   useEffect(() => {
@@ -26,6 +27,7 @@ function FAQ() {
       <head>
         <TitleTags title="Frequently Asked Questions" />
       </head>
+      <Header searchParams={searchParams} />
       <div className="mx-5 md:mx-10 mt-5">
         <div className="px-4 py-4 mx-auto max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-8 flex flex-col w-full mb-12 text-center">
           <h1 className="text-4xl font-bold leading-none tracking-tighter text-neutral-600 dark:text-gray-200">

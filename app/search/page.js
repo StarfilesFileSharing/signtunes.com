@@ -3,6 +3,7 @@ import { getTranslations } from "@/utils/getTranslation";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
 
 function Search({ searchParams }) {
@@ -51,6 +52,7 @@ function Search({ searchParams }) {
       <head>
         <TitleTags title="Search" />
       </head>
+      <Header searchParams={searchParams} />
       <div className="mx-5 md:mx-10 mt-5">
         <form className="p-0 hidden md:flex lg:hidden" action="/search">
           <div className="relative m-auto w-64">

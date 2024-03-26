@@ -3,6 +3,7 @@ import { getTranslations } from "@/utils/getTranslation";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
 
 function Claim({ searchParams }) {
@@ -144,6 +145,7 @@ function Claim({ searchParams }) {
       <head>
         <TitleTags title="Claim" />
       </head>
+      <Header searchParams={searchParams} />
       <div className="mx-5 md:mx-10 mt-5">
         <div className="px-4 py-4 mx-auto sm:px-6 md:px-12 lg:px-24 lg:py-8 flex flex-col w-full mb-12 text-center">
           <h1 className="text-4xl font-bold leading-none tracking-tighter text-neutral-600 dark:text-gray-200">

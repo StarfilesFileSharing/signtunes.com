@@ -1,6 +1,7 @@
 "use client";
 import { getTranslations } from "@/utils/getTranslation";
 import { useEffect, useState } from "react";
+import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
 
 function ProPurchaseButton({ purchaseButton = <></>, period = "monthly", searchParams }) {
@@ -63,6 +64,7 @@ function Pro({ searchParams }) {
       <head>
         <TitleTags title="Purchase Signatures Pro" />
       </head>
+      <Header searchParams={searchParams} />
       <div className="mx-5 md:mx-10 mt-5">
         <h1 className="text-5xl font-extrabold dark:text-white text-center">
           Signtunes

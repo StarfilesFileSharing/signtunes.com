@@ -3,6 +3,7 @@ import cookie, { setCookie } from "@/utils/cookies";
 import { getTranslations } from "@/utils/getTranslation";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
 
 function Settings({ searchParams }) {
@@ -129,6 +130,7 @@ function Settings({ searchParams }) {
       <head>
         <TitleTags title="Settings - Signtunes" />
       </head>
+      <Header searchParams={searchParams} />
       <div className="mx-5 md:mx-10 mt-5">
         <div className="grid grid-cols-6 gap-4">
           <aside aria-label="Sidebar" className="col-span-6 md:col-span-1">

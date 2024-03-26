@@ -1,6 +1,7 @@
 "use client";
 import { getTranslations } from "@/utils/getTranslation";
 import { useEffect, useState } from "react";
+import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
 
 function ProPurchaseButton({ purchaseButton = <></>, searchParams }) {
@@ -55,6 +56,7 @@ function Success({ searchParams }) {
       <head>
         <TitleTags title="Purchase Successfully Completed" />
       </head>
+      <Header searchParams={searchParams} />
       <div className="mx-5 md:mx-10 mt-5">
         <div className="flex flex-col py-4 lg:pt-8 text-center">
           <h1 className="text-3xl font-bold leading-none text-neutral-800 dark:text-gray-100">

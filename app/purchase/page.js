@@ -2,6 +2,7 @@
 import cookie, { setCookie } from "@/utils/cookies";
 import { getTranslations } from "@/utils/getTranslation";
 import { useEffect, useState } from "react";
+import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
 
 function PurchaseButton({ purchaseButton = <></>, redirect = null, searchParams }) {
@@ -120,6 +121,7 @@ function Purchase({ searchParams }) {
       <head>
         <TitleTags title="Purchase Signtunes" />
       </head>
+      <Header searchParams={searchParams} />
       <div className="mx-5 md:mx-10 mt-5">
         <div className="px-4 py-4 sm:px-6 md:px-12 lg:px-24 lg:py-8 flex flex-col mb-4 md:mb-12 text-center">
           <h1 className="text-3xl md:text-5xl font-extrabold dark:text-white">{translationList?.slogan_2}</h1>

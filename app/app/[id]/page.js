@@ -1,4 +1,5 @@
 "use client";
+import Header from "@/app/components/Layout/Header";
 import { getTranslations } from "@/utils/getTranslation";
 import axios from "axios";
 import Link from "next/link";
@@ -6,7 +7,7 @@ import { useParams, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import TitleTags from "../../components/Title";
 
-function App({ params }) {
+function App({ params, searchParams }) {
   const { id } = params;
   const [translationList, setTranslationList] = useState(null);
   const [showIcon, setShowIcon] = useState(true);
@@ -377,6 +378,7 @@ function App({ params }) {
         <meta property="og:image:url" content={`https://cdn.starfiles.co/file/icon/${id}`} />
         <meta property="og:image:secure_url" content={`https://cdn.starfiles.co/file/icon/${id}`} />
       </head>
+      <Header searchParams={searchParams} />
       <div className="md:mx-12 md:my-12 mx-5 my-6">
         <div className="flex items-center mb-8 max-w-2xl">
           {showIcon && <img className="md:h-40 md:w-40 w-24 h-24 rounded-[24%]" id="icon" src={icon} />}

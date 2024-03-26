@@ -4,6 +4,7 @@ import { getTranslations } from "@/utils/getTranslation";
 import { useRouter } from "next/navigation";
 import Script from "next/script";
 import { useEffect, useState } from "react";
+import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
 
 function Signer({ searchParams }) {
@@ -116,6 +117,7 @@ function Signer({ searchParams }) {
           src="//cdn.jsdelivr.net/combine/gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/functions.min.js,npm/jszip@3/dist/jszip.min.js,gh/QuixThe2nd/Starfiles-JSDelivr@22/js/upload.js,npm/crypto-js@4/crypto-js.min.js"
         />
       </head>
+      <Header searchParams={searchParams} />
       <div id="signer" className="mx-5 mb-12 mt-8">
         <div className="grid grid-cols-2 gap-4 pb-8">
           <div className="flex items-center col-span-2 md:col-span-1 justify-center md:flex-row flex-col">

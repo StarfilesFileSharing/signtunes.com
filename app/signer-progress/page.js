@@ -2,6 +2,7 @@
 import { getTranslations } from "@/utils/getTranslation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
 
 function ProPurchaseButton({ purchaseButton = <></>, searchParams }) {
@@ -239,6 +240,7 @@ function SignerProgress({ searchParams }) {
       <head>
         <TitleTags title="Signer" />
       </head>
+      <Header searchParams={searchParams} />
       <div className="mx-5 mt-24 mb-12" id="signer-progress">
         <div className="text-center">
           <div className="duration-500" id="status">

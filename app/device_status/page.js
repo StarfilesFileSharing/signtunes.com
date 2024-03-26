@@ -3,9 +3,10 @@ import { getTranslations } from "@/utils/getTranslation";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
 
-function DeviceStatus() {
+function DeviceStatus({ searchParams }) {
   const [translationList, setTranslationList] = useState(null);
   const [udid, setUdid] = useState("");
   const router = useRouter();
@@ -244,6 +245,7 @@ function DeviceStatus() {
       <head>
         <TitleTags title="Device Status" />
       </head>
+      <Header searchParams={searchParams} />
       <div className="mx-5 md:mx-10 mt-5" id="device_status">
         <div className="lg:mx-96 mb-8 flex items-center mb-8">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" className="h-28 w-28">
