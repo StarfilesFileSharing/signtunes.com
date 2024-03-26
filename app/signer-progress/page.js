@@ -238,7 +238,7 @@ function SignerProgress() {
   return (
     <>
       <head>
-        <TitleTags title="Purchase Signatures Pro" />
+        <TitleTags title="Signer" />
       </head>
       <div className="mx-5 mt-24 mb-12" id="signer-progress">
         <div className="text-center">
