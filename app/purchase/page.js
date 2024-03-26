@@ -129,7 +129,7 @@ function Purchase() {
           <h1 className="text-3xl md:text-5xl font-extrabold dark:text-white">{translationList?.slogan_2}</h1>
           <h2 className="m-2 mb-0 md:text-xl text-neutral-600 dark:text-gray-200">{translationList?.slogan}</h2>
         </div>
-        <PurchaseButton
+        {/* <PurchaseButton
           purchaseButton={
             <button
               type="submit"
@@ -147,7 +147,7 @@ function Purchase() {
               <span>{translationList?.per_year}</span>
             </button>
           }
-        />
+        /> */}
         <div className="dark:text-gray-900 block rounded-xl p-8 shadow-xl bg-bright md:w-64 text-center m-auto">
           <h3 className="text-xl font-bold">Signtunes</h3>
           <p className="text-lg">
@@ -187,7 +187,7 @@ function Purchase() {
                   gtag_report_conversion();
                 }}
               >
-                {translationList?.purchase}
+                Install Now
               </button>
             }
             redirect="card"
