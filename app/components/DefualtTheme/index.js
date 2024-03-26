@@ -5,9 +5,6 @@ import Header from "../Layout/Header";
 function DefaultTheme({ children }) {
   return (
     <div>
-      <Suspense>
-        <Header />
-      </Suspense>
       {children}
       <Footer />
     </div>

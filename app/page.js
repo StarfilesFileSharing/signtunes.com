@@ -145,7 +145,6 @@ export default function Home({ searchParams }) {
     <>
       <main className="mx-5 md:mx-12 mt-5 grid grid-cols-4 mb-6 ">
         <div className="md:w-12/12 col-span-4 md:col-span-3 grid grid-cols-6">
-          {console.log("ispro", alertOptions.isPro)}
           {alertsLoad && (
             <div className="col-span-6" id="alerts">
               <div className="alert bg-teal-100 text-black shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium">

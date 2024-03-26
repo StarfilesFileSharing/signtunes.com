@@ -6,9 +6,8 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-function Header() {
-  const searchParams = useSearchParams();
-  const referral = searchParams.get("referral");
+function Header({ searchParams }) {
+  const referral = searchParams?.referral;
   console.log("referral1", referral);
   const [translationList, setTranslationList] = useState(null);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
