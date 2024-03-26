@@ -297,10 +297,10 @@ function App() {
                 if (bundle_id_data.apps.hasOwnProperty(version))
                   return (
                     <>
-                      <h3 key={versionIndex} class="text-xl font-semibold mt-4">
+                      <h3 key={versionIndex} className="text-xl font-semibold mt-4">
                         {version}
                       </h3>
-                      <div class="grid grid-cols-1 gap-1">
+                      <div className="grid grid-cols-1 gap-1">
                         {bundle_id_data.apps[version].map((app, index) => {
                           if (index == bundle_id_data.apps.len && id != app.id)
                             // TODO make /app?id to /app/id
@@ -319,7 +319,7 @@ function App() {
                                   <Link
                                     href="/purchase"
                                     type="button"
-                                    class="text-white bg-secondary hover:bg-[#0096C7] md:font-medium text-xs rounded-lg py-2.5 text-center w-[5rem]"
+                                    className="text-white bg-secondary hover:bg-[#0096C7] md:font-medium text-xs rounded-lg py-2.5 text-center w-[5rem]"
                                   >
                                     Install
                                   </Link>
@@ -327,7 +327,7 @@ function App() {
                                   <Link
                                     href={"/signer#" + app.id}
                                     type="button"
-                                    class="text-white bg-secondary hover:bg-[#0096C7] md:font-medium text-xs rounded-lg py-2.5 text-center w-[5rem]"
+                                    className="text-white bg-secondary hover:bg-[#0096C7] md:font-medium text-xs rounded-lg py-2.5 text-center w-[5rem]"
                                   >
                                     Install
                                   </Link>
@@ -335,7 +335,7 @@ function App() {
                                 <a
                                   href={"https://starfiles.co/file/" + app.id}
                                   type="button"
-                                  class="text-white bg-[#0096C7] hover:bg-primary md:font-medium text-xs rounded-lg py-2.5 text-center w-[5rem]"
+                                  className="text-white bg-[#0096C7] hover:bg-primary md:font-medium text-xs rounded-lg py-2.5 text-center w-[5rem]"
                                 >
                                   Download
                                 </a>
@@ -378,24 +378,24 @@ function App() {
         <meta property="og:image:secure_url" content={`https://cdn.starfiles.co/file/icon/${id}`} />
       </head>
       <div className="md:mx-12 md:my-12 mx-5 my-6">
-        <div class="flex items-center mb-8 max-w-2xl">
-          {showIcon && <img class="md:h-40 md:w-40 w-24 h-24 rounded-[24%]" id="icon" src={icon} />}
-          <div class="ml-4">
-            <p class="text-2xl font-bold dark:text-white" id="name">
+        <div className="flex items-center mb-8 max-w-2xl">
+          {showIcon && <img className="md:h-40 md:w-40 w-24 h-24 rounded-[24%]" id="icon" src={icon} />}
+          <div className="ml-4">
+            <p className="text-2xl font-bold dark:text-white" id="name">
               {name}
             </p>
-            <p class="text-sm" id="developer">
+            <p className="text-sm" id="developer">
               {developer}
             </p>
-            <p class="text-xs" id="description">
+            <p className="text-xs" id="description">
               {description ? (
                 description
               ) : (
-                <span class="w-4 h-4 mx-auto my-8">
+                <span className="w-4 h-4 mx-auto my-8">
                   <span role="status">
                     <svg
                       aria-hidden="true"
-                      class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-[#0096C7]"
+                      className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-[#0096C7]"
                       viewBox="0 0 100 101"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -409,7 +409,7 @@ function App() {
                         fill="currentFill"
                       />
                     </svg>
-                    <span class="sr-only">Loading...</span>
+                    <span className="sr-only">Loading...</span>
                   </span>
                 </span>
               )}
@@ -419,7 +419,7 @@ function App() {
                 loader-ignore-click="true"
                 data-modal-target="defaultModal"
                 data-modal-toggle="defaultModal"
-                class="block text-white bg-[#0096C7] hover:bg-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-2"
+                className="block text-white bg-[#0096C7] hover:bg-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-2"
                 type="button"
                 id="download_button"
               >
@@ -432,20 +432,20 @@ function App() {
               id="defaultModal"
               tabindex="-1"
               aria-hidden="true"
-              class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full"
+              className="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full"
             >
-              <div class="relative w-full h-full max-w-2xl md:h-auto">
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                  <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Download</h3>
+              <div className="relative w-full h-full max-w-2xl md:h-auto">
+                <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                  <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Download</h3>
                     <button
                       type="button"
-                      class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                      className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                       data-modal-hide="defaultModal"
                     >
                       <svg
                         aria-hidden="true"
-                        class="w-5 h-5"
+                        className="w-5 h-5"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg"
@@ -456,18 +456,18 @@ function App() {
                           clip-rule="evenodd"
                         ></path>
                       </svg>
-                      <span class="sr-only">Close modal</span>
+                      <span className="sr-only">Close modal</span>
                     </button>
                   </div>
-                  <div class="px-6 pb-6 md:h-[75vh] h-[100vh] overflow-scroll" id="download_links">
+                  <div className="px-6 pb-6 md:h-[75vh] h-[100vh] overflow-scroll" id="download_links">
                     {downloadLinks ? (
                       downloadLinks
                     ) : (
-                      <div class="w-4 h-4 mx-auto my-8">
+                      <div className="w-4 h-4 mx-auto my-8">
                         <div role="status">
                           <svg
                             aria-hidden="true"
-                            class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-[#0096C7]"
+                            className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-[#0096C7]"
                             viewBox="0 0 100 101"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
@@ -481,7 +481,7 @@ function App() {
                               fill="currentFill"
                             />
                           </svg>
-                          <span class="sr-only">Loading...</span>
+                          <span className="sr-only">Loading...</span>
                         </div>
                       </div>
                     )}
@@ -493,39 +493,39 @@ function App() {
         </div>
         <div>
           {showScreenshots && (
-            <div class="block pb-8">
-              <h3 class="text-2xl font-semibold mb-4">Screenshots</h3>
-              <div id="screenshots" class="flex h-64 gap-2 overflow-x-scroll">
+            <div className="block pb-8">
+              <h3 className="text-2xl font-semibold mb-4">Screenshots</h3>
+              <div id="screenshots" className="flex h-64 gap-2 overflow-x-scroll">
                 {screenshots}
               </div>
             </div>
           )}
           {showReleaseNotes && (
-            <div class="block pb-8">
-              <h3 class="text-2xl font-semibold mb-4 dark:text-white">What's New?</h3>
-              <p class="text-sm text-gray-600 dark:text-gray-300" id="release_notes">
+            <div className="block pb-8">
+              <h3 className="text-2xl font-semibold mb-4 dark:text-white">What's New?</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300" id="release_notes">
                 {releaseNotes ? (
                   releaseNotes
                 ) : (
-                  <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                  <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                     Loading...
                   </span>
                 )}
               </p>
             </div>
           )}
-          <div class="block pb-8">
-            <h3 class="text-2xl font-semibold mb-4">App Info</h3>
-            <div class="block rounded-xl p-8 bg-gray-300 dark:bg-gray-800 dark:text-gray-200">
-              <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="block pb-8">
+            <h3 className="text-2xl font-semibold mb-4">App Info</h3>
+            <div className="block rounded-xl p-8 bg-gray-300 dark:bg-gray-800 dark:text-gray-200">
+              <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {showPrice && (
                   <div>
-                    <p class="font-semibold text-lg">Price</p>
+                    <p className="font-semibold text-lg">Price</p>
                     <p id="price">
                       {price ? (
                         price
                       ) : (
-                        <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                        <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
                         </span>
                       )}
@@ -534,12 +534,12 @@ function App() {
                 )}
                 {showAgeRating && (
                   <div>
-                    <p class="font-semibold text-lg">Age Rating</p>
+                    <p className="font-semibold text-lg">Age Rating</p>
                     <p id="age_rating">
                       {ageRating ? (
                         ageRating
                       ) : (
-                        <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                        <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
                         </span>
                       )}
@@ -548,12 +548,12 @@ function App() {
                 )}
                 {showVersion && (
                   <div>
-                    <p class="font-semibold text-lg">Latest Version</p>
+                    <p className="font-semibold text-lg">Latest Version</p>
                     <p id="version">
                       {version ? (
                         version
                       ) : (
-                        <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                        <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
                         </span>
                       )}
@@ -562,12 +562,12 @@ function App() {
                 )}
                 {showRating && (
                   <div>
-                    <p class="font-semibold text-lg">Rating</p>
+                    <p className="font-semibold text-lg">Rating</p>
                     <p id="rating">
                       {rating ? (
                         rating
                       ) : (
-                        <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                        <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
                         </span>
                       )}
@@ -576,12 +576,12 @@ function App() {
                 )}
                 {showSize && (
                   <div>
-                    <p class="font-semibold text-lg">Size</p>
+                    <p className="font-semibold text-lg">Size</p>
                     <p id="size">
                       {size ? (
                         size
                       ) : (
-                        <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                        <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
                         </span>
                       )}
@@ -590,12 +590,12 @@ function App() {
                 )}
                 {showMinimumIos && (
                   <div>
-                    <p class="font-semibold text-lg">Minimum iOS</p>
+                    <p className="font-semibold text-lg">Minimum iOS</p>
                     <p id="minimum_ios">
                       {minimumIos ? (
                         minimumIos
                       ) : (
-                        <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                        <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
                         </span>
                       )}
@@ -604,12 +604,12 @@ function App() {
                 )}
                 {showReleaseDate && (
                   <div>
-                    <p class="font-semibold text-lg">Release Date</p>
+                    <p className="font-semibold text-lg">Release Date</p>
                     <p id="release_date">
                       {releaseDate ? (
                         releaseDate
                       ) : (
-                        <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                        <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
                         </span>
                       )}
@@ -618,12 +618,12 @@ function App() {
                 )}
                 {showVersionReleaseDate && (
                   <div>
-                    <p class="font-semibold text-lg">Version Release Date</p>
+                    <p className="font-semibold text-lg">Version Release Date</p>
                     <p id="version_release_date">
                       {versionReleaseDate ? (
                         versionReleaseDate
                       ) : (
-                        <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                        <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
                         </span>
                       )}
@@ -632,12 +632,12 @@ function App() {
                 )}
                 {showGenres && (
                   <div>
-                    <p class="font-semibold text-lg">Genres</p>
+                    <p className="font-semibold text-lg">Genres</p>
                     <p id="genres">
                       {genres ? (
                         genres
                       ) : (
-                        <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                        <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
                         </span>
                       )}
@@ -646,12 +646,12 @@ function App() {
                 )}
                 {showFeatures && (
                   <div>
-                    <p class="font-semibold text-lg">Features</p>
+                    <p className="font-semibold text-lg">Features</p>
                     <p id="features">
                       {features ? (
                         features
                       ) : (
-                        <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                        <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
                         </span>
                       )}
@@ -660,12 +660,12 @@ function App() {
                 )}
                 {showAdvisories && (
                   <div>
-                    <p class="font-semibold text-lg">Advisories</p>
+                    <p className="font-semibold text-lg">Advisories</p>
                     <p id="advisories">
                       {advisories ? (
                         advisories
                       ) : (
-                        <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                        <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
                         </span>
                       )}
@@ -673,96 +673,96 @@ function App() {
                   </div>
                 )}
                 <div>
-                  <p class="font-semibold text-lg">Upload Time</p>
+                  <p className="font-semibold text-lg">Upload Time</p>
                   <p id="upload_time">
                     {uploadTime ? (
                       uploadTime
                     ) : (
-                      <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                      <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                         Loading...
                       </span>
                     )}
                   </p>
                 </div>
                 <div>
-                  <p class="font-semibold text-lg">Views</p>
+                  <p className="font-semibold text-lg">Views</p>
                   <p id="views">
                     {views ? (
                       views
                     ) : (
-                      <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                      <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                         Loading...
                       </span>
                     )}
                   </p>
                 </div>
                 <div>
-                  <p class="font-semibold text-lg">Downloads</p>
+                  <p className="font-semibold text-lg">Downloads</p>
                   <p id="downloads">
                     {downloads ? (
                       downloads
                     ) : (
-                      <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                      <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                         Loading...
                       </span>
                     )}
                   </p>
                 </div>
                 <div>
-                  <p class="font-semibold text-lg">Starfiles Version</p>
+                  <p className="font-semibold text-lg">Starfiles Version</p>
                   <p id="starfiles_version">
                     {starfilesVersion ? (
                       starfilesVersion
                     ) : (
-                      <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                      <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                         Loading...
                       </span>
                     )}
                   </p>
                 </div>
                 <div>
-                  <p class="font-semibold text-lg">Bundle ID</p>
+                  <p className="font-semibold text-lg">Bundle ID</p>
                   <p id="bundle_id" style={{ wordBreak: "break-word" }}>
                     {bundleID ? (
                       bundleID
                     ) : (
-                      <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                      <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                         Loading...
                       </span>
                     )}
                   </p>
                 </div>
                 <div>
-                  <p class="font-semibold text-lg">SHA256 Hash</p>
+                  <p className="font-semibold text-lg">SHA256 Hash</p>
                   <p id="sha256" style={{ wordBreak: "break-word" }}>
                     {sha256 ? (
                       sha256
                     ) : (
-                      <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                      <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                         Loading...
                       </span>
                     )}
                   </p>
                 </div>
                 <div>
-                  <p class="font-semibold text-lg">Starfiles Minimum iOS</p>
+                  <p className="font-semibold text-lg">Starfiles Minimum iOS</p>
                   <p id="starfiles_minimum_ios">
                     {starfilesMinimumIOS ? (
                       starfilesMinimumIOS
                     ) : (
-                      <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                      <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                         Loading...
                       </span>
                     )}
                   </p>
                 </div>
                 <div>
-                  <p class="font-semibold text-lg">Starfiles Maximum iOS</p>
+                  <p className="font-semibold text-lg">Starfiles Maximum iOS</p>
                   <p id="starfiles_maximum_ios">
                     {starfilesMaximumIOS ? (
                       starfilesMaximumIOS
                     ) : (
-                      <span class="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                      <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                         Loading...
                       </span>
                     )}

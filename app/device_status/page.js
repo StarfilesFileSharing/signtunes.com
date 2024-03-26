@@ -79,21 +79,21 @@ function DeviceStatus() {
       let outputFirst = <></>;
       if (data.registered)
         outputFirst = (
-          <div class="step">
-            <div class="node green"></div>
-            <div class="state">
+          <div className="step">
+            <div className="node green"></div>
+            <div className="state">
               <p>Registered</p>
-              <p class="timeframe"></p>
+              <p className="timeframe"></p>
             </div>
           </div>
         );
       else
         outputFirst = (
-          <div class="step">
-            <div class="node red"></div>
-            <div class="state">
+          <div className="step">
+            <div className="node red"></div>
+            <div className="state">
               <p>Registered</p>
-              <p class="timeframe">Signtunes not Purchased</p>
+              <p className="timeframe">Signtunes not Purchased</p>
             </div>
           </div>
         );
@@ -101,12 +101,12 @@ function DeviceStatus() {
       if (data.enrolled)
         outputSecond = (
           <>
-            <div class="divider green"></div>
-            <div class="step">
-              <div class="node green"></div>
-              <div class="state">
+            <div className="divider green"></div>
+            <div className="step">
+              <div className="node green"></div>
+              <div className="state">
                 <p>Enrolled</p>
-                <p class="timeframe"></p>
+                <p className="timeframe"></p>
               </div>
             </div>
             ;
@@ -115,12 +115,12 @@ function DeviceStatus() {
       else
         outputSecond = (
           <>
-            <div class="divider"></div>
-            <div class="step">
-              <div class="node"></div>
-              <div class="state">
+            <div className="divider"></div>
+            <div className="step">
+              <div className="node"></div>
+              <div className="state">
                 <p>Enrolled</p>
-                <p class="timeframe">Create a Support Ticket</p>
+                <p className="timeframe">Create a Support Ticket</p>
               </div>
             </div>
             ;
@@ -130,12 +130,12 @@ function DeviceStatus() {
       if (data.processed)
         outputThree = (
           <>
-            <div class="divider green"></div>
-            <div class="step">
-              <div class="node green"></div>
-              <div class="state">
+            <div className="divider green"></div>
+            <div className="step">
+              <div className="node green"></div>
+              <div className="state">
                 <p>Processed</p>
-                <p class="timeframe"></p>
+                <p className="timeframe"></p>
               </div>
             </div>
           </>
@@ -143,12 +143,12 @@ function DeviceStatus() {
       else
         outputThree = (
           <>
-            <div class="divider"></div>
-            <div class="step">
-              <div class="node"></div>
-              <div class="state">
+            <div className="divider"></div>
+            <div className="step">
+              <div className="node"></div>
+              <div className="state">
                 <p>Processed</p>
-                <p class="timeframe">
+                <p className="timeframe">
                   Maximum Processing Time:{" "}
                   {data.signed_time === "null"
                     ? "72"
@@ -163,12 +163,12 @@ function DeviceStatus() {
       if (data.eligible)
         outputFour = (
           <>
-            <div class="divider green"></div>
-            <div class="step">
-              <div class="node green"></div>
-              <div class="state">
+            <div className="divider green"></div>
+            <div className="step">
+              <div className="node green"></div>
+              <div className="state">
                 <p>Eligible</p>
-                <p class="timeframe"></p>
+                <p className="timeframe"></p>
               </div>
             </div>
           </>
@@ -176,12 +176,12 @@ function DeviceStatus() {
       else
         outputFour = (
           <>
-            <div class="divider"></div>
-            <div class="step">
-              <div class="node"></div>
-              <div class="state">
+            <div className="divider"></div>
+            <div className="step">
+              <div className="node"></div>
+              <div className="state">
                 <p>Eligible</p>
-                <p class="timeframe">
+                <p className="timeframe">
                   {data.processed ? "Eligible in Maximum " + eligible_in + " Days" : "Eligible in 0, 7, 14, or 30 Days"}
                 </p>
               </div>
@@ -193,12 +193,12 @@ function DeviceStatus() {
       if (data.signed)
         outputFive = (
           <>
-            <div class="divider green"></div>
-            <div class="step">
-              <div class="node green"></div>
-              <div class="state">
+            <div className="divider green"></div>
+            <div className="step">
+              <div className="node green"></div>
+              <div className="state">
                 <p>Signed</p>
-                <p class="timeframe"></p>
+                <p className="timeframe"></p>
               </div>
             </div>
           </>
@@ -206,12 +206,12 @@ function DeviceStatus() {
       else
         outputFive = (
           <>
-            <div class="divider"></div>
-            <div class="step">
-              <div class="node"></div>
-              <div class="state">
+            <div className="divider"></div>
+            <div className="step">
+              <div className="node"></div>
+              <div className="state">
                 <p>Signed</p>
-                <p class="timeframe">Estimated Processing Time: 30 Seconds</p>
+                <p className="timeframe">Estimated Processing Time: 30 Seconds</p>
               </div>
             </div>
           </>

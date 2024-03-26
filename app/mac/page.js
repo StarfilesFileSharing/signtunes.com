@@ -32,20 +32,20 @@ function Mac() {
         <TitleTags title="Mac Signing" />
       </head>
       <div className="mx-5 md:mx-10 mt-5">
-        <div class="px-4 py-4 mx-auto sm:px-6 md:px-12 lg:px-24 lg:py-8 flex flex-col w-full mb-12 text-center">
-          <h1 class="text-4xl font-bold leading-none tracking-tighter text-neutral-600 dark:text-gray-200">
+        <div className="px-4 py-4 mx-auto sm:px-6 md:px-12 lg:px-24 lg:py-8 flex flex-col w-full mb-12 text-center">
+          <h1 className="text-4xl font-bold leading-none tracking-tighter text-neutral-600 dark:text-gray-200">
             <span>{translationList?.mac_udid_grabber}</span>
           </h1>
         </div>
-        <div class="block rounded-xl p-8 shadow-xl bg-bright dark:text-black lg:mx-96 mb-12 dark:text-gray-900">
+        <div className="block rounded-xl p-8 shadow-xl bg-bright dark:text-black lg:mx-96 mb-12 dark:text-gray-900">
           {!UDID ? (
             <div>
-              <h3 class="text-xl font-semibold">
+              <h3 className="text-xl font-semibold">
                 <span>{translationList?.get_udid}</span>
               </h3>
               <p>{translationList?.mac_terminal_script}</p>
-              <div class="mockup-code mt-4 text-left">
-                <pre class="flex" data-prefix="$">
+              <div className="mockup-code mt-4 text-left">
+                <pre className="flex" data-prefix="$">
                   <code>eval `curl https://signtunes.com/get_udid`</code>
                 </pre>
               </div>
@@ -54,16 +54,16 @@ function Mac() {
             <>
               {chip?.includes("intel") || !chip?.includes("apple") ? (
                 <div>
-                  <h3 class="text-xl font-semibold">Device Incompatible</h3>
+                  <h3 className="text-xl font-semibold">Device Incompatible</h3>
                   <p>Your Mac doesn't seem to use Apple Silicon.</p>
                 </div>
               ) : (
                 <div>
-                  <h3 class="text-xl font-semibold">Continue</h3>
+                  <h3 className="text-xl font-semibold">Continue</h3>
                   <p>Please ensure your Mac is using an Apple Silicon chip.</p>
                   <p>
                     Finally,{" "}
-                    <Link href="/purchase" class="text-blue-400 font-bold">
+                    <Link href="/purchase" className="text-blue-400 font-bold">
                       Purchase Signtunes
                     </Link>
                     . Your Mac's UDID is {UDID}.

@@ -59,17 +59,17 @@ function Success() {
         <TitleTags title="Purchase Successfully Completed" />
       </head>
       <div className="mx-5 md:mx-10 mt-5">
-        <div class="flex flex-col py-4 lg:pt-8 text-center">
-          <h1 class="text-3xl font-bold leading-none text-neutral-800 dark:text-gray-100">
+        <div className="flex flex-col py-4 lg:pt-8 text-center">
+          <h1 className="text-3xl font-bold leading-none text-neutral-800 dark:text-gray-100">
             Thank you for your purchase!
           </h1>
-          <p class="m-2 mb-0 text-xl text-neutral-600 text-center dark:text-gray-300">
+          <p className="m-2 mb-0 text-xl text-neutral-600 text-center dark:text-gray-300">
             You have been emailed instructions.
           </p>
         </div>
-        <div class="text-center">
-          <a href="/discord" class="inline-block w-auto mb-8 p-2 text-l rounded-3xl text-white bg-[#7289da]">
-            <i class="fab fa-discord"></i> Support
+        <div className="text-center">
+          <a href="/discord" className="inline-block w-auto mb-8 p-2 text-l rounded-3xl text-white bg-[#7289da]">
+            <i className="fab fa-discord"></i> Support
           </a>
         </div>
 
@@ -84,23 +84,23 @@ function Success() {
           }
         />
         <div className="block lg:mx-96 mb-12 dark:text-gray-900 rounded-xl p-8 shadow-xl bg-bright">
-          <h3 class="text-xl font-semibold">Get Certificate Files</h3>
-          <p class="text-lg mb-4">As a pro member you get access to certificate files to use as you wish</p>
-          <h3 class="text-xl font-semibold">Priority Support</h3>
-          <p class="text-lg mb-4">Pro members get priority support from our support team</p>
-          <h3 class="text-xl font-semibold">Early Access New Features</h3>
-          <p class="text-lg mb-4">Get early access to new features before we release them to everyone else</p>
-          <h3 class="text-xl font-semibold">Starfiles Silver</h3>
-          <p class="text-lg mb-4">
+          <h3 className="text-xl font-semibold">Get Certificate Files</h3>
+          <p className="text-lg mb-4">As a pro member you get access to certificate files to use as you wish</p>
+          <h3 className="text-xl font-semibold">Priority Support</h3>
+          <p className="text-lg mb-4">Pro members get priority support from our support team</p>
+          <h3 className="text-xl font-semibold">Early Access New Features</h3>
+          <p className="text-lg mb-4">Get early access to new features before we release them to everyone else</p>
+          <h3 className="text-xl font-semibold">Starfiles Silver</h3>
+          <p className="text-lg mb-4">
             A Starfiles silver subscription (normally $5/month) is included free for all pro members
           </p>
-          <h3 class="text-xl font-semibold">Special Discord Role</h3>
-          <p class="text-lg mb-4">Get a special role on our Discord server for everyone to see</p>
+          <h3 className="text-xl font-semibold">Special Discord Role</h3>
+          <p className="text-lg mb-4">Get a special role on our Discord server for everyone to see</p>
           <ProPurchaseButton
             purchaseButton={
-              <div class="flex justify-center">
+              <div className="flex justify-center">
                 <button
-                  class="rounded-md bg-primary hover:bg-[#023E8A] px-5 py-2.5 text-sm font-medium text-white shadow"
+                  className="rounded-md bg-primary hover:bg-[#023E8A] px-5 py-2.5 text-sm font-medium text-white shadow"
                   type={`submit${referral ? `?referral=${referral}` : ""}}`}
                 >
                   Join Signtunes Pro

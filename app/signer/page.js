@@ -96,8 +96,9 @@ function Signer() {
     try {
       let match = /^[a-fA-F0-9]{40}|[0-9]{8}-[a-fA-F0-9]{16}$/.test(value);
       if (match) {
-        console.log("test", value, match);
-        setCookie("udid", value, 365);
+        const d = new Date();
+        d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000);
+        document.cookie = "udid=" + this.value + ";expires=" + d.toUTCString() + ";path=/;domain=.signtunes.co";
         window.history.pushState("data" + this.value, "Signtunes", "/signer" + window.location.hash);
       }
     } catch (err) {
