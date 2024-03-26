@@ -2,15 +2,15 @@
 import { getTranslations } from "@/utils/getTranslation";
 import axios from "axios";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import TitleTags from "../components/Title";
+import TitleTags from "../../components/Title";
 
-function App() {
+function App({ params }) {
+  const { id } = params;
   const [translationList, setTranslationList] = useState(null);
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
   const [showIcon, setShowIcon] = useState(true);
+  const [showDescBox, setShowDescBox] = useState(true);
   const [showDownloadButton, setShowDownloadButton] = useState(true);
   const [showReleaseNotes, setShowReleaseNotes] = useState(true);
   const [showFeatures, setShowFeatures] = useState(true);
@@ -110,7 +110,7 @@ function App() {
         setShowIcon(false);
         setDescription(<></>);
         setShowDownloadButton(false);
-        setShowReleaseNotes(false);
+        setShowDescBox(false);
       } else {
         setUploadTime(data.time_ago);
         setViews(data.view_count);
@@ -491,39 +491,193 @@ function App() {
             </div>
           </div>
         </div>
-        <div>
-          {showScreenshots && (
-            <div className="block pb-8">
-              <h3 className="text-2xl font-semibold mb-4">Screenshots</h3>
-              <div id="screenshots" className="flex h-64 gap-2 overflow-x-scroll">
-                {screenshots}
+        {showDescBox && (
+          <div>
+            {showScreenshots && (
+              <div className="block pb-8">
+                <h3 className="text-2xl font-semibold mb-4">Screenshots</h3>
+                <div id="screenshots" className="flex h-64 gap-2 overflow-x-scroll">
+                  {screenshots}
+                </div>
               </div>
-            </div>
-          )}
-          {showReleaseNotes && (
+            )}
+            {showReleaseNotes && (
+              <div className="block pb-8">
+                <h3 className="text-2xl font-semibold mb-4 dark:text-white">What's New?</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300" id="release_notes">
+                  {releaseNotes ? (
+                    releaseNotes
+                  ) : (
+                    <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                      Loading...
+                    </span>
+                  )}
+                </p>
+              </div>
+            )}
             <div className="block pb-8">
-              <h3 className="text-2xl font-semibold mb-4 dark:text-white">What's New?</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-300" id="release_notes">
-                {releaseNotes ? (
-                  releaseNotes
-                ) : (
-                  <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                    Loading...
-                  </span>
-                )}
-              </p>
-            </div>
-          )}
-          <div className="block pb-8">
-            <h3 className="text-2xl font-semibold mb-4">App Info</h3>
-            <div className="block rounded-xl p-8 bg-gray-300 dark:bg-gray-800 dark:text-gray-200">
-              <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {showPrice && (
+              <h3 className="text-2xl font-semibold mb-4">App Info</h3>
+              <div className="block rounded-xl p-8 bg-gray-300 dark:bg-gray-800 dark:text-gray-200">
+                <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {showPrice && (
+                    <div>
+                      <p className="font-semibold text-lg">Price</p>
+                      <p id="price">
+                        {price ? (
+                          price
+                        ) : (
+                          <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                            Loading...
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  )}
+                  {showAgeRating && (
+                    <div>
+                      <p className="font-semibold text-lg">Age Rating</p>
+                      <p id="age_rating">
+                        {ageRating ? (
+                          ageRating
+                        ) : (
+                          <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                            Loading...
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  )}
+                  {showVersion && (
+                    <div>
+                      <p className="font-semibold text-lg">Latest Version</p>
+                      <p id="version">
+                        {version ? (
+                          version
+                        ) : (
+                          <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                            Loading...
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  )}
+                  {showRating && (
+                    <div>
+                      <p className="font-semibold text-lg">Rating</p>
+                      <p id="rating">
+                        {rating ? (
+                          rating
+                        ) : (
+                          <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                            Loading...
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  )}
+                  {showSize && (
+                    <div>
+                      <p className="font-semibold text-lg">Size</p>
+                      <p id="size">
+                        {size ? (
+                          size
+                        ) : (
+                          <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                            Loading...
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  )}
+                  {showMinimumIos && (
+                    <div>
+                      <p className="font-semibold text-lg">Minimum iOS</p>
+                      <p id="minimum_ios">
+                        {minimumIos ? (
+                          minimumIos
+                        ) : (
+                          <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                            Loading...
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  )}
+                  {showReleaseDate && (
+                    <div>
+                      <p className="font-semibold text-lg">Release Date</p>
+                      <p id="release_date">
+                        {releaseDate ? (
+                          releaseDate
+                        ) : (
+                          <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                            Loading...
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  )}
+                  {showVersionReleaseDate && (
+                    <div>
+                      <p className="font-semibold text-lg">Version Release Date</p>
+                      <p id="version_release_date">
+                        {versionReleaseDate ? (
+                          versionReleaseDate
+                        ) : (
+                          <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                            Loading...
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  )}
+                  {showGenres && (
+                    <div>
+                      <p className="font-semibold text-lg">Genres</p>
+                      <p id="genres">
+                        {genres ? (
+                          genres
+                        ) : (
+                          <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                            Loading...
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  )}
+                  {showFeatures && (
+                    <div>
+                      <p className="font-semibold text-lg">Features</p>
+                      <p id="features">
+                        {features ? (
+                          features
+                        ) : (
+                          <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                            Loading...
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  )}
+                  {showAdvisories && (
+                    <div>
+                      <p className="font-semibold text-lg">Advisories</p>
+                      <p id="advisories">
+                        {advisories ? (
+                          advisories
+                        ) : (
+                          <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
+                            Loading...
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  )}
                   <div>
-                    <p className="font-semibold text-lg">Price</p>
-                    <p id="price">
-                      {price ? (
-                        price
+                    <p className="font-semibold text-lg">Upload Time</p>
+                    <p id="upload_time">
+                      {uploadTime ? (
+                        uploadTime
                       ) : (
                         <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
@@ -531,13 +685,11 @@ function App() {
                       )}
                     </p>
                   </div>
-                )}
-                {showAgeRating && (
                   <div>
-                    <p className="font-semibold text-lg">Age Rating</p>
-                    <p id="age_rating">
-                      {ageRating ? (
-                        ageRating
+                    <p className="font-semibold text-lg">Views</p>
+                    <p id="views">
+                      {views ? (
+                        views
                       ) : (
                         <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
@@ -545,13 +697,11 @@ function App() {
                       )}
                     </p>
                   </div>
-                )}
-                {showVersion && (
                   <div>
-                    <p className="font-semibold text-lg">Latest Version</p>
-                    <p id="version">
-                      {version ? (
-                        version
+                    <p className="font-semibold text-lg">Downloads</p>
+                    <p id="downloads">
+                      {downloads ? (
+                        downloads
                       ) : (
                         <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
@@ -559,13 +709,11 @@ function App() {
                       )}
                     </p>
                   </div>
-                )}
-                {showRating && (
                   <div>
-                    <p className="font-semibold text-lg">Rating</p>
-                    <p id="rating">
-                      {rating ? (
-                        rating
+                    <p className="font-semibold text-lg">Starfiles Version</p>
+                    <p id="starfiles_version">
+                      {starfilesVersion ? (
+                        starfilesVersion
                       ) : (
                         <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
@@ -573,13 +721,11 @@ function App() {
                       )}
                     </p>
                   </div>
-                )}
-                {showSize && (
                   <div>
-                    <p className="font-semibold text-lg">Size</p>
-                    <p id="size">
-                      {size ? (
-                        size
+                    <p className="font-semibold text-lg">Bundle ID</p>
+                    <p id="bundle_id" style={{ wordBreak: "break-word" }}>
+                      {bundleID ? (
+                        bundleID
                       ) : (
                         <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
@@ -587,13 +733,11 @@ function App() {
                       )}
                     </p>
                   </div>
-                )}
-                {showMinimumIos && (
                   <div>
-                    <p className="font-semibold text-lg">Minimum iOS</p>
-                    <p id="minimum_ios">
-                      {minimumIos ? (
-                        minimumIos
+                    <p className="font-semibold text-lg">SHA256 Hash</p>
+                    <p id="sha256" style={{ wordBreak: "break-word" }}>
+                      {sha256 ? (
+                        sha256
                       ) : (
                         <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
@@ -601,13 +745,11 @@ function App() {
                       )}
                     </p>
                   </div>
-                )}
-                {showReleaseDate && (
                   <div>
-                    <p className="font-semibold text-lg">Release Date</p>
-                    <p id="release_date">
-                      {releaseDate ? (
-                        releaseDate
+                    <p className="font-semibold text-lg">Starfiles Minimum iOS</p>
+                    <p id="starfiles_minimum_ios">
+                      {starfilesMinimumIOS ? (
+                        starfilesMinimumIOS
                       ) : (
                         <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
@@ -615,13 +757,11 @@ function App() {
                       )}
                     </p>
                   </div>
-                )}
-                {showVersionReleaseDate && (
                   <div>
-                    <p className="font-semibold text-lg">Version Release Date</p>
-                    <p id="version_release_date">
-                      {versionReleaseDate ? (
-                        versionReleaseDate
+                    <p className="font-semibold text-lg">Starfiles Maximum iOS</p>
+                    <p id="starfiles_maximum_ios">
+                      {starfilesMaximumIOS ? (
+                        starfilesMaximumIOS
                       ) : (
                         <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
                           Loading...
@@ -629,149 +769,11 @@ function App() {
                       )}
                     </p>
                   </div>
-                )}
-                {showGenres && (
-                  <div>
-                    <p className="font-semibold text-lg">Genres</p>
-                    <p id="genres">
-                      {genres ? (
-                        genres
-                      ) : (
-                        <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                          Loading...
-                        </span>
-                      )}
-                    </p>
-                  </div>
-                )}
-                {showFeatures && (
-                  <div>
-                    <p className="font-semibold text-lg">Features</p>
-                    <p id="features">
-                      {features ? (
-                        features
-                      ) : (
-                        <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                          Loading...
-                        </span>
-                      )}
-                    </p>
-                  </div>
-                )}
-                {showAdvisories && (
-                  <div>
-                    <p className="font-semibold text-lg">Advisories</p>
-                    <p id="advisories">
-                      {advisories ? (
-                        advisories
-                      ) : (
-                        <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                          Loading...
-                        </span>
-                      )}
-                    </p>
-                  </div>
-                )}
-                <div>
-                  <p className="font-semibold text-lg">Upload Time</p>
-                  <p id="upload_time">
-                    {uploadTime ? (
-                      uploadTime
-                    ) : (
-                      <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                        Loading...
-                      </span>
-                    )}
-                  </p>
-                </div>
-                <div>
-                  <p className="font-semibold text-lg">Views</p>
-                  <p id="views">
-                    {views ? (
-                      views
-                    ) : (
-                      <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                        Loading...
-                      </span>
-                    )}
-                  </p>
-                </div>
-                <div>
-                  <p className="font-semibold text-lg">Downloads</p>
-                  <p id="downloads">
-                    {downloads ? (
-                      downloads
-                    ) : (
-                      <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                        Loading...
-                      </span>
-                    )}
-                  </p>
-                </div>
-                <div>
-                  <p className="font-semibold text-lg">Starfiles Version</p>
-                  <p id="starfiles_version">
-                    {starfilesVersion ? (
-                      starfilesVersion
-                    ) : (
-                      <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                        Loading...
-                      </span>
-                    )}
-                  </p>
-                </div>
-                <div>
-                  <p className="font-semibold text-lg">Bundle ID</p>
-                  <p id="bundle_id" style={{ wordBreak: "break-word" }}>
-                    {bundleID ? (
-                      bundleID
-                    ) : (
-                      <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                        Loading...
-                      </span>
-                    )}
-                  </p>
-                </div>
-                <div>
-                  <p className="font-semibold text-lg">SHA256 Hash</p>
-                  <p id="sha256" style={{ wordBreak: "break-word" }}>
-                    {sha256 ? (
-                      sha256
-                    ) : (
-                      <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                        Loading...
-                      </span>
-                    )}
-                  </p>
-                </div>
-                <div>
-                  <p className="font-semibold text-lg">Starfiles Minimum iOS</p>
-                  <p id="starfiles_minimum_ios">
-                    {starfilesMinimumIOS ? (
-                      starfilesMinimumIOS
-                    ) : (
-                      <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                        Loading...
-                      </span>
-                    )}
-                  </p>
-                </div>
-                <div>
-                  <p className="font-semibold text-lg">Starfiles Maximum iOS</p>
-                  <p id="starfiles_maximum_ios">
-                    {starfilesMaximumIOS ? (
-                      starfilesMaximumIOS
-                    ) : (
-                      <span className="px-3 py-1 text-xs font-medium text-[#023E8A] bg-bright rounded-full animate-pulse">
-                        Loading...
-                      </span>
-                    )}
-                  </p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

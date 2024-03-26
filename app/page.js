@@ -5,16 +5,12 @@ import { getTranslations } from "@/utils/getTranslation";
 import getUserLanguageCode from "@/utils/userLanguageCode";
 import axios from "axios";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import Footer from "./components/Layout/Footer";
-import Header from "./components/Layout/Header";
 
-export default function Home() {
-  const searchParams = useSearchParams();
+export default function Home({ searchParams }) {
+  const { referral } = searchParams();
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [emailSuccess, setEmailSuccess] = useState({ success: false, message: "" });
-  const referral = searchParams.get("referral");
   const [mainContentLoad, setMainContentLoad] = useState(false);
   const [alertsLoad, setAlertsLoad] = useState(false);
   const [alertOptions, setAlertOptions] = useState({ isPro: null, deviceExists: null, appdbLT: null, devices: null });
