@@ -11,12 +11,16 @@ function DeviceStatus() {
   const router = useRouter();
   const [output, setOutput] = useState("");
   const [hideButton, setHideButton] = useState(false);
+  let isCalled = false;
 
   useEffect(() => {
-    // Get Translations
-    getTranslationList();
-    // Check Cookie
-    checkCookie();
+    if (!isCalled) {
+      isCalled = true;
+      // Get Translations
+      getTranslationList();
+      // Check Cookie
+      checkCookie();
+    }
   }, []);
 
   // Get Translations
@@ -31,7 +35,7 @@ function DeviceStatus() {
 
   // Check Cookie
   const checkCookie = () => {
-    if (document.cookie.indexOf("udid=") != -1) router.push("/settings");
+    if (document.cookie.indexOf("udid=") !== -1) router.push("/settings");
   };
 
   // On Check
@@ -69,7 +73,7 @@ function DeviceStatus() {
 
       let finalOutput = (
         <>
-          <p style="margin-top:24px">
+          <p className="mt-[24px]">
             Plan Expires in ` + Math.floor((data.signed_till-Math.floor(Date.now()/1000))/60/60/24) + ` Days
           </p>
           <p>Account ID: ` + data.developer_account + `</p>

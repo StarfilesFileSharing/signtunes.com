@@ -261,7 +261,7 @@ function Signer() {
               <div id="output"></div>
               <p className="font-semibold my-1 text-center">{translationList?.or}</p>
               <input
-                className="rounded-lg border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full mb-4 dark:text-gray-700"
+                className="rounded-lg border border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full mb-4 dark:text-gray-700"
                 placeholder="Starfiles ID"
                 type="text"
                 id="ipa"
@@ -272,7 +272,7 @@ function Signer() {
             <div className="md:ml-4 md:mt-0 mt-4 w-full md:w-5/12 text-center">
               <div className="grid grid-cols-1">
                 <input
-                  className="rounded-lg border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full mb-3 dark:text-gray-700"
+                  className="rounded-lg border border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full mb-3 dark:text-gray-700"
                   placeholder="UDID"
                   type="udid"
                   id="udid"
@@ -284,7 +284,7 @@ function Signer() {
                   pattern="[a-fA-F0-9]{40}|[0-9]{8}-[a-fA-F0-9]{16}"
                 />
                 <select
-                  className="rounded-lg border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full mb-3 dark:text-gray-700"
+                  className="rounded-lg border border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full mb-3 dark:text-gray-700"
                   id="certificate_type"
                 >
                   <option value="distribution">
@@ -297,7 +297,7 @@ function Signer() {
                   </option>
                 </select>
                 <select
-                  className="rounded-lg border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full dark:text-gray-700"
+                  className="rounded-lg border border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full dark:text-gray-700"
                   id="provision_type"
                 >
                   <option value="explicit">
@@ -442,7 +442,7 @@ function Signer() {
             <h3 className="text-2xl font-semibold mb-4">{translationList?.optional_settings}</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 items-center">
               <input
-                className="rounded-lg border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full dark:text-gray-700"
+                className="rounded-lg border border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full dark:text-gray-700"
                 placeholder={translationList?.custom_bundle_id}
                 type="text"
                 id="custom_bundle_id"
@@ -450,7 +450,7 @@ function Signer() {
                 onChange={(e) => setCustomBundleID(e.target.value)}
               />
               <input
-                className="rounded-lg border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full dark:text-gray-700"
+                className="rounded-lg border border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full dark:text-gray-700"
                 placeholder={translationList?.custom_name}
                 type="text"
                 id="custom_app_name"
@@ -458,7 +458,7 @@ function Signer() {
                 onChange={(e) => setCustomAppName(e.target.value)}
               />
               <input
-                className="rounded-lg border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full dark:text-gray-700"
+                className="rounded-lg border border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full dark:text-gray-700"
                 placeholder={translationList?.custom_version}
                 type="text"
                 id="custom_version"
@@ -581,7 +581,7 @@ function Signer() {
             <h3 className="text-2xl font-semibold mb-4">{translationList?.compatibility}</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 items-center">
               <input
-                className="rounded-lg border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full dark:text-gray-700"
+                className="rounded-lg border border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full dark:text-gray-700"
                 placeholder="Minimum iOS"
                 type="text"
                 id="minimum_ios"

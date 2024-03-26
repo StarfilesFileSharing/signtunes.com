@@ -12,11 +12,16 @@ function Search() {
   const [translationList, setTranslationList] = useState(null);
   const [searchData, setSearchData] = useState(null);
 
+  let isCalled = false;
+
   useEffect(() => {
-    // Get Translations
-    getTranslationList();
-    // Get Search Data
-    getSearchData();
+    if (!isCalled) {
+      isCalled = true;
+      // Get Translations
+      getTranslationList();
+      // Get Search Data
+      getSearchData();
+    }
   }, []);
 
   // Get Translations

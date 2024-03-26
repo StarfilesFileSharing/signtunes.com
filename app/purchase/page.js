@@ -187,7 +187,7 @@ function Purchase() {
                   gtag_report_conversion();
                 }}
               >
-                Pay With Crypto
+                {translationList?.purchase}
               </button>
             }
             redirect="card"
@@ -202,7 +202,7 @@ function Purchase() {
                   gtag_report_conversion();
                 }}
               >
-                {translationList?.purchase}
+                Pay with Crypto
               </button>
             }
             redirect="crypto"

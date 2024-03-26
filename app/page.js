@@ -31,19 +31,24 @@ export default function Home() {
   const [count, setCount] = useState({ uploadCount: "", downloadCount: "", sizeUpload: "" });
   const [currentClicked, setCurrentClicked] = useState("All");
 
+  let isCalled = false;
+
   useEffect(() => {
-    // Revealing main content once the site is loaded
-    setMainContentLoad(true);
-    // Get genre
-    getGenre(false);
-    // Get Categories
-    getCategories();
-    // Get Translations
-    getTranslationList();
-    // Stats
-    getStats();
-    // Alerts
-    getAlerts();
+    if (!isCalled) {
+      isCalled = true;
+      // Revealing main content once the site is loaded
+      setMainContentLoad(true);
+      // Get genre
+      getGenre(false);
+      // Get Categories
+      getCategories();
+      // Get Translations
+      getTranslationList();
+      // Stats
+      getStats();
+      // Alerts
+      getAlerts();
+    }
   }, []);
 
   // Get Genre
@@ -126,7 +131,12 @@ export default function Home() {
       const devices = await axios.get(
         "https://api.starfiles.co/device_enrolments/appdb_devices?udid=" + cookie("udid")
       );
-      setAlertOptions({ isPro, deviceExists, appdbLT, devices });
+      setAlertOptions({
+        isPro: isPro.data,
+        deviceExists: deviceExists.data,
+        appdbLT: appdbLT.data,
+        devices: devices.data,
+      });
 
       setAlertsLoad(true);
     } catch (err) {
@@ -138,6 +148,7 @@ export default function Home() {
     <>
       <main className="mx-5 md:mx-12 mt-5 grid grid-cols-4 mb-6 ">
         <div className="md:w-12/12 col-span-4 md:col-span-3 grid grid-cols-6">
+          {console.log("ispro", alertOptions.isPro)}
           {alertsLoad && (
             <div className="col-span-6" id="alerts">
               <div className="alert bg-teal-100 text-black shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium">
@@ -252,7 +263,7 @@ export default function Home() {
                   </a>
                 </div>
               )}
-              {alertOptions.deviceExists === "true" ? (
+              {document.cookie.indexOf("udid") !== -1 && alertOptions.deviceExists === true ? (
                 !getUserLanguageCode().startsWith("en") ? (
                   <div className="alert alert-info shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium">
                     <div className="alert-child">
@@ -268,10 +279,10 @@ export default function Home() {
                           d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
                         ></path>
                       </svg>
-                      <span>{help_translate}</span>
+                      <span>{translationList?.help_translate}</span>
                     </div>
                     <a className="alert-btn" href="https://crowdin.com/project/signtunes">
-                      {translate}
+                      {translationList?.translate}
                     </a>
                   </div>
                 ) : alertOptions.isPro === false ? (
@@ -328,7 +339,7 @@ export default function Home() {
                                     Link
                                   </a>
                                   <a className="alert-btn" href="/purchase">
-                                    {purchase}
+                                    {translationList?.purchase}
                                   </a>
                                 </div>
                               </div>
@@ -380,8 +391,7 @@ export default function Home() {
               ) : (
                 <></>
               )}
-              {/* TODO COMMENT OUT AFTER DEVELOPMENT AND TESTING */}
-              {/* {document.cookie.indexOf("udid") !== -1 && alertOptions.deviceExists !== "true" && (
+              {document.cookie.indexOf("udid") !== -1 && alertOptions.deviceExists !== true && (
                 <div
                   aria-hidden="true"
                   className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full bg-[#000000db] h-[100vh]"
@@ -453,7 +463,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              )} */}
+              )}
             </div>
           )}
           <aside aria-label="Sidebar" className="hidden xl:block xl:col-span-1">

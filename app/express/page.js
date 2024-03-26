@@ -42,12 +42,16 @@ function ProPurchaseButton({ purchaseButton = <></> }) {
 
 function Express() {
   const [translationList, setTranslationList] = useState(null);
+  let isCalled = false;
 
   useEffect(() => {
-    // Get Translations
-    getTranslationList();
-    // Check Cookie
-    // checkCookie();
+    if (!isCalled) {
+      isCalled = true;
+      // Get Translations
+      getTranslationList();
+      // Check Cookie
+      // checkCookie();
+    }
   }, []);
 
   // Get Translations

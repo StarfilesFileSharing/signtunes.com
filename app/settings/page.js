@@ -22,13 +22,18 @@ function Settings() {
   const [deviceCertificate, setDeviceCertificate] = useState(null);
   const [permissions, setPermissions] = useState(null);
 
+  let isCalled = false;
+
   useEffect(() => {
-    // Get Translations
-    getTranslationList();
-    // Check Udid Exists
-    getUdid();
-    // Get Data
-    getData();
+    if (!isCalled) {
+      isCalled = true;
+      // Get Translations
+      getTranslationList();
+      // Check Udid Exists
+      getUdid();
+      // Get Data
+      getData();
+    }
   }, []);
 
   useEffect(() => {
