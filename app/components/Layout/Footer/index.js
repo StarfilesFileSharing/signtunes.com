@@ -49,8 +49,11 @@ function Footer() {
   return (
     <footer className="bg-gray-100 dark:bg-gray-800 px-4 py-16 sm:px-6 lg:px-8 mt-12">
       <div className="text-center">
-        <Link href="/discord" className="inline-block w-auto mb-1 p-2 text-l rounded-3xl text-white bg-[#7289da]">
-          {/* <i className="fab fa-discord" />  */}
+        <Link
+          href="https://signtunes.com/discord"
+          className="inline-block w-auto mb-1 p-2 text-l rounded-3xl text-white bg-[#7289da]"
+        >
+          <i className="fab fa-discord mr-1" />
           Discord
         </Link>
       </div>
