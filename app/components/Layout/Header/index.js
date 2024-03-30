@@ -239,7 +239,7 @@ function Header({ searchParams }) {
         <h1>
           <Link
             className="block font-semibold text-2xl text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-600"
-            href=""
+            href="/"
             loader-ignore-click="true"
           >
             Signtunes
