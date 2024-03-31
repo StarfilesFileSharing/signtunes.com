@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 function Header({ searchParams }) {
   const referral = searchParams?.referral;
-  console.log("referral1", referral);
+  // console.log("referral1", referral);
   const [translationList, setTranslationList] = useState(null);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [cookieChecked, setCookieChecked] = useState(false);
@@ -191,7 +191,7 @@ function Header({ searchParams }) {
               </Link>
             </li>
             <li className="nav_btn" tabIndex="0">
-              <Link className="p-2 active:bg-secondary" href="/discord">
+              <Link className="p-2 active:bg-secondary" href="https://signtunes.com/discord">
                 {translationList?.support}
               </Link>
             </li>
@@ -367,7 +367,7 @@ function Header({ searchParams }) {
                 </li>
                 <li>
                   <Link
-                    href="/discord"
+                    href="https://signtunes.com/discord"
                     className="nav_btn hover:text-blue-600 dark:hover:text-blue-500 active:bg-secondary active:text-white"
                   >
                     <span className="sr-only">Support</span>

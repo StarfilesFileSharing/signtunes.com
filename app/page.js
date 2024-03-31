@@ -10,7 +10,7 @@ import Header from "./components/Layout/Header";
 
 export default function Home({ searchParams }) {
   const { referral } = searchParams;
-  console.log("referral2", referral);
+  // console.log("referral2", referral);
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [emailSuccess, setEmailSuccess] = useState({ success: false, message: "" });
   const [mainContentLoad, setMainContentLoad] = useState(false);
