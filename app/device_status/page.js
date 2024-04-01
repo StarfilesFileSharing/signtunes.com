@@ -50,9 +50,7 @@ function DeviceStatus({ searchParams }) {
       d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000);
       document.cookie = "udid=" + udid + ";expires=" + d.toUTCString() + ";path=/;domain=.signtunes.com";
       setOutput("Checking Status");
-      const response = await axios.get(
-        "https://api2.starfiles.co/check_enrolment/" + udid + "?organisation=2"
-      );
+      const response = await axios.get("https://api2.starfiles.co/check_enrolment/" + udid + "?organisation=2");
       const data = response.data;
 
       if (!data.developer_account) router.push("/purchase");
@@ -75,9 +73,9 @@ function DeviceStatus({ searchParams }) {
       let finalOutput = (
         <>
           <p className="mt-[24px]">
-            Plan Expires in ` + Math.floor((data.signed_till-Math.floor(Date.now()/1000))/60/60/24) + ` Days
+            Plan Expires in {Math.floor((data.signed_till - Math.floor(Date.now() / 1000)) / 60 / 60 / 24)} Days
           </p>
-          <p>Account ID: ` + data.developer_account + `</p>
+          <p>Account ID: {data.developer_account}</p>
         </>
       );
 
