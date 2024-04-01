@@ -123,14 +123,14 @@ export default function Home({ searchParams }) {
     try {
       const isPro = await axios.get("https://api2.starfiles.co/pro?udid=" + cookie("udid"));
       const deviceExists = await axios.get(
-        "https://api.starfiles.co/device_enrolments/device_exists?udid=" + cookie("udid")
+        "https://api2.starfiles.co/check_enrolment/" + cookie("udid") + "?organisation=2"
       );
       const devices = await axios.get(
         "https://api.starfiles.co/device_enrolments/appdb_devices?udid=" + cookie("udid")
       );
       setAlertOptions({
         isPro: JSON.parse(isPro.data)['status'],
-        deviceExists: deviceExists.data,
+        deviceExists: JSON.parse(deviceExists.data)['registered'],
         devices: devices.data,
       });
 
