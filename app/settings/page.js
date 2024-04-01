@@ -56,7 +56,7 @@ function Settings({ searchParams }) {
       setUdidExists(true);
       // Is pro
       const pro = await axios.get("https://api2.starfiles.co/pro?udid=" + cookie("udid"));
-      if (JSON.parse(pro.data)['status']) {
+      if (pro.data["status"]) {
         setIsPro(true);
         // Check for certificates
         const deviceCerts = await axios.get("https://api2.starfiles.co/device_certificate/" + cookie("udid"));
@@ -93,7 +93,7 @@ function Settings({ searchParams }) {
 
   // Auxillary Functions
   async function listDevices() {
-    const response = await axios.get("https://api.starfiles.co/device_enrolments/list_devices?udid=" + cookie("udid"));
+    const response = await axios.get("https://api2.starfiles.co/devices/" + cookie("udid"));
     const devices = await response.data;
     return devices;
   }

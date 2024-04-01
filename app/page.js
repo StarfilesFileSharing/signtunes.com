@@ -15,7 +15,7 @@ export default function Home({ searchParams }) {
   const [emailSuccess, setEmailSuccess] = useState({ success: false, message: "" });
   const [mainContentLoad, setMainContentLoad] = useState(false);
   const [alertsLoad, setAlertsLoad] = useState(false);
-  const [alertOptions, setAlertOptions] = useState({ isPro: null, deviceExists: null, devices: null });
+  const [alertOptions, setAlertOptions] = useState({ isPro: null, deviceExists: null });
   const [email, setEmail] = useState("");
   const [statsLoad, setStatsLoad] = useState(false);
   const [genreData, setGenreData] = useState({
@@ -125,13 +125,9 @@ export default function Home({ searchParams }) {
       const deviceExists = await axios.get(
         "https://api2.starfiles.co/check_enrolment/" + cookie("udid") + "?organisation=2"
       );
-      const devices = await axios.get(
-        "https://api.starfiles.co/device_enrolments/appdb_devices?udid=" + cookie("udid")
-      );
       setAlertOptions({
-        isPro: JSON.parse(isPro.data)['status'],
-        deviceExists: JSON.parse(deviceExists.data)['registered'],
-        devices: devices.data,
+        isPro: JSON.parse(isPro.data)["status"],
+        deviceExists: JSON.parse(deviceExists.data)["registered"],
       });
 
       setAlertsLoad(true);
