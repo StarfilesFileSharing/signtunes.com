@@ -112,7 +112,6 @@ function DeviceStatus({ searchParams }) {
                 <p className="timeframe"></p>
               </div>
             </div>
-            ;
           </>
         );
       else
