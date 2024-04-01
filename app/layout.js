@@ -37,14 +37,14 @@ export default function RootLayout({ children }) {
         <meta itemProp="description" content="The #1 Signing Service for iPhone, iPad, Mac, and Apple TV" />
 
         {/* Fetch DNS Async */}
-        <link rel="preconnect" href="https://api.starfiles.co" />
+        <link rel="preconnect" href="https://api2.starfiles.co" />
         <link rel="preconnect" href="https://cdn.starfiles.co" />
         <link rel="preconnect" href="https://sts.st" />
         <link rel="preconnect" href="https://api.github.com" />
         <link rel="preconnect" href="https://raw.githubusercontent.com" />
 
         {/* Fetch DNS files when Idle */}
-        <link rel="dns-prefetch" href="https://api.starfiles.co" />
+        <link rel="dns-prefetch" href="https://api2.starfiles.co" />
         <link rel="dns-prefetch" href="https://cdn.starfiles.co" />
         <link rel="dns-prefetch" href="https://sts.st" />
         <link rel="dns-prefetch" href="https://api.github.com" />

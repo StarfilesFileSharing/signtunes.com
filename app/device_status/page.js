@@ -51,7 +51,7 @@ function DeviceStatus({ searchParams }) {
       document.cookie = "udid=" + udid + ";expires=" + d.toUTCString() + ";path=/;domain=.signtunes.com";
       setOutput("Checking Status");
       const response = await axios.get(
-        "https://api.starfiles.co/device_enrolments/check_enrolment?organisation=2&udid=" + udid
+        "https://api2.starfiles.co/check_enrolment/" + udid + "?organisation=2"
       );
       const data = response.data;
 

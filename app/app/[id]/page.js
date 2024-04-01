@@ -288,7 +288,7 @@ function App({ params, searchParams }) {
           appdb_data = JSON.parse(cydiaRes.data).data[0];
         }
 
-        await axios.get("https://api.starfiles.co/bundle_id/" + data.bundle_id).then((bundleData) => {
+        await axios.get("https://api2.starfiles.co/bundle_id/" + data.bundle_id).then((bundleData) => {
           let bundle_id_data = bundleData.data;
           let highestVersion = null;
           setDownloadLinks(

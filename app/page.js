@@ -83,7 +83,7 @@ export default function Home({ searchParams }) {
   // Get Categories
   const getCategories = async () => {
     try {
-      let response = await axios.get("https://api.starfiles.co/categories");
+      let response = await axios.get("https://api2.starfiles.co/categories");
       setCategories(response.data);
     } catch (err) {
       console.error(err.message);

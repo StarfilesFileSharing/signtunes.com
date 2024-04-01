@@ -212,20 +212,20 @@ function SignerProgress({ searchParams }) {
       if (working) {
         setShowFeedback(true);
         await axios.post(
-          "https://api.starfiles.co/ipa_feedback/" + ipa,
+          "https://api2.starfiles.co/ipa_feedback/" + ipa,
           new URLSearchParams("udid=" + udid + "&working=true")
         );
       } else if (reason == null) {
         setShowAppFeedbackReason(true);
         await axios.post(
-          "https://api.starfiles.co/ipa_feedback/" + ipa,
+          "https://api2.starfiles.co/ipa_feedback/" + ipa,
           new URLSearchParams("udid=" + udid + "&working=false")
         );
       } else {
         setShowAppFeedbackReason(false);
         setShowFeedback(true);
         await axios.post(
-          "https://api.starfiles.co/ipa_feedback/" + ipa,
+          "https://api2.starfiles.co/ipa_feedback/" + ipa,
           new URLSearchParams("udid=" + udid + "&working=false&reason=" + reason)
         );
       }

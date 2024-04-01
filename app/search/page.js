@@ -37,7 +37,7 @@ function Search({ searchParams }) {
   const getSearchData = async () => {
     try {
       const res = await axios.get(
-        `https://api.starfiles.co/2.0/files?public=true&extension=ipa&group=bundle_id&collapse=true&limit=200&search=${
+        `https://api2.starfiles.co/files?public=true&extension=ipa&group=bundle_id&collapse=true&limit=200&search=${
           q ? q : ""
         }`
       );
