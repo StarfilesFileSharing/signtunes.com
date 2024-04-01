@@ -15,7 +15,7 @@ export default function Home({ searchParams }) {
   const [emailSuccess, setEmailSuccess] = useState({ success: false, message: "" });
   const [mainContentLoad, setMainContentLoad] = useState(false);
   const [alertsLoad, setAlertsLoad] = useState(false);
-  const [alertOptions, setAlertOptions] = useState({ isPro: null, deviceExists: null, appdbLT: null, devices: null });
+  const [alertOptions, setAlertOptions] = useState({ isPro: null, deviceExists: null, devices: null });
   const [email, setEmail] = useState("");
   const [statsLoad, setStatsLoad] = useState(false);
   const [genreData, setGenreData] = useState({
@@ -125,14 +125,12 @@ export default function Home({ searchParams }) {
       const deviceExists = await axios.get(
         "https://api.starfiles.co/device_enrolments/device_exists?udid=" + cookie("udid")
       );
-      const appdbLT = await axios.get("https://api.starfiles.co/device_enrolments/appdb_lt?udid=" + cookie("udid"));
       const devices = await axios.get(
         "https://api.starfiles.co/device_enrolments/appdb_devices?udid=" + cookie("udid")
       );
       setAlertOptions({
         isPro: isPro.data,
         deviceExists: deviceExists.data,
-        appdbLT: appdbLT.data,
         devices: devices.data,
       });
 
@@ -305,84 +303,6 @@ export default function Home({ searchParams }) {
                       Get Pro
                     </a>
                   </div>
-                ) : alertOptions.appdbLT === "true" ? (
-                  <>
-                    {alertOptions.devices.map((device, index) => {
-                      if (device["name" != null]) {
-                        return (
-                          <>
-                            {!device["p12_validation_result"] && (
-                              <div className="alert alert-warning shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium">
-                                <div className="alert-child">
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth="1.5"
-                                    stroke="currentColor"
-                                    className="stroke-current flex-shrink-0 w-6 h-6"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
-                                    ></path>
-                                  </svg>
-                                  <span>
-                                    Your ${device["nice_idevice_model"]} (${device["name"]}) isn't linked to Signtunes.
-                                  </span>
-                                </div>
-                                <div className="alert-child">
-                                  <a className="alert-btn" href="/link_appdb">
-                                    Link
-                                  </a>
-                                  <a className="alert-btn" href="/purchase">
-                                    {translationList?.purchase}
-                                  </a>
-                                </div>
-                              </div>
-                            )}
-                            <div className="card bg-gray-100 dark:bg-gray-900 shadow-xl mt-4">
-                              <div className="card-body p-4">
-                                <h3 className="card-title text-2xl text-gray-900 dark:text-white">${device["name"]}</h3>
-                                <p className="text-sm text-gray-700 dark:text-gray-400">
-                                  ${device["nice_idevice_model"]}
-                                  <br />$
-                                  {device["model"].startsWith("Mac")
-                                    ? "mac"
-                                    : device["model"].startsWith("AppleTV")
-                                    ? "tv"
-                                    : "i"}
-                                  OS ${device["ios_version"]}
-                                  <br />$
-                                  {Date.parse(device["plus_till"]) <= +new Date()
-                                    ? `<br>AppDB Signs Left: ${device["free_signs_left"]}<br>` +
-                                      (Date.parse(device["free_signs_reset_at"]) && device["free_signs_left"] < 30
-                                        ? `AppDB Signs Reset in ${Math.round(
-                                            (Date.parse(device["free_signs_reset_at"]) - +new Date()) /
-                                              1000 /
-                                              60 /
-                                              60 /
-                                              24,
-                                            1
-                                          )} Days<br>`
-                                        : "") +
-                                      `Upgrade for unlimited signs through AppDB.`
-                                    : ""}
-                                </p>
-                                $
-                                {Date.parse(device["plus_till"]) <= +new Date()
-                                  ? `<div className="card-actions justify-end">
-                                              <a href="/appdb_plus" className="btn bg-primary hover:bg-secondary text-white border-none">AppDB PLUS</a>
-                                          </div>`
-                                  : ""}
-                              </div>
-                            </div>
-                          </>
-                        );
-                      }
-                    })}
-                  </>
                 ) : (
                   <></>
                 )
