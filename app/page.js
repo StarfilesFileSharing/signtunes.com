@@ -121,7 +121,7 @@ export default function Home({ searchParams }) {
   // Get Alerts
   const getAlerts = async () => {
     try {
-      const isPro = await axios.get("https://api.starfiles.co/device_enrolments/is_pro?udid=" + cookie("udid"));
+      const isPro = await axios.get("https://api2.starfiles.co/pro?udid=" + cookie("udid"));
       const deviceExists = await axios.get(
         "https://api.starfiles.co/device_enrolments/device_exists?udid=" + cookie("udid")
       );
@@ -129,7 +129,7 @@ export default function Home({ searchParams }) {
         "https://api.starfiles.co/device_enrolments/appdb_devices?udid=" + cookie("udid")
       );
       setAlertOptions({
-        isPro: isPro.data,
+        isPro: JSON.parse(isPro.data)['status'],
         deviceExists: deviceExists.data,
         devices: devices.data,
       });

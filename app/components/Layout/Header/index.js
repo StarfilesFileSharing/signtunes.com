@@ -57,8 +57,8 @@ function Header({ searchParams }) {
     if (document.cookie.indexOf("udid=") !== 1) {
       try {
         if (cookie("pro") === null) {
-          const response = await axios.get("https://api.starfiles.co/device_enrolments/is_pro?udid=" + cookie("udid"));
-          setCookie("pro", `${response.data}`, 7);
+          const response = await axios.get("https://api2.starfiles.co/pro?udid=" + cookie("udid"));
+          setCookie("pro", `${JSON.parse(response.data)['status']}`, 7);
         }
         const devices = await axios.get(
           "https://api.starfiles.co/device_enrolments/list_devices?udid=" + cookie("udid")

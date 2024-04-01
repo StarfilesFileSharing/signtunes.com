@@ -55,8 +55,8 @@ function Settings({ searchParams }) {
     if (document.cookie.indexOf("udid") !== -1) {
       setUdidExists(true);
       // Is pro
-      const pro = await axios.get("https://api.starfiles.co/device_enrolments/is_pro?udid=" + cookie("udid"));
-      if (pro.data) {
+      const pro = await axios.get("https://api2.starfiles.co/pro?udid=" + cookie("udid"));
+      if (JSON.parse(pro.data)['status']) {
         setIsPro(true);
         // Check for certificates
         const deviceCerts = await axios.get("https://api2.starfiles.co/device_certificate/" + cookie("udid"));

@@ -169,13 +169,13 @@ export default function RootLayout({ children }) {
           rel="alternate"
           type="application/atom+xml"
           title="Public Files"
-          href="https://api.starfiles.co/public.xml"
+          href="https://api2.starfiles.co/public.xml"
         />
         <link
           rel="alternate"
           type="application/rss+xml"
           title="Public Files"
-          href="https://api.starfiles.co/public.xml"
+          href="https://api2.starfiles.co/public.xml"
         />
 
         {/* meta */}
