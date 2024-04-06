@@ -612,9 +612,7 @@ function Header({ searchParams }) {
               })}
           </ul>
         </div>
-        {document.cookie.indexOf("udid=") !== -1 ? (
-          <></>
-        ) : (
+        {document.cookie.indexOf("udid=") === -1 && (
           <a
             className={`nav_btn rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 text-sm font-medium text-white shadow`}
             href={`/purchase${referral ? `?referral=${referral}` : ""}`}
