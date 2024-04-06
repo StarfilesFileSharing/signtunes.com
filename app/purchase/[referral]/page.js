@@ -2,8 +2,8 @@
 import cookie, { setCookie } from "@/utils/cookies";
 import { getTranslations } from "@/utils/getTranslation";
 import { useEffect, useState } from "react";
-import Header from "../components/Layout/Header";
-import TitleTags from "../components/Title";
+import Header from "@/app/components/Layout/Header";
+import TitleTags from "@/app/components/Title";
 
 function PurchaseButton({ purchaseButton = <></>, redirect = null, searchParams, params }) {
   const { id } = searchParams;
@@ -177,7 +177,7 @@ function Purchase({ params, searchParams }) {
             )}
           </p>
           <PurchaseButton
-            params={parmas}
+            params={params}
             searchParams={searchParams}
             purchaseButton={
               <button

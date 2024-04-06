@@ -461,6 +461,7 @@ function Header({ searchParams }) {
             Signtunes Pro
           </a>
         )}
+        {/* When UDID Is Found */}
         <a
           className={`nav_btn ${
             document.cookie.indexOf("udid=") !== -1 ? "" : "hidden"
@@ -612,6 +613,7 @@ function Header({ searchParams }) {
               })}
           </ul>
         </div>
+        {/* When UDID Is Not Found */}
         {document.cookie.indexOf("udid=") === -1 && (
           <a
             className={`nav_btn rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 text-sm font-medium text-white shadow`}
