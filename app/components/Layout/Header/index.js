@@ -31,6 +31,10 @@ function Header({ searchParams }) {
     }
   }, []);
 
+  useEffect(() => {
+    checkCookie();
+  }, [document.cookie.indexOf("udid=")]);
+
   // Check Dark THeme
   const checkDarkTheme = async () => {
     if (
@@ -55,11 +59,13 @@ function Header({ searchParams }) {
   // Check Cookie If User Exists
   const checkCookie = async () => {
     if (document.cookie.indexOf("udid=") !== 1) {
+      console.log("test1");
       try {
         if (cookie("pro") === null) {
           const response = await axios.get("https://api2.starfiles.co/pro?udid=" + cookie("udid"));
-          setCookie("pro", `${JSON.parse(response.data)["status"]}`, 7);
+          setCookie("pro", `${response.data["status"]}`, 7);
         }
+        console.log("test2");
         const devices = await axios.get("https://api2.starfiles.co/devices/" + cookie("udid"));
         setDevicesList(devices.data);
         if (devices.data?.length === 0) setDeviceName("");
@@ -151,61 +157,61 @@ function Header({ searchParams }) {
           >
             {document.cookie.indexOf("udid=") !== -1 && (
               <li className="nav_btn customer_only" tabIndex="0">
-                <Link className="p-2 active:bg-secondary" href="/signer">
+                <a className="p-2 active:bg-secondary" href="/signer">
                   {translationList?.signer}
-                </Link>
+                </a>
               </li>
             )}
             <li className="nav_btn" tabIndex="0">
-              <Link className="p-2 active:bg-secondary" href="/purchase">
+              <a className="p-2 active:bg-secondary" href="/purchase">
                 {translationList?.purchase}
-              </Link>
+              </a>
             </li>
             {document.cookie.indexOf("udid=") === -1 && (
               <li className="nav_btn" tabIndex="0">
-                <Link className="p-2 active:bg-secondary" href="/device_status" id="device_status_1">
+                <a className="p-2 active:bg-secondary" href="/device_status" id="device_status_1">
                   {translationList?.device_status}
-                </Link>
+                </a>
               </li>
             )}
             {/* <li className="nav_btn" tabIndex="0">
-              <Link className="p-2 active:bg-secondary" href="/appdb_plus">
+              <a className="p-2 active:bg-secondary" href="/appdb_plus">
                 AppDB PLUS
-              </Link>
+              </a>
             </li> */}
             <li className="nav_btn" tabIndex="0">
-              <Link className="p-2 active:bg-secondary" href="/mac">
+              <a className="p-2 active:bg-secondary" href="/mac">
                 Mac
-              </Link>
+              </a>
             </li>
             <li className="nav_btn" tabIndex="0">
-              <Link className="p-2 active:bg-secondary" href="/apple_tv">
+              <a className="p-2 active:bg-secondary" href="/apple_tv">
                 Apple TV
-              </Link>
+              </a>
             </li>
             <li className="nav_btn" tabIndex="0">
-              <Link className="p-2 active:bg-secondary" href="/faq">
+              <a className="p-2 active:bg-secondary" href="/faq">
                 {translationList?.faq}
-              </Link>
+              </a>
             </li>
             <li className="nav_btn" tabIndex="0">
-              <Link className="p-2 active:bg-secondary" href="https://signtunes.com/discord">
+              <a className="p-2 active:bg-secondary" href="https://signtunes.com/discord">
                 {translationList?.support}
-              </Link>
+              </a>
             </li>
             <li className="nav_btn" tabIndex="0">
-              <Link className="p-2 active:bg-secondary" href="/blog">
+              <a className="p-2 active:bg-secondary" href="/blog">
                 {translationList?.blog}
-              </Link>
+              </a>
             </li>
             {cookieChecked && document.cookie.indexOf("udid=") !== -1 && cookie("pro") === "false" && (
               <li className="nav_btn" id="upgrade_btn" tabIndex="0">
-                <Link
+                <a
                   className="rounded-xl px-2 py-1 font-medium text-white shadow bg-gradient-to-r from-sky-400 to-emerald-600 mb-2 m-0"
                   href={`/pro${referral ? `?referral=${referral}` : ""}`}
                 >
                   Signtunes Pro
-                </Link>
+                </a>
               </li>
             )}
             <li>
@@ -235,13 +241,13 @@ function Header({ searchParams }) {
           </ul>
         </div>
         <h1>
-          <Link
+          <a
             className="block font-semibold text-2xl text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-600"
             href="/"
             loader-ignore-click="true"
           >
             Signtunes
-          </Link>
+          </a>
         </h1>
         <form className="mb-0 ml-4 hidden lg:flex" action="/search">
           <div className="relative">
@@ -271,47 +277,47 @@ function Header({ searchParams }) {
           <ul className="menu menu-horizontal px-1 text-[16px]">
             {document.cookie.indexOf("udid=") !== -1 && (
               <li className="nav_btn customer_only">
-                <Link className="p-2 active:bg-secondary" href="/signer">
+                <a className="p-2 active:bg-secondary" href="/signer">
                   {translationList?.signer}
-                </Link>
+                </a>
               </li>
             )}
             <li className="nav_btn" tabIndex="0">
-              <Link className="p-2 active:bg-secondary" href="/purchase">
+              <a className="p-2 active:bg-secondary" href="/purchase">
                 {translationList?.purchase}
-              </Link>
+              </a>
             </li>
             {document.cookie.indexOf("udid=") === -1 && (
               <li className="nav_btn">
-                <Link className="p-2 active:bg-secondary" href="/device_status" id="device_status_2">
+                <a className="p-2 active:bg-secondary" href="/device_status" id="device_status_2">
                   {translationList?.device_status}
-                </Link>
+                </a>
               </li>
             )}
             {/* <li className="nav_btn">
-              <Link className="p-2 active:bg-secondary" href="/appdb_plus">
+              <a className="p-2 active:bg-secondary" href="/appdb_plus">
                 AppDB PLUS
-              </Link>
+              </a>
             </li> */}
             <li className="nav_btn">
-              <Link className="p-2 active:bg-secondary" href="/mac">
+              <a className="p-2 active:bg-secondary" href="/mac">
                 Mac
-              </Link>
+              </a>
             </li>
             <li className="nav_btn">
-              <Link className="p-2 active:bg-secondary" href="/apple_tv">
+              <a className="p-2 active:bg-secondary" href="/apple_tv">
                 Apple TV
-              </Link>
+              </a>
             </li>
             <li className="nav_btn">
-              <Link className="p-2 md:flex lg:hidden active:bg-secondary" href="/search">
+              <a className="p-2 md:flex lg:hidden active:bg-secondary" href="/search">
                 {translationList?.search}
-              </Link>
+              </a>
             </li>
             <li className="nav_btn">
-              <Link className="p-2 md:flex lg:hidden active:bg-secondary" href="/blog">
+              <a className="p-2 md:flex lg:hidden active:bg-secondary" href="/blog">
                 {translationList?.blog}
-              </Link>
+              </a>
             </li>
             <li>
               <button
@@ -341,7 +347,7 @@ function Header({ searchParams }) {
                 className="hidden absolute z-10 text-sm rounded-lg shadow-md bg-white border border-gray-100 text-gray-900 dark:bg-gray-700 dark:border-gray-700 text-gray-500 dark:text-gray-400"
               >
                 <li>
-                  <Link
+                  <a
                     href="/faq"
                     className="nav_btn hover:text-blue-600 dark:hover:text-blue-500 active:bg-secondary active:text-white"
                   >
@@ -361,10 +367,10 @@ function Header({ searchParams }) {
                       />
                     </svg>
                     {translationList?.faq}
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
+                  <a
                     href="https://signtunes.com/discord"
                     className="nav_btn hover:text-blue-600 dark:hover:text-blue-500 active:bg-secondary active:text-white"
                   >
@@ -383,7 +389,7 @@ function Header({ searchParams }) {
                       />
                     </svg>
                     {translationList?.support}
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -447,22 +453,22 @@ function Header({ searchParams }) {
           )}
         </button>
         {cookieChecked && document.cookie.indexOf("udid=") !== -1 && cookie("pro") === "false" && (
-          <Link
+          <a
             id="upgrade_btn_2"
             className="nav_btn rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 text-sm font-medium text-white mr-2 shadow bg-gradient-to-r from-sky-400 to-emerald-600"
             href={`/pro${referral ? `?referral=${referral}` : ""}`}
           >
             Signtunes Pro
-          </Link>
+          </a>
         )}
-        <Link
-          className={`nav_btn rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 text-sm font-medium text-white shadow ${
-            document.cookie.indexOf("udid=") !== -1 ? "flex gap-1" : ""
-          }`}
-          href={document.cookie.indexOf("udid=") !== -1 ? "#" : `/purchase${referral ? `?referral=${referral}` : ""}`}
+        <a
+          className={`nav_btn ${
+            document.cookie.indexOf("udid=") !== -1 ? "" : "hidden"
+          } rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 text-sm font-medium text-white shadow flex gap-1`}
+          href={"#"}
           id="dropdown_account_btn"
-          data-dropdown-toggle={document.cookie.indexOf("udid=") !== -1 ? "dropdown_account" : ""}
-          loader-ignore-click={document.cookie.indexOf("udid=") !== -1 ? "true" : ""}
+          data-dropdown-toggle={"dropdown_account"}
+          loader-ignore-click={"true"}
         >
           {document.cookie.indexOf("udid=") !== -1 ? (
             <>
@@ -481,7 +487,7 @@ function Header({ searchParams }) {
           ) : (
             translationList?.get_started
           )}
-        </Link>
+        </a>
         <div
           id="dropdown_account"
           className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
@@ -498,31 +504,31 @@ function Header({ searchParams }) {
           </div>
           <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown_account_btn">
             <li>
-              <Link
+              <a
                 href="/settings?current=devices"
                 className="nav_btn block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 loader-ignore-click="true"
               >
                 {translationList?.devices}
-              </Link>
+              </a>
             </li>
             <li>
-              <Link
+              <a
                 href="/settings?current=certificates"
                 className="nav_btn block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 loader-ignore-click="true"
               >
                 {translationList?.certificates}
-              </Link>
+              </a>
             </li>
             <li>
-              <Link
+              <a
                 href="/settings?current=configure"
                 className="nav_btn block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 loader-ignore-click="true"
               >
                 {translationList?.configure}
-              </Link>
+              </a>
             </li>
           </ul>
           <ul
@@ -606,6 +612,19 @@ function Header({ searchParams }) {
               })}
           </ul>
         </div>
+        {document.cookie.indexOf("udid=") !== -1 ? (
+          <></>
+        ) : (
+          <a
+            className={`nav_btn rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 text-sm font-medium text-white shadow`}
+            href={`/purchase${referral ? `?referral=${referral}` : ""}`}
+            id="dropdown_account_btn"
+            data-dropdown-toggle={""}
+            loader-ignore-click={""}
+          >
+            {translationList?.get_started}
+          </a>
+        )}
       </div>
     </header>
   );

@@ -48,7 +48,9 @@ function DeviceStatus({ searchParams }) {
       }
       const d = new Date();
       d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000);
-      document.cookie = "udid=" + udid + ";expires=" + d.toUTCString() + ";path=/;domain=.signtunes.com";
+      // TODO remove cookie
+      // document.cookie = "udid=" + udid + ";expires=" + d.toUTCString() + ";path=/;domain=.signtunes.com";
+      document.cookie = "udid=" + udid + ";expires=" + d.toUTCString() + ";";
       setOutput("Checking Status");
       const response = await axios.get("https://api2.starfiles.co/check_enrolment/" + udid + "?organisation=2");
       const data = response.data;
@@ -125,7 +127,6 @@ function DeviceStatus({ searchParams }) {
                 <p className="timeframe">Create a Support Ticket</p>
               </div>
             </div>
-            ;
           </>
         );
       let outputThree = <></>;
@@ -151,8 +152,9 @@ function DeviceStatus({ searchParams }) {
               <div className="state">
                 <p>Processed</p>
                 <p className="timeframe">
+                  {console.log("date signed time", data.signed_time)}
                   Maximum Processing Time:{" "}
-                  {data.signed_time === "null"
+                  {!data.signed_time
                     ? "72"
                     : Math.round((Math.floor(Date.now() / 1000) - data.signed_time) / 60 / 60)}{" "}
                   Hours
@@ -188,7 +190,6 @@ function DeviceStatus({ searchParams }) {
                 </p>
               </div>
             </div>
-            ;
           </>
         );
       let outputFive = <></>;
