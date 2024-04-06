@@ -90,8 +90,7 @@ function Purchase({ params, searchParams }) {
   // Save Referral
   const saveReferral = async () => {
     if (referral !== "purchase" && cookie("referral") == null) setCookie("referral", referral, 7);
-    if (cookie("referral") !== referral && cookie("referral") != null)
-      window.location.href = "/purchase/" + cookie("referral");
+    if (cookie("referral") !== referral && cookie("referral")) window.location.href = "/purchase/" + cookie("referral");
   };
 
   function gtag_report_conversion(url) {
@@ -177,7 +176,7 @@ function Purchase({ params, searchParams }) {
             )}
           </p>
           <PurchaseButton
-            params={parmas}
+            params={params}
             searchParams={searchParams}
             purchaseButton={
               <button

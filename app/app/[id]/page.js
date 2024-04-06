@@ -304,7 +304,6 @@ function App({ params, searchParams }) {
                       <div className="grid grid-cols-1 gap-1">
                         {bundle_id_data.apps[version].map((app, index) => {
                           if (index == bundle_id_data.apps.len && id != app.id)
-                            // TODO make /app?id to /app/id
                             window.location.href = "/app?id=" + app.id;
                           return (
                             <div className="flex items-center justify-between" key={index}>

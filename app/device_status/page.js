@@ -48,7 +48,7 @@ function DeviceStatus({ searchParams }) {
       }
       const d = new Date();
       d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000);
-      // TODO remove cookie
+      // TODO uncomment first line
       // document.cookie = "udid=" + udid + ";expires=" + d.toUTCString() + ";path=/;domain=.signtunes.com";
       document.cookie = "udid=" + udid + ";expires=" + d.toUTCString() + ";";
       setOutput("Checking Status");
