@@ -105,7 +105,7 @@ function SignerProgress({ searchParams }) {
     setStatus(text);
     setStatusComponent((prev) => (
       <>
-        <p className="text-2xl font-semibold">{text}</p>
+        <p className="text-2xl font-semibold max-w-[700px] m-auto px-3 break-words">{text}</p>
         {prev}
       </>
     ));
@@ -145,6 +145,7 @@ function SignerProgress({ searchParams }) {
         if (output == "&gt;&gt;&gt;u001b[32m" || output == "&gt;&gt;&gt;u001b[33m") return;
         setProgressWidth(data.progress + "%");
         updateStatusText(output.replaceAll("&gt;&gt;&gt; ", "").replaceAll("u001b[32m", "").replaceAll("u001b[0m", ""));
+        console.log("test");
         let formatted_output = output
           .replaceAll("u001b[31m", '<span style="color:red">')
           .replaceAll("u001b[32m", '<span style="color:green">')

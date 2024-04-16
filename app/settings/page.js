@@ -95,7 +95,12 @@ function Settings({ searchParams }) {
   async function listDevices() {
     const response = await axios.get("https://api2.starfiles.co/devices/" + cookie("udid"));
     const devices = await response.data;
-    return devices;
+    let tempDevices = devices.slice(0);
+    for (let i = 0; i < devices.length; i++) {
+      let res = await axios.get(`https://api2.starfiles.co/check_enrolment/${devices[i].udid}?organisation=2`);
+      if (res.data) tempDevices[i] = { ...tempDevices[i], ...res.data };
+    }
+    return tempDevices;
   }
 
   function days_till_signed(signed_time) {
@@ -343,12 +348,7 @@ function Settings({ searchParams }) {
                                     </a>
                                   )}
                                   {!device["link_token"] || !device["name"] ? (
-                                    <a
-                                      href="/link_appdb"
-                                      className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center"
-                                    >
-                                      Link AppDB
-                                    </a>
+                                    <></>
                                   ) : device["plus_till"] && Date.parse(device["plus_till"]) < +new Date() ? (
                                     <a
                                       href="/appdb_plus"
@@ -498,7 +498,7 @@ function Settings({ searchParams }) {
             )}
           </div>
           <div className="hidden md:block col-span-1">
-            <div className="rounded-xl shadow-md bg-gray-100 dark:bg-gray-900">
+            {/* <div className="rounded-xl shadow-md bg-gray-100 dark:bg-gray-900">
               <div className="grid grid-cols-6">
                 <img src="//sts.st/bi/com.lightricks.Enlight-Video" loading="lazy" className="w-[100%] rounded-tl-xl" />
                 <img src="//sts.st/bi/com.lightricks.Enlight-Phoenix" loading="lazy" className="w-[100%]" />
@@ -529,8 +529,8 @@ function Settings({ searchParams }) {
                   </a>
                 </div>
               </div>
-            </div>
-            <div className="rounded-xl shadow-md bg-gray-100 dark:bg-gray-900 mt-4">
+            </div> */}
+            {/* <div className="rounded-xl shadow-md bg-gray-100 dark:bg-gray-900 mt-4">
               <div className="grid grid-cols-8">
                 <img src="//sts.st/bi/com.google.ios.youtube" loading="lazy" className="w-[100%] rounded-tl-xl" />
                 <img src="//sts.st/bi/com.hammerandchisel.discord" loading="lazy" className="w-[100%]" />
@@ -567,7 +567,7 @@ function Settings({ searchParams }) {
                   </a>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="card bg-gray-100 dark:bg-gray-900 shadow-xl mt-4">
               <div className="card-body p-4">
                 <h3 className="card-title text-2xl text-gray-900 dark:text-white">Now on Apple TV & Mac!</h3>
