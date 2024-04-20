@@ -25,11 +25,17 @@
   .alert-btn {
     @apply btn btn-sm text-white uppercase bg-[#3d4451] border-0 outline-0 hover:bg-[#292d36];
   }
+  .bg-bright {
+    @apply bg-gradient-to-br from-sky-500 to-emerald-600 rounded-lg !text-white;
+  }
 }
 
 body {
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-    "Noto Color Emoji" !important;
+  font-family: DM Sans, system-ui, Avenir, Helvetica, Arial, sans-serif !important;
+}
+
+h3 {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif !important;
 }
 
 #device_status .step {

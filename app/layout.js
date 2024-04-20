@@ -193,6 +193,14 @@ export default function RootLayout({ children }) {
           data-cfasync="false"
         />
 
+        {/* GFont */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Inter:wght@100..900"
+          rel="stylesheet"
+        />
+
         {/* Schema */}
         <Script
           type="application/ld+json"
@@ -256,7 +264,7 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className={inter.className + " dark:bg-gray-700 dark:text-gray-200 bg-white text-black"}>
+      <body className={inter.className + " dark:bg-[#13161f] dark:text-gray-200 bg-white text-black"}>
         <DefaultTheme>{children}</DefaultTheme>
       </body>
     </html>

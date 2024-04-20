@@ -255,7 +255,7 @@ function DeviceStatus({ searchParams }) {
           </div>
         </div>
         <div className="lg:mx-96 mb-12 block rounded-xl p-8 shadow-xl text-center bg-bright dark:text-gray-900">
-          <h3 className="text-xl font-semibold dark:text-black">Enter your UDID</h3>
+          <h3 className="text-xl font-semibold">Enter your UDID</h3>
           <div className="my-6">
             <input
               type="udid"

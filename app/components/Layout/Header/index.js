@@ -137,7 +137,7 @@ function Header({ searchParams }) {
   };
 
   return (
-    <header className="sticky navbar bg-white dark:text-white dark:bg-gray-900 px-5 md:px-12 py-0 justify-between top-0 z-10">
+    <header className="sticky navbar bg-white dark:text-white dark:bg-gray-800 px-5 md:px-12 py-0 justify-between top-0 z-10">
       <div className="navbar-start w-min">
         <div className="dropdown md:hidden">
           <label tabIndex="0" className="btn btn-ghost">
@@ -491,7 +491,7 @@ function Header({ searchParams }) {
         </a>
         <div
           id="dropdown_account"
-          className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+          className="z-10 hidden dark:border dark:border-light bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
         >
           <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
             {!hideDeviceName && (

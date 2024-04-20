@@ -146,9 +146,9 @@ function Claim({ searchParams }) {
         <TitleTags title="Claim" />
       </head>
       <Header searchParams={searchParams} />
-      <div className="mx-5 md:mx-10 mt-5">
-        <div className="px-4 py-4 mx-auto sm:px-6 md:px-12 lg:px-24 lg:py-8 flex flex-col w-full mb-12 text-center">
-          <h1 className="text-4xl font-bold leading-none tracking-tighter text-neutral-600 dark:text-gray-200">
+      <div className="mx-5 md:mx-10 mt-5 py-8">
+        <div className="px-4 py-4 mx-auto sm:px-6 md:px-12 lg:px-24 lg:py-8 flex flex-col w-full text-center">
+          <h1 className="text-center font-bold sm:font-semibold lg:mb-0 mb-6 text-[21px] sm:text-3xl text-neutral-600 dark:text-white">
             {translationList?.claim_purchase}
           </h1>
         </div>
@@ -158,7 +158,7 @@ function Claim({ searchParams }) {
               <h3 className="text-xl font-semibold">Code</h3>
               <p>{translationList?.code_prompt}</p>
               <input
-                className="rounded-lg border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full"
+                className="rounded-lg border-gray-200 text-gray-900 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full"
                 placeholder="Code"
                 type="text"
                 id="code_input"
