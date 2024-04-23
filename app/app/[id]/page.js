@@ -123,7 +123,7 @@ function App({ params, searchParams }) {
         setStarfilesMinimumIOS(data.min_compatible_version);
         setStarfilesMaximumIOS(data.max_compatible_version);
 
-        function checkAppDB() {
+        async function checkAppDB() {
           if (Object.keys(appdb_data).length == 0 && typeof appdb_checked == "undefined") {
             setTimeout(checkAppDB, 100);
           } else {
@@ -131,9 +131,9 @@ function App({ params, searchParams }) {
               setIcon(appdb_data.image);
             });
 
-            let appstoreRes = axios.get("https://api2.starfiles.co/appstore_lookup?bundleId=" + data.bundle_id);
+            let appstoreRes = await axios.get("https://api2.starfiles.co/appstore_lookup?bundleId=" + data.bundle_id);
             let appstore_data = appstoreRes.data;
-
+            console.log("data", appstore_data);
             if (appstore_data?.resultCount >= 1) {
               appstore_data = appstore_data.results[0];
               setName(appstore_data.trackName);
