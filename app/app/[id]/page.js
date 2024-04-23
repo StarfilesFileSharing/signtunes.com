@@ -151,7 +151,7 @@ function App({ params, searchParams }) {
                         )}
                       </>
                     ))}
-                  {appstore_data.description?.length > 200 ? "..." : ""}
+                  {appstore_data.description?.length > 200 ? " ..." : ""}
                 </>
               );
               setReleaseNotes(

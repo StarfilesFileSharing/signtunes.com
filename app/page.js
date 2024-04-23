@@ -394,7 +394,7 @@ export default function Home({ searchParams }) {
                   }`}
                 >
                   {/* <svg aria-hidden="true" className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>  */}
-                  <span className="ml-3">{translationList?.All}</span>
+                  <span className="ml-3">{translationList?.All ?? "All"}</span>
                 </button>
               </li>
               <li>
@@ -409,7 +409,7 @@ export default function Home({ searchParams }) {
                   }`}
                 >
                   {/* <svg aria-hidden="true" className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>  */}
-                  <span className="ml-3">{translationList?.Jailbreak}</span>
+                  <span className="ml-3">{translationList?.Jailbreak ?? "Jailbreak"}</span>
                 </button>
               </li>
               {categories.map((genre, index) => {
@@ -467,28 +467,28 @@ export default function Home({ searchParams }) {
                   <button
                     className={`text-gray-900 dark:text-white hover:underline py-1 px-2 rounded-lg ${
                       currentClicked === "All" ? "bg-gray-200 dark:bg-gray-700" : ""
-                    } text-xs`}
+                    } text-xs md:text-[16px]`}
                     onClick={() => {
                       getGenre(false);
                       setCurrentClicked("All");
                     }}
                     loader-ignore-click="true"
                   >
-                    {translationList?.All}
+                    {translationList?.All ?? "All"}
                   </button>
                 </li>
                 <li>
                   <button
                     className={`text-gray-900 dark:text-white hover:underline py-1 px-2 rounded-lg ${
                       currentClicked === "Jailbreak" ? "bg-gray-200 dark:bg-gray-700" : ""
-                    } text-xs`}
+                    } text-xs md:text-[16px]`}
                     onClick={() => {
                       getGenre("");
                       setCurrentClicked("Jailbreak");
                     }}
                     loader-ignore-click="true"
                   >
-                    {translationList?.Jailbreak}
+                    {translationList?.Jailbreak ?? "Jailbreak"}
                   </button>
                 </li>
                 {categories.map((genre, index) => {
@@ -498,7 +498,7 @@ export default function Home({ searchParams }) {
                         <button
                           className={`text-gray-900 dark:text-white hover:underline py-1 px-2 rounded-lg ${
                             currentClicked === genre ? "bg-gray-200 dark:bg-gray-700" : ""
-                          } text-xs`}
+                          } text-xs md:text-[16px]`}
                           onClick={() => {
                             getGenre(genre);
                             setCurrentClicked(genre);
