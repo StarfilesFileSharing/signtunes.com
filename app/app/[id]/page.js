@@ -133,7 +133,6 @@ function App({ params, searchParams }) {
 
             let appstoreRes = await axios.get("https://api2.starfiles.co/appstore_lookup?bundleId=" + data.bundle_id);
             let appstore_data = appstoreRes.data;
-            console.log("data", appstore_data);
             if (appstore_data?.resultCount >= 1) {
               appstore_data = appstore_data.results[0];
               setName(appstore_data.trackName);
@@ -141,12 +140,18 @@ function App({ params, searchParams }) {
               setDeveloper(appstore_data.artistName);
               setDescription(
                 <>
-                  {appstore_data.description.split("\n").map((desc, index) => (
-                    <>
-                      {desc}
-                      <br key={index} />
-                    </>
-                  ))}
+                  {appstore_data.description
+                    .substring(0, 200)
+                    .split("\n")
+                    .map((desc, index) => (
+                      <>
+                        {desc}
+                        {appstore_data.description.substring(0, 200).split("\n").length > index + 1 && (
+                          <br key={index} />
+                        )}
+                      </>
+                    ))}
+                  {appstore_data.description?.length > 200 ? "..." : ""}
                 </>
               );
               setReleaseNotes(
