@@ -181,7 +181,7 @@ function SignerProgress({ searchParams }) {
           setShowProgress(false);
           updateStatusText("Complete!");
           eventSource.close();
-          showAppFeedback(true);
+          setShowAppFeedback(true);
           alert(
             "Please reopen this page after app install to give feedback on whether or not the install was successful"
           );
@@ -254,7 +254,7 @@ function SignerProgress({ searchParams }) {
           )}
           {showAppFeedback && (
             <div
-              className="mt-4 mb-1 px-4 py-2 leading-none rounded-2xl bg-[hsl(var(--n))]"
+              className="mt-4 mb-1 px-4 py-2 leading-none rounded-2xl bg-[hsl(var(--n))] dark:bg-gray-800 items-center self-center"
               role="alert"
               id="app_feedback"
             >
