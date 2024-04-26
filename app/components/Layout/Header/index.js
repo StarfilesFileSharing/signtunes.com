@@ -195,7 +195,7 @@ function Header({ searchParams }) {
               </a>
             </li>
             <li className="nav_btn" tabIndex="0">
-              <a className="p-2 active:bg-secondary" href="https://signtunes.com/discord">
+              <a className="p-2 active:bg-secondary" href={process.env.NEXT_PUBLIC_SIGNTUNES_DISCORD}>
                 {translationList?.support}
               </a>
             </li>
@@ -371,7 +371,7 @@ function Header({ searchParams }) {
                 </li>
                 <li>
                   <a
-                    href="https://signtunes.com/discord"
+                    href={process.env.NEXT_PUBLIC_SIGNTUNES_DISCORD}
                     className="nav_btn hover:text-blue-600 dark:hover:text-blue-500 active:bg-secondary active:text-white"
                   >
                     <span className="sr-only">Support</span>

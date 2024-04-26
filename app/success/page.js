@@ -67,7 +67,10 @@ function Success({ searchParams }) {
           </p>
         </div>
         <div className="text-center">
-          <a href="/discord" className="inline-block w-auto mb-8 p-2 text-l rounded-3xl text-white bg-[#7289da]">
+          <a
+            href={process.env.NEXT_PUBLIC_SIGNTUNES_DISCORD}
+            className="inline-block w-auto mb-8 p-2 text-l rounded-3xl text-white bg-[#7289da]"
+          >
             <i className="fab fa-discord"></i> Support
           </a>
         </div>
