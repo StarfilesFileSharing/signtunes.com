@@ -516,7 +516,7 @@ export default function Home({ searchParams }) {
                 <>
                   <h2 className="text-3xl font-semibold mb-2">{translationList?.popular}</h2>
                   <div className="w-full">
-                    <div className="flex flex-wrap gap-x-3 gap-y-2 md:gap-x-4 md:gap-y-3" id="popular_apps">
+                    <div className="flex flex-wrap gap-x-2 gap-y-2 xl:gap-x-4 xl:gap-y-3" id="popular_apps">
                       {genreData.popular.map((app, index) => {
                         if (
                           app.bundle_id &&
@@ -528,13 +528,11 @@ export default function Home({ searchParams }) {
                             <Link
                               key={index}
                               href={`/app/${app.id}`}
-                              className="rounded-lg hover:shadow-xl transition-shadow duration-300 ease-in-out md:w-24 w-16"
+                              className="rounded-lg hover:shadow-xl transition-shadow duration-300 ease-in-out md:w-24 w-14"
                             >
                               <img
                                 loading="lazy"
-                                className="shadow rounded-[24%] h-16 md:!h-24 md:!w-24
-                                w-16 align-middle
-                                border-none"
+                                className="shadow rounded-[24%] w-14 h-14 md:!h-20 md:!w-20 xl:!h-24 xl:!w-24 align-middle border-none"
                                 alt=""
                                 src={`https://sts.st/bi/${app.bundle_id}`}
                                 onError={({ currentTarget }) => {
@@ -544,7 +542,7 @@ export default function Home({ searchParams }) {
                               />
                               <p
                                 className="font-semibold md:!text-base text-xs truncate
-                                md:w-24 w-16 mt-1 "
+                                md:w-24 w-14 mt-1 "
                               >
                                 {name}
                               </p>
@@ -874,10 +872,10 @@ export default function Home({ searchParams }) {
                 We are facing increased censorship. Please save our TOR or I2P address in-case Signtunes becomes
                 inaccessible for you.
               </p>
-              <p className="text-[12px] text-gray-700 dark:text-gray-400">
+              <p className="text-[12px] break-words max-w-[250px] text-gray-700 dark:text-gray-400">
                 signtunesjchffojqtmnngqgdwn4qtdpxrwg6t6ghjygqa2wjjvnlmyd.onion
               </p>
-              <p className="text-[12px] text-gray-700 dark:text-gray-400">
+              <p className="text-[12px] break-words max-w-[250px] text-gray-700 dark:text-gray-400">
                 hsetkcdjjwcedxdhgx4cokv33t2okipejolpum2lvvbncjijk5wq.b32.i2p
               </p>
               <div className="card-actions justify-end">

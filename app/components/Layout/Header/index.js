@@ -174,11 +174,6 @@ function Header({ searchParams }) {
                 </a>
               </li>
             )}
-            {/* <li className="nav_btn" tabIndex="0">
-              <a className="p-2 active:bg-secondary" href="/appdb_plus">
-                AppDB PLUS
-              </a>
-            </li> */}
             <li className="nav_btn" tabIndex="0">
               <a className="p-2 active:bg-secondary" href="/mac">
                 Mac
@@ -294,11 +289,6 @@ function Header({ searchParams }) {
                 </a>
               </li>
             )}
-            {/* <li className="nav_btn">
-              <a className="p-2 active:bg-secondary" href="/appdb_plus">
-                AppDB PLUS
-              </a>
-            </li> */}
             <li className="nav_btn">
               <a className="p-2 active:bg-secondary" href="/mac">
                 Mac
@@ -309,7 +299,7 @@ function Header({ searchParams }) {
                 Apple TV
               </a>
             </li>
-            <li className="nav_btn">
+            {/* <li className="nav_btn">
               <a className="p-2 md:flex lg:hidden active:bg-secondary" href="/search">
                 {translationList?.search}
               </a>
@@ -318,7 +308,7 @@ function Header({ searchParams }) {
               <a className="p-2 md:flex lg:hidden active:bg-secondary" href="/blog">
                 {translationList?.blog}
               </a>
-            </li>
+            </li> */}
             <li>
               <button
                 id="help-dropdown-button"
