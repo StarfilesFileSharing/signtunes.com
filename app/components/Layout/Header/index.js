@@ -137,7 +137,7 @@ function Header({ searchParams }) {
   };
 
   return (
-    <header className="sticky navbar bg-white dark:text-white dark:bg-gray-800 px-5 md:px-12 py-0 justify-between top-0 z-10">
+    <header className="sticky navbar bg-white dark:text-white dark:bg-gray-800 px-2 md:px-12 py-0 justify-between top-0 z-10">
       <div className="navbar-start w-min">
         <div className="dropdown md:hidden">
           <label tabIndex="0" className="btn btn-ghost">
@@ -237,7 +237,8 @@ function Header({ searchParams }) {
         </div>
         <h1>
           <a
-            className="block font-semibold text-2xl text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-600"
+            className="block font-semibold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-600 
+            md:text-2xl text-1xl"
             href="/"
             loader-ignore-click="true"
           >
@@ -445,7 +446,7 @@ function Header({ searchParams }) {
         {cookieChecked && document.cookie.indexOf("udid=") !== -1 && cookie("pro") === "false" && (
           <a
             id="upgrade_btn_2"
-            className="nav_btn rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 text-sm font-medium text-white mr-2 shadow bg-gradient-to-r from-sky-400 to-emerald-600"
+            className="nav_btn rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 md:text-sm text-xs font-medium text-white mr-2 shadow bg-gradient-to-r from-sky-400 to-emerald-600 items-center"
             href={`/pro${referral ? `?referral=${referral}` : ""}`}
           >
             Signtunes Pro
@@ -455,7 +456,7 @@ function Header({ searchParams }) {
         <a
           className={`nav_btn ${
             document.cookie.indexOf("udid=") !== -1 ? "" : "hidden"
-          } rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 text-sm font-medium text-white shadow flex gap-1`}
+          } rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 md:text-sm text-xs font-medium text-white shadow flex gap-1`}
           href={"#"}
           id="dropdown_account_btn"
           data-dropdown-toggle={"dropdown_account"}

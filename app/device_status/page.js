@@ -35,9 +35,9 @@ function DeviceStatus({ searchParams }) {
   };
 
   // Check Cookie
-  const checkCookie = () => {
-    if (document.cookie.indexOf("udid=") !== -1) router.push("/settings");
-  };
+  // const checkCookie = () => {
+  //   if (document.cookie.indexOf("udid=") !== -1) router.push("/settings");
+  // };
 
   // On Check
   const onCheck = async () => {
@@ -245,7 +245,7 @@ function DeviceStatus({ searchParams }) {
       </head>
       <Header searchParams={searchParams} />
       <div className="mx-5 md:mx-10 mt-5" id="device_status">
-        <div className="lg:mx-96 mb-8 flex items-center mb-8">
+        <div className="lg:mx-96 mb-8 flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" className="h-28 w-28">
             <path d="M80 0C44.7 0 16 28.7 16 64V448c0 35.3 28.7 64 64 64H304c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H80zm80 432h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H160c-8.8 0-16-7.2-16-16s7.2-16 16-16z"></path>
           </svg>
@@ -279,7 +279,7 @@ function DeviceStatus({ searchParams }) {
               Check
             </button>
           )}
-          <div className="text-left" id="output">
+          <div className="text-left text-white" id="output">
             {output}
           </div>
         </div>

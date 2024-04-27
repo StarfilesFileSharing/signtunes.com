@@ -145,9 +145,8 @@ function Settings({ searchParams }) {
                   href="#"
                   onClick={() => setCurrentSetting("devices")}
                   loader-ignore-click="true"
-                  className={`block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${
-                    currentSetting === "devices" ? "bg-gray-200 dark:bg-gray-700" : ""
-                  }`}
+                  className={`block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${currentSetting === "devices" ? "bg-gray-200 dark:bg-gray-700" : ""
+                    }`}
                 >
                   <span className="ml-3">Devices</span>
                 </a>
@@ -157,9 +156,8 @@ function Settings({ searchParams }) {
                   href="#"
                   onClick={() => setCurrentSetting("certificates")}
                   loader-ignore-click="true"
-                  className={`block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${
-                    currentSetting === "certificates" ? "bg-gray-200 dark:bg-gray-700" : ""
-                  }`}
+                  className={`block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${currentSetting === "certificates" ? "bg-gray-200 dark:bg-gray-700" : ""
+                    }`}
                 >
                   <span className="ml-3">Certificates</span>
                 </a>
@@ -169,9 +167,8 @@ function Settings({ searchParams }) {
                   href="#"
                   onClick={() => setCurrentSetting("configure")}
                   loader-ignore-click="true"
-                  className={`block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${
-                    currentSetting === "configure" ? "bg-gray-200 dark:bg-gray-700" : ""
-                  }`}
+                  className={`block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${currentSetting === "configure" ? "bg-gray-200 dark:bg-gray-700" : ""
+                    }`}
                 >
                   <span className="ml-3">Configure</span>
                 </a>
@@ -210,13 +207,12 @@ function Settings({ searchParams }) {
                                 </span>
                               ) : device["enrolled"] ? (
                                 <span
-                                  className={`${
-                                    device["eligible"]
+                                  className={`${device["eligible"]
                                       ? `bg-green-100 text-green-800`
                                       : device["processed"]
-                                      ? `bg-red-100 text-red-800`
-                                      : `bg-yellow-100 text-yellow-800`
-                                  } text-xs font-semibold px-2.5 py-0.5 rounded ml-1`}
+                                        ? `bg-red-100 text-red-800`
+                                        : `bg-yellow-100 text-yellow-800`
+                                    } text-xs font-semibold px-2.5 py-0.5 rounded ml-1`}
                                 >
                                   {device["eligible"] ? "ENABLED" : device["processed"] ? "INELIGIBLE" : "PROCESSING"}
                                 </span>
@@ -266,8 +262,8 @@ function Settings({ searchParams }) {
                               {device["nice_idevice_model"]
                                 ? device["nice_idevice_model"]
                                 : device["model"]
-                                ? device["model"]
-                                : ""}{" "}
+                                  ? device["model"]
+                                  : ""}{" "}
                               {device["ios_version"] ? (
                                 <>
                                   {" "}
@@ -275,8 +271,8 @@ function Settings({ searchParams }) {
                                   {device["is_apple_silicon"] == "yes"
                                     ? "mac"
                                     : device["model"].startsWith("AppleTV")
-                                    ? "tv"
-                                    : "i"}
+                                      ? "tv"
+                                      : "i"}
                                   OS {device["ios_version"]}
                                   <br />
                                 </>
@@ -322,59 +318,61 @@ function Settings({ searchParams }) {
                             ) : (
                               ""
                             )}
-                            <div className="flex gap-1 mt-2 justify-center">
-                              {typeof device["status"] == "undefined" ? (
-                                <a
-                                  className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center"
-                                  href="/purchase"
+                            <div className="flex flex-row justify-center">
+                              <div className="flex gap-1 mt-2">
+                                {typeof device["status"] == "undefined" ? (
+                                  <a
+                                    className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center"
+                                    href="/purchase"
+                                  >
+                                    Purchase Signtunes
+                                  </a>
+                                ) : (
+                                  <>
+                                    {device["pro"] ? (
+                                      <a
+                                        href="/vip"
+                                        className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center"
+                                      >
+                                        Signtunes VIP
+                                      </a>
+                                    ) : (
+                                      <a
+                                        href="/pro"
+                                        className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center"
+                                      >
+                                        Signtunes PRO
+                                      </a>
+                                    )}
+                                    {!device["link_token"] || !device["name"] ? (
+                                      <></>
+                                    ) : device["plus_till"] && Date.parse(device["plus_till"]) < +new Date() ? (
+                                      <a
+                                        href="/appdb_plus"
+                                        className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center"
+                                      >
+                                        AppDB PLUS
+                                      </a>
+                                    ) : (
+                                      ""
+                                    )}
+                                  </>
+                                )}
+                              </div>
+                              {device["udid"] && cookie("udid") != device["udid"] ? (
+                                <button
+                                  onClick={() => {
+                                    setCookie("udid", device["udid"], 365);
+                                    window.location.reload();
+                                  }}
+                                  className="text-white bg-secondary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center ml-2 mt-2"
                                 >
-                                  Purchase Signtunes
-                                </a>
+                                  Switch
+                                </button>
                               ) : (
-                                <>
-                                  {device["pro"] ? (
-                                    <a
-                                      href="/vip"
-                                      className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center"
-                                    >
-                                      Signtunes VIP
-                                    </a>
-                                  ) : (
-                                    <a
-                                      href="/pro"
-                                      className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center"
-                                    >
-                                      Signtunes PRO
-                                    </a>
-                                  )}
-                                  {!device["link_token"] || !device["name"] ? (
-                                    <></>
-                                  ) : device["plus_till"] && Date.parse(device["plus_till"]) < +new Date() ? (
-                                    <a
-                                      href="/appdb_plus"
-                                      className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-4 py-2 text-center"
-                                    >
-                                      AppDB PLUS
-                                    </a>
-                                  ) : (
-                                    ""
-                                  )}
-                                </>
+                                ""
                               )}
                             </div>
-                            {device["udid"] && cookie("udid") != device["udid"] ? (
-                              <button
-                                onClick={() => {
-                                  setCookie("udid", device["udid"], 365);
-                                  window.location.reload();
-                                }}
-                                className="text-white bg-secondary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-8 py-3 text-center mt-2"
-                              >
-                                Switch
-                              </button>
-                            ) : (
-                              ""
-                            )}
                           </div>
                         </div>
                       );
@@ -414,11 +412,11 @@ function Settings({ searchParams }) {
                       else {
                         const res = await axios.get(
                           "https://api.starfiles.co/device_enrolments/link_email?email=" +
-                            email +
-                            "&current_email=" +
-                            currentEmail +
-                            "&udid=" +
-                            cookie("udid")
+                          email +
+                          "&current_email=" +
+                          currentEmail +
+                          "&udid=" +
+                          cookie("udid")
                         );
                         const response = res.data;
                         if (response.length == 0) {
