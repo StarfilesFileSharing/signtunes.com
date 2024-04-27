@@ -55,8 +55,7 @@ export default function Home({ searchParams }) {
     for (let gt of genreTypes) {
       try {
         let response = await axios.get(
-          `https://api2.starfiles.co/files?public=true&extension=ipa&sort=${gt}&group=bundle_id&collapse=true&limit=50${
-            genre !== false ? "&genre=" + encodeURIComponent(genre) : ""
+          `https://api2.starfiles.co/files?public=true&extension=ipa&sort=${gt}&group=bundle_id&collapse=true&limit=50${genre !== false ? "&genre=" + encodeURIComponent(genre) : ""
           }`
         );
         setGenreData((prev) => {
@@ -65,8 +64,7 @@ export default function Home({ searchParams }) {
         });
         if (gt === "trending") {
           let response = await axios.get(
-            `https://api2.starfiles.co/files?public=true&extension=ipa&sort=${gt}&group=bundle_id&collapse=true&limit=500&tvos=true${
-              genre !== false ? "&genre=" + encodeURIComponent(genre) : ""
+            `https://api2.starfiles.co/files?public=true&extension=ipa&sort=${gt}&group=bundle_id&collapse=true&limit=500&tvos=true${genre !== false ? "&genre=" + encodeURIComponent(genre) : ""
             }`
           );
           setGenreData((prev) => {
@@ -84,7 +82,7 @@ export default function Home({ searchParams }) {
   const getCategories = async () => {
     try {
       let response = await axios.get("https://api2.starfiles.co/categories");
-      setCategories(response.data);
+      setCategories(response.data || []);
     } catch (err) {
       console.error(err.message);
     }
@@ -126,8 +124,8 @@ export default function Home({ searchParams }) {
         "https://api2.starfiles.co/check_enrolment/" + cookie("udid") + "?organisation=2"
       );
       setAlertOptions({
-        isPro: JSON.parse(isPro.data)["status"],
-        deviceExists: JSON.parse(deviceExists.data)["registered"],
+        isPro: isPro?.data?.status || false,
+        deviceExists: deviceExists?.data?.registered,
       });
 
       setAlertsLoad(true);
@@ -155,8 +153,8 @@ export default function Home({ searchParams }) {
                       y2="7.8394"
                       gradientTransform="matrix(1 0 0 -1 0 34)"
                     >
-                      <stop offset="0" stop-color="#00d924" />
-                      <stop offset="1" stop-color="#00cb1b" />
+                      <stop offset="0" stopColor={"#00d924"} />
+                      <stop offset="1" stopColor={"#00cb1b"} />
                     </linearGradient>
                     <path d="M0 10.82h32c0 8.84-7.16 16-16 16s-16-7.16-16-16z" fill="url(#StripeClimate-gradient-a)" />
                     <linearGradient
@@ -168,8 +166,8 @@ export default function Home({ searchParams }) {
                       y2="17.2443"
                       gradientTransform="matrix(1 0 0 -1 0 34)"
                     >
-                      <stop offset=".1562" stop-color="#009c00" />
-                      <stop offset="1" stop-color="#00be20" />
+                      <stop offset=".1562" stopColor={"#009c00"} />
+                      <stop offset="1" stopColor={"#00be20"} />
                     </linearGradient>
                     <path
                       d="M32 10.82c0 2.21-1.49 4.65-5.41 4.65-3.42 0-7.27-2.37-10.59-4.65 3.52-2.43 7.39-5.63 10.59-5.63C29.86 5.18 32 8.17 32 10.82z"
@@ -184,8 +182,8 @@ export default function Home({ searchParams }) {
                       y2="29.1239"
                       gradientTransform="matrix(1 0 0 -1 0 34)"
                     >
-                      <stop offset="0" stop-color="#ffe37d" />
-                      <stop offset="1" stop-color="#ffc900" />
+                      <stop offset="0" stopColor={"#ffe37d"} />
+                      <stop offset="1" stopColor={"#ffc900"} />
                     </linearGradient>
                     <path
                       d="M0 10.82c0 2.21 1.49 4.65 5.41 4.65 3.42 0 7.27-2.37 10.59-4.65-3.52-2.43-7.39-5.64-10.59-5.64C2.14 5.18 0 8.17 0 10.82z"
@@ -338,9 +336,9 @@ export default function Home({ searchParams }) {
                                 } else {
                                   const response = await axios.get(
                                     "https://api.starfiles.co/device_enrolments/link_email?email=" +
-                                      document.getElementById("email").value +
-                                      "&udid=" +
-                                      cookie("udid")
+                                    document.getElementById("email").value +
+                                    "&udid=" +
+                                    cookie("udid")
                                   );
                                   if (response?.length === 0) {
                                     setEmailSuccess({ success: true, message: "" });
@@ -389,9 +387,8 @@ export default function Home({ searchParams }) {
                     setCurrentClicked("All");
                   }}
                   loader-ignore-click="true"
-                  className={`px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${
-                    currentClicked === "All" ? "bg-gray-200 dark:bg-gray-700" : ""
-                  }`}
+                  className={`px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${currentClicked === "All" ? "bg-gray-200 dark:bg-gray-700" : ""
+                    }`}
                 >
                   {/* <svg aria-hidden="true" className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>  */}
                   <span className="ml-3">{translationList?.All ?? "All"}</span>
@@ -404,9 +401,8 @@ export default function Home({ searchParams }) {
                     setCurrentClicked("Jailbreak");
                   }}
                   loader-ignore-click="true"
-                  className={`px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${
-                    currentClicked === "Jailbreak" ? "bg-gray-200 dark:bg-gray-700" : ""
-                  }`}
+                  className={`px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${currentClicked === "Jailbreak" ? "bg-gray-200 dark:bg-gray-700" : ""
+                    }`}
                 >
                   {/* <svg aria-hidden="true" className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>  */}
                   <span className="ml-3">{translationList?.Jailbreak ?? "Jailbreak"}</span>
@@ -414,16 +410,15 @@ export default function Home({ searchParams }) {
               </li>
               {categories.map((genre, index) => {
                 return (
-                  <li key={index}>
+                  <li key={index + genre}>
                     <button
                       onClick={() => {
                         getGenre(genre);
                         setCurrentClicked(genre);
                       }}
                       loader-ignore-click="true"
-                      className={`px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${
-                        currentClicked === genre ? "bg-gray-200 dark:bg-gray-700" : ""
-                      }`}
+                      className={`px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${currentClicked === genre ? "bg-gray-200 dark:bg-gray-700" : ""
+                        }`}
                     >
                       <span className="ml-3">{genre}</span>
                     </button>
@@ -465,9 +460,8 @@ export default function Home({ searchParams }) {
               >
                 <li>
                   <button
-                    className={`text-gray-900 dark:text-white hover:underline py-1 px-2 rounded-lg ${
-                      currentClicked === "All" ? "bg-gray-200 dark:bg-gray-700" : ""
-                    } text-xs md:text-[16px]`}
+                    className={`text-gray-900 dark:text-white hover:underline py-1 px-2 rounded-lg ${currentClicked === "All" ? "bg-gray-200 dark:bg-gray-700" : ""
+                      } text-xs md:text-[16px]`}
                     onClick={() => {
                       getGenre(false);
                       setCurrentClicked("All");
@@ -479,9 +473,8 @@ export default function Home({ searchParams }) {
                 </li>
                 <li>
                   <button
-                    className={`text-gray-900 dark:text-white hover:underline py-1 px-2 rounded-lg ${
-                      currentClicked === "Jailbreak" ? "bg-gray-200 dark:bg-gray-700" : ""
-                    } text-xs md:text-[16px]`}
+                    className={`text-gray-900 dark:text-white hover:underline py-1 px-2 rounded-lg ${currentClicked === "Jailbreak" ? "bg-gray-200 dark:bg-gray-700" : ""
+                      } text-xs md:text-[16px]`}
                     onClick={() => {
                       getGenre("");
                       setCurrentClicked("Jailbreak");
@@ -496,9 +489,8 @@ export default function Home({ searchParams }) {
                     return (
                       <li key={index}>
                         <button
-                          className={`text-gray-900 dark:text-white hover:underline py-1 px-2 rounded-lg ${
-                            currentClicked === genre ? "bg-gray-200 dark:bg-gray-700" : ""
-                          } text-xs md:text-[16px]`}
+                          className={`text-gray-900 dark:text-white hover:underline py-1 px-2 rounded-lg ${currentClicked === genre ? "bg-gray-200 dark:bg-gray-700" : ""
+                            } text-xs md:text-[16px]`}
                           onClick={() => {
                             getGenre(genre);
                             setCurrentClicked(genre);
