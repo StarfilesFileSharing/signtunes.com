@@ -20,7 +20,7 @@ function DeviceStatus({ searchParams }) {
       // Get Translations
       getTranslationList();
       // Check Cookie
-      checkCookie();
+      //checkCookie();
     }
   }, []);
 
