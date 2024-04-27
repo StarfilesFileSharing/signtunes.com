@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 function Footer() {
   const [translationList, setTranslationList] = useState(null);
-  const [translationButtons, setTranslationButtons] = useState(null);
+  const [translationButtons, setTranslationButtons] = useState([]);
   let initialRun = false;
 
   useEffect(() => {
@@ -82,9 +82,9 @@ function Footer() {
       >
         {translationList?.help_translate}
       </button>
-      {translationButtons && (
+      {translationButtons && Array.isArray(translationButtons) && translationButtons.length > 0 && (
         <div id="translation-list" className="mt-2 flex justify-center gap-4 text-center flex-wrap">
-          {translationButtons.map((item, index) => {
+          {translationButtons?.map((item, index) => {
             if (
               !item.name.endsWith(".json") ||
               item.name === "en_source.json" ||
