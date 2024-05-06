@@ -190,7 +190,7 @@ export default function RootLayout({ children }) {
           async
           defer
           src="https://cdn.jsdelivr.net/combine/npm/flowbite@1/dist/flowbite.min.js,npm/@fortawesome/fontawesome-free@6/js/all.min.js"
-          data-cfasync="false"
+          // data-cfasync="false"
         />
 
         {/* GFont */}
