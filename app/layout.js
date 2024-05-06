@@ -186,11 +186,17 @@ export default function RootLayout({ children }) {
         <meta name="rating" content="general" />
         <meta name="theme-color" content="#111827" />
 
-        <script
+        {/* <script
           async
           defer
           src="https://cdn.jsdelivr.net/combine/npm/flowbite@1/dist/flowbite.min.js,npm/@fortawesome/fontawesome-free@6/js/all.min.js"
-          // data-cfasync="false"
+          data-cfasync="false"
+        /> */}
+        <script
+          async
+          defer
+          src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.js"
+          data-cfasync="false"
         />
 
         {/* GFont */}
