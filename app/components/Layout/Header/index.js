@@ -462,7 +462,7 @@ function Header({ searchParams }) {
         >
           {document.cookie.indexOf("udid=") !== -1 ? (
             <>
-              <span>{translationList?.my_devices}s</span>
+              <span>{translationList?.my_devices}</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
