@@ -55,7 +55,8 @@ export default function Home({ searchParams }) {
     for (let gt of genreTypes) {
       try {
         let response = await axios.get(
-          `https://api2.starfiles.co/files?public=true&extension=ipa&sort=${gt}&group=bundle_id&collapse=true&limit=50${genre !== false ? "&genre=" + encodeURIComponent(genre) : ""
+          `https://api2.starfiles.co/files?public=true&extension=ipa&sort=${gt}&group=bundle_id&collapse=true&limit=50${
+            genre !== false ? "&genre=" + encodeURIComponent(genre) : ""
           }`
         );
         setGenreData((prev) => {
@@ -64,7 +65,8 @@ export default function Home({ searchParams }) {
         });
         if (gt === "trending") {
           let response = await axios.get(
-            `https://api2.starfiles.co/files?public=true&extension=ipa&sort=${gt}&group=bundle_id&collapse=true&limit=500&tvos=true${genre !== false ? "&genre=" + encodeURIComponent(genre) : ""
+            `https://api2.starfiles.co/files?public=true&extension=ipa&sort=${gt}&group=bundle_id&collapse=true&limit=500&tvos=true${
+              genre !== false ? "&genre=" + encodeURIComponent(genre) : ""
             }`
           );
           setGenreData((prev) => {
@@ -137,6 +139,135 @@ export default function Home({ searchParams }) {
   return (
     <>
       <Header searchParams={searchParams} />
+      <div id="default-carousel" class="relative w-full" data-carousel="slide">
+        <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+          <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            Test
+            <img
+              src="https://flowbite.com//docs/images/carousel/carousel-1.svg"
+              class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+              alt="..."
+            />
+          </div>
+          <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            Test 2
+            <img
+              src="https://flowbite.com//docs/images/carousel/carousel-2.svg"
+              class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+              alt="..."
+            />
+          </div>
+          <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            Test 3
+            <img
+              src="https://flowbite.com//docs/images/carousel/carousel-3.svg"
+              class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+              alt="..."
+            />
+          </div>
+          <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            Test 4
+            <img
+              src="https://flowbite.com//docs/images/carousel/carousel-4.svg"
+              class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+              alt="..."
+            />
+          </div>
+          <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            Test5
+            <img
+              src="https://flowbite.com//docs/images/carousel/carousel-5.svg"
+              class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+              alt="..."
+            />
+          </div>
+        </div>
+        <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+          <button
+            type="button"
+            class="w-3 h-3 rounded-full"
+            aria-current="true"
+            aria-label="Slide 1"
+            data-carousel-slide-to="0"
+          ></button>
+          <button
+            type="button"
+            class="w-3 h-3 rounded-full"
+            aria-current="false"
+            aria-label="Slide 2"
+            data-carousel-slide-to="1"
+          ></button>
+          <button
+            type="button"
+            class="w-3 h-3 rounded-full"
+            aria-current="false"
+            aria-label="Slide 3"
+            data-carousel-slide-to="2"
+          ></button>
+          <button
+            type="button"
+            class="w-3 h-3 rounded-full"
+            aria-current="false"
+            aria-label="Slide 4"
+            data-carousel-slide-to="3"
+          ></button>
+          <button
+            type="button"
+            class="w-3 h-3 rounded-full"
+            aria-current="false"
+            aria-label="Slide 5"
+            data-carousel-slide-to="4"
+          ></button>
+        </div>
+        <button
+          type="button"
+          class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+          data-carousel-prev
+        >
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            <svg
+              class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 1 1 5l4 4"
+              />
+            </svg>
+            <span class="sr-only">Previous</span>
+          </span>
+        </button>
+        <button
+          type="button"
+          class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+          data-carousel-next
+        >
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            <svg
+              class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 9 4-4-4-4"
+              />
+            </svg>
+            <span class="sr-only">Next</span>
+          </span>
+        </button>
+      </div>
       <main className="mx-5 md:mx-12 mt-5 grid grid-cols-4 mb-6 ">
         <div className="md:w-12/12 col-span-4 md:col-span-3 grid grid-cols-6">
           {alertsLoad && (
@@ -336,9 +467,9 @@ export default function Home({ searchParams }) {
                                 } else {
                                   const response = await axios.get(
                                     "https://api.starfiles.co/device_enrolments/link_email?email=" +
-                                    document.getElementById("email").value +
-                                    "&udid=" +
-                                    cookie("udid")
+                                      document.getElementById("email").value +
+                                      "&udid=" +
+                                      cookie("udid")
                                   );
                                   if (response?.length === 0) {
                                     setEmailSuccess({ success: true, message: "" });
@@ -387,8 +518,9 @@ export default function Home({ searchParams }) {
                     setCurrentClicked("All");
                   }}
                   loader-ignore-click="true"
-                  className={`px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${currentClicked === "All" ? "bg-gray-200 dark:bg-gray-700" : ""
-                    }`}
+                  className={`px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${
+                    currentClicked === "All" ? "bg-gray-200 dark:bg-gray-700" : ""
+                  }`}
                 >
                   {/* <svg aria-hidden="true" className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>  */}
                   <span className="ml-3">{translationList?.All ?? "All"}</span>
@@ -401,8 +533,9 @@ export default function Home({ searchParams }) {
                     setCurrentClicked("Jailbreak");
                   }}
                   loader-ignore-click="true"
-                  className={`px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${currentClicked === "Jailbreak" ? "bg-gray-200 dark:bg-gray-700" : ""
-                    }`}
+                  className={`px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${
+                    currentClicked === "Jailbreak" ? "bg-gray-200 dark:bg-gray-700" : ""
+                  }`}
                 >
                   {/* <svg aria-hidden="true" className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>  */}
                   <span className="ml-3">{translationList?.Jailbreak ?? "Jailbreak"}</span>
@@ -417,8 +550,9 @@ export default function Home({ searchParams }) {
                         setCurrentClicked(genre);
                       }}
                       loader-ignore-click="true"
-                      className={`px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${currentClicked === genre ? "bg-gray-200 dark:bg-gray-700" : ""
-                        }`}
+                      className={`px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${
+                        currentClicked === genre ? "bg-gray-200 dark:bg-gray-700" : ""
+                      }`}
                     >
                       <span className="ml-3">{genre}</span>
                     </button>
@@ -460,8 +594,9 @@ export default function Home({ searchParams }) {
               >
                 <li>
                   <button
-                    className={`text-gray-900 dark:text-white hover:underline py-1 px-2 rounded-lg ${currentClicked === "All" ? "bg-gray-200 dark:bg-gray-700" : ""
-                      } text-xs md:text-[16px]`}
+                    className={`text-gray-900 dark:text-white hover:underline py-1 px-2 rounded-lg ${
+                      currentClicked === "All" ? "bg-gray-200 dark:bg-gray-700" : ""
+                    } text-xs md:text-[16px]`}
                     onClick={() => {
                       getGenre(false);
                       setCurrentClicked("All");
@@ -473,8 +608,9 @@ export default function Home({ searchParams }) {
                 </li>
                 <li>
                   <button
-                    className={`text-gray-900 dark:text-white hover:underline py-1 px-2 rounded-lg ${currentClicked === "Jailbreak" ? "bg-gray-200 dark:bg-gray-700" : ""
-                      } text-xs md:text-[16px]`}
+                    className={`text-gray-900 dark:text-white hover:underline py-1 px-2 rounded-lg ${
+                      currentClicked === "Jailbreak" ? "bg-gray-200 dark:bg-gray-700" : ""
+                    } text-xs md:text-[16px]`}
                     onClick={() => {
                       getGenre("");
                       setCurrentClicked("Jailbreak");
@@ -489,8 +625,9 @@ export default function Home({ searchParams }) {
                     return (
                       <li key={index}>
                         <button
-                          className={`text-gray-900 dark:text-white hover:underline py-1 px-2 rounded-lg ${currentClicked === genre ? "bg-gray-200 dark:bg-gray-700" : ""
-                            } text-xs md:text-[16px]`}
+                          className={`text-gray-900 dark:text-white hover:underline py-1 px-2 rounded-lg ${
+                            currentClicked === genre ? "bg-gray-200 dark:bg-gray-700" : ""
+                          } text-xs md:text-[16px]`}
                           onClick={() => {
                             getGenre(genre);
                             setCurrentClicked(genre);
