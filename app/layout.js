@@ -192,12 +192,6 @@ export default function RootLayout({ children }) {
           src="https://cdn.jsdelivr.net/combine/npm/flowbite@1/dist/flowbite.min.js,npm/@fortawesome/fontawesome-free@6/js/all.min.js"
           data-cfasync="false"
         /> */}
-        <script
-          async
-          defer
-          src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.js"
-          data-cfasync="false"
-        />
 
         {/* GFont */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -272,6 +266,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className={inter.className + " dark:bg-[#13161f] dark:text-gray-200 bg-white text-black"}>
         <DefaultTheme>{children}</DefaultTheme>
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js" />
       </body>
     </html>
   );
