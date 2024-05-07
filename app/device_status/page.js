@@ -279,7 +279,7 @@ function DeviceStatus({ searchParams }) {
               Check
             </button>
           )}
-          <div className="text-left text-white" id="output">
+          <div className="text-left !text-white" id="output">
             {output}
           </div>
         </div>

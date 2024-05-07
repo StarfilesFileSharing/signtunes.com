@@ -15,6 +15,14 @@
   }
 }
 
+@layer base {
+  input,
+  select,
+  #file-uploader {
+    @apply dark:!text-white dark:!bg-gray-800;
+  }
+}
+
 @layer components {
   .alert {
     @apply flex justify-between text-left flex-col md:flex-row outline-0 border-0;
@@ -65,11 +73,15 @@ h3 {
   margin-top: -1px;
   margin-bottom: -1px;
 }
+#device_status .divider:before,
+#device_status .divider:after {
+  background-color: white;
+}
 #device_status .step p {
   display: inline-block;
   line-height: 14px;
   font-size: 14px;
-  color: rgb(65, 69, 82);
+  /* color: rgb(65, 69, 82); */
   margin: 0;
 }
 #device_status .step p.timeframe {

@@ -145,8 +145,9 @@ function Settings({ searchParams }) {
                   href="#"
                   onClick={() => setCurrentSetting("devices")}
                   loader-ignore-click="true"
-                  className={`block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${currentSetting === "devices" ? "bg-gray-200 dark:bg-gray-700" : ""
-                    }`}
+                  className={`block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${
+                    currentSetting === "devices" ? "bg-gray-200 dark:bg-gray-700" : ""
+                  }`}
                 >
                   <span className="ml-3">Devices</span>
                 </a>
@@ -156,8 +157,9 @@ function Settings({ searchParams }) {
                   href="#"
                   onClick={() => setCurrentSetting("certificates")}
                   loader-ignore-click="true"
-                  className={`block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${currentSetting === "certificates" ? "bg-gray-200 dark:bg-gray-700" : ""
-                    }`}
+                  className={`block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${
+                    currentSetting === "certificates" ? "bg-gray-200 dark:bg-gray-700" : ""
+                  }`}
                 >
                   <span className="ml-3">Certificates</span>
                 </a>
@@ -167,8 +169,9 @@ function Settings({ searchParams }) {
                   href="#"
                   onClick={() => setCurrentSetting("configure")}
                   loader-ignore-click="true"
-                  className={`block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${currentSetting === "configure" ? "bg-gray-200 dark:bg-gray-700" : ""
-                    }`}
+                  className={`block px-1 py-2 text-base text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 w-[100%] text-left overflow-hidden text-ellipsis whitespace-nowrap ${
+                    currentSetting === "configure" ? "bg-gray-200 dark:bg-gray-700" : ""
+                  }`}
                 >
                   <span className="ml-3">Configure</span>
                 </a>
@@ -207,12 +210,13 @@ function Settings({ searchParams }) {
                                 </span>
                               ) : device["enrolled"] ? (
                                 <span
-                                  className={`${device["eligible"]
+                                  className={`${
+                                    device["eligible"]
                                       ? `bg-green-100 text-green-800`
                                       : device["processed"]
-                                        ? `bg-red-100 text-red-800`
-                                        : `bg-yellow-100 text-yellow-800`
-                                    } text-xs font-semibold px-2.5 py-0.5 rounded ml-1`}
+                                      ? `bg-red-100 text-red-800`
+                                      : `bg-yellow-100 text-yellow-800`
+                                  } text-xs font-semibold px-2.5 py-0.5 rounded ml-1`}
                                 >
                                   {device["eligible"] ? "ENABLED" : device["processed"] ? "INELIGIBLE" : "PROCESSING"}
                                 </span>
@@ -262,8 +266,8 @@ function Settings({ searchParams }) {
                               {device["nice_idevice_model"]
                                 ? device["nice_idevice_model"]
                                 : device["model"]
-                                  ? device["model"]
-                                  : ""}{" "}
+                                ? device["model"]
+                                : ""}{" "}
                               {device["ios_version"] ? (
                                 <>
                                   {" "}
@@ -271,8 +275,8 @@ function Settings({ searchParams }) {
                                   {device["is_apple_silicon"] == "yes"
                                     ? "mac"
                                     : device["model"].startsWith("AppleTV")
-                                      ? "tv"
-                                      : "i"}
+                                    ? "tv"
+                                    : "i"}
                                   OS {device["ios_version"]}
                                   <br />
                                 </>
@@ -412,11 +416,11 @@ function Settings({ searchParams }) {
                       else {
                         const res = await axios.get(
                           "https://api.starfiles.co/device_enrolments/link_email?email=" +
-                          email +
-                          "&current_email=" +
-                          currentEmail +
-                          "&udid=" +
-                          cookie("udid")
+                            email +
+                            "&current_email=" +
+                            currentEmail +
+                            "&udid=" +
+                            cookie("udid")
                         );
                         const response = res.data;
                         if (response.length == 0) {

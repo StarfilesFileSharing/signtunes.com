@@ -24,8 +24,9 @@ function PurchaseButton({ purchaseButton = <></>, redirect = null, searchParams,
       <input
         type="hidden"
         name="price"
-        value={`${id && id !== "wicked" ? +process.env.NEXT_PUBLIC_SIGNTUNES_PRICE - 1 : process.env.NEXT_PUBLIC_SIGNTUNES_PRICE
-          }`}
+        value={`${
+          id && id !== "wicked" ? +process.env.NEXT_PUBLIC_SIGNTUNES_PRICE - 1 : process.env.NEXT_PUBLIC_SIGNTUNES_PRICE
+        }`}
       />
       <input type="hidden" name="p3" value="1" />
       <input type="hidden" name="t3" value="Y" />
@@ -148,10 +149,11 @@ function Purchase({ params, searchParams }) {
           <h3 className="text-xl font-bold">Signtunes</h3>
           <p className="text-lg">
             $
-            {`${id && id !== "wicked"
+            {`${
+              id && id !== "wicked"
                 ? +process.env.NEXT_PUBLIC_SIGNTUNES_PRICE - 1
                 : process.env.NEXT_PUBLIC_SIGNTUNES_PRICE
-              }`}
+            }`}
             <span>{translationList?.per_year}</span>
           </p>
           <p className="mt-4 text-sm text-gray-300">
@@ -212,7 +214,7 @@ function Purchase({ params, searchParams }) {
         </h1>
         <div className="grid md:grid-cols-2 md:gap-x-40 gap-8 md:mx-20 pb-10">
           <div className="block rounded-xl p-8 shadow-xl bg-bright">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" className="h-10 w-10">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" className="h-10 w-10" fill="currentColor">
               <path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-167l80 80c9.4 9.4 24.6 9.4 33.9 0l80-80c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-39 39V184c0-13.3-10.7-24-24-24s-24 10.7-24 24V318.1l-39-39c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9z" />
             </svg>
             <h3 className="mt-3 text-xl font-bold">{translationList?.unlimited_installs}</h3>
@@ -248,21 +250,21 @@ function Purchase({ params, searchParams }) {
             <p className="mt-4 text-sm text-gray-200">{translationList?.custom_app_description}</p>
           </div>
           <div className="block rounded-xl p-8 shadow-xl bg-bright">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="h-10 w-10">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="h-10 w-10" fill="currentColor">
               <path d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.7 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0zm0 66.8V444.8C394 378 431.1 230.1 432 141.4L256 66.8l0 0z" />
             </svg>
             <h3 className="mt-3 text-xl font-bold">{translationList?.revoke_protection}</h3>
             <p className="mt-4 text-sm text-gray-200">{translationList?.revoke_protection_description}</p>
           </div>
           <div className="block rounded-xl p-8 shadow-xl bg-bright">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" className="h-10 w-10">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" className="h-10 w-10" fill="currentColor">
               <path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384v47l-92.8 37.1c-21.3 8.5-35.2 29.1-35.2 52c0 56.6 18.9 148 94.2 208.3c-9 4.8-19.3 7.6-30.2 7.6H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128zm39.1 97.7c5.7-2.3 12.1-2.3 17.8 0l120 48C570 277.4 576 286.2 576 296c0 63.3-25.9 168.8-134.8 214.2c-5.9 2.5-12.6 2.5-18.5 0C313.9 464.8 288 359.3 288 296c0-9.8 6-18.6 15.1-22.3l120-48zM527.4 312L432 273.8V461.7c68.2-33 91.5-99 95.4-149.7z" />
             </svg>
             <h3 className="mt-3 text-xl font-bold">{translationList?.no_jailbreak}</h3>
             <p className="mt-4 text-sm text-gray-200">{translationList?.no_jailbreak_description}</p>
           </div>
           <div className="block rounded-xl p-8 shadow-xl bg-bright">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="h-10 w-10">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="h-10 w-10" fill="currentColor">
               <path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" />
             </svg>
             <h3 className="mt-3 text-xl font-bold">{translationList?.designed_with_security}</h3>
@@ -270,7 +272,7 @@ function Purchase({ params, searchParams }) {
           </div>
           {translationList && (
             <div className="block rounded-xl p-8 shadow-xl bg-bright">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="h-10 w-10">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="h-10 w-10" fill="currentColor">
                 <path d="M256 48C141.1 48 48 141.1 48 256v40c0 13.3-10.7 24-24 24s-24-10.7-24-24V256C0 114.6 114.6 0 256 0S512 114.6 512 256V400.1c0 48.6-39.4 88-88.1 88L313.6 488c-8.3 14.3-23.8 24-41.6 24H240c-26.5 0-48-21.5-48-48s21.5-48 48-48h32c17.8 0 33.3 9.7 41.6 24l110.4 .1c22.1 0 40-17.9 40-40V256c0-114.9-93.1-208-208-208zM144 208h16c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32H144c-35.3 0-64-28.7-64-64V272c0-35.3 28.7-64 64-64zm224 0c35.3 0 64 28.7 64 64v48c0 35.3-28.7 64-64 64H352c-17.7 0-32-14.3-32-32V240c0-17.7 14.3-32 32-32h16z" />
               </svg>
               <h3 className="mt-3 text-xl font-bold">{translationList["247_chat"]}</h3>
