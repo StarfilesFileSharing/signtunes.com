@@ -451,155 +451,159 @@ function Header({ searchParams }) {
           </a>
         )}
         {/* When UDID Is Found */}
-        <a
-          className={`nav_btn ${
-            document.cookie.indexOf("udid=") !== -1 ? "" : "hidden"
-          } rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 md:text-sm text-xs font-medium text-white shadow flex gap-1`}
-          href={"#"}
-          id="dropdown_account_btn"
-          data-dropdown-toggle={"dropdown_account"}
-          loader-ignore-click={"true"}
-        >
-          {document.cookie.indexOf("udid=") !== -1 ? (
-            <>
-              <span>{translationList?.my_devices}</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="mt-0.5 w-3 h-4"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-              </svg>
-            </>
-          ) : (
-            translationList?.get_started
-          )}
-        </a>
-        <div
-          id="dropdown_account"
-          className="z-10 hidden dark:border dark:border-light bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
-        >
-          <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
-            {!hideDeviceName && (
-              <div id="device_name" className="overflow-hidden text-ellipsis">
-                {deviceName ? deviceName : "Loading"}
-              </div>
-            )}
-            <div id="device_info" className="font-medium truncate overflow-hidden text-ellipsis">
-              {deviceInfo}
-            </div>
-          </div>
-          <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown_account_btn">
-            <li>
-              <a
-                href="/settings?current=devices"
-                className="nav_btn block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                loader-ignore-click="true"
-              >
-                {translationList?.devices}
-              </a>
-            </li>
-            <li>
-              <a
-                href="/settings?current=certificates"
-                className="nav_btn block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                loader-ignore-click="true"
-              >
-                {translationList?.certificates}
-              </a>
-            </li>
-            <li>
-              <a
-                href="/settings?current=configure"
-                className="nav_btn block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                loader-ignore-click="true"
-              >
-                {translationList?.configure}
-              </a>
-            </li>
-          </ul>
-          <ul
-            className="py-2 text-sm text-gray-700 dark:text-gray-200"
-            aria-labelledby="dropdown_account_btn"
-            id="menubar_device_list"
+        <div className="dropdown dropdown-end">
+          <a
+            className={`nav_btn ${
+              document.cookie.indexOf("udid=") !== -1 ? "" : "hidden"
+            } btn rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 md:text-sm text-xs font-medium text-white shadow flex gap-1`}
+            href={"#"}
+            id="dropdown_account_btn"
+            data-dropdown-toggle={"dropdown_account"}
+            loader-ignore-click={"true"}
           >
-            {document.cookie.indexOf("udid=") !== -1 &&
-              devicesList.map((device, index) => {
-                if (device["udid"] !== cookie("udid")) {
-                  if (device["name"] == device["udid"]) {
-                    return (
-                      <li key={index}>
-                        <button
-                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-[100%] text-left overflow-hidden text-ellipsis text-xs"
-                          loader-ignore-click="true"
-                          onClick="setCookie('udid', '` + device['udid'] + `', 365);window.location.reload()"
-                        >
-                          {device["nice_idevice_model"] ? (
-                            device["nice_idevice_model"]
-                          ) : (
-                            <>
-                              {device["model"] ? device["model"] : device["udid"]}
-                              {device["ios_version"] ? (
-                                <>
-                                  {" "}
-                                  -{" "}
-                                  {device["is_apple_silicon"] == "yes"
-                                    ? "mac"
-                                    : device["model"].startsWith("AppleTV")
-                                    ? "tv"
-                                    : "i"}
-                                  OS {device["ios_version"]}
-                                  <br />
-                                </>
-                              ) : (
-                                ""
-                              )}
-                            </>
-                          )}
-                          <br /> {device["udid"]}
-                        </button>
-                      </li>
-                    );
-                  } else {
-                    return (
-                      <li key={index}>
-                        <button
-                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-[100%] text-left overflow-hidden text-ellipsis text-xs"
-                          loader-ignore-click="true"
-                          onclick="setCookie('udid', '` + device['udid'] + `', 365);window.location.reload()"
-                        >
-                          {device["name"]} <br />
-                          {device["nice_idevice_model"] ? (
-                            device["nice_idevice_model"]
-                          ) : (
-                            <>
-                              {device["model"] ? device["model"] : device["udid"]}
-                              {device["ios_version"] ? (
-                                <>
-                                  {" "}
-                                  -{" "}
-                                  {device["is_apple_silicon"] == "yes"
-                                    ? "mac"
-                                    : device["model"].startsWith("AppleTV")
-                                    ? "tv"
-                                    : "i"}
-                                  OS {device["ios_version"]}
-                                  <br />
-                                </>
-                              ) : (
-                                ""
-                              )}
-                            </>
-                          )}
-                        </button>
-                      </li>
-                    );
+            {document.cookie.indexOf("udid=") !== -1 ? (
+              <>
+                <span>{translationList?.my_devices}</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="mt-0.5 w-3 h-4"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                </svg>
+              </>
+            ) : (
+              translationList?.get_started
+            )}
+          </a>
+          <ul
+            id="dropdown_account"
+            className="z-10 shadow menu dropdown-content dark:border dark:border-light bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+          >
+            <li>
+              <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                {!hideDeviceName && (
+                  <div id="device_name" className="overflow-hidden text-ellipsis">
+                    {deviceName ? deviceName : "Loading"}
+                  </div>
+                )}
+                <div id="device_info" className="font-medium truncate overflow-hidden text-ellipsis">
+                  {deviceInfo}
+                </div>
+              </div>
+            </li>
+            <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown_account_btn">
+              <li>
+                <a
+                  href="/settings?current=devices"
+                  className="nav_btn block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  loader-ignore-click="true"
+                >
+                  {translationList?.devices}
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/settings?current=certificates"
+                  className="nav_btn block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  loader-ignore-click="true"
+                >
+                  {translationList?.certificates}
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/settings?current=configure"
+                  className="nav_btn block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  loader-ignore-click="true"
+                >
+                  {translationList?.configure}
+                </a>
+              </li>
+            </ul>
+            <ul
+              className="py-2 text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby="dropdown_account_btn"
+              id="menubar_device_list"
+            >
+              {document.cookie.indexOf("udid=") !== -1 &&
+                devicesList.map((device, index) => {
+                  if (device["udid"] !== cookie("udid")) {
+                    if (device["name"] == device["udid"]) {
+                      return (
+                        <li key={index}>
+                          <button
+                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-[100%] text-left overflow-hidden text-ellipsis text-xs"
+                            loader-ignore-click="true"
+                            onClick="setCookie('udid', '` + device['udid'] + `', 365);window.location.reload()"
+                          >
+                            {device["nice_idevice_model"] ? (
+                              device["nice_idevice_model"]
+                            ) : (
+                              <>
+                                {device["model"] ? device["model"] : device["udid"]}
+                                {device["ios_version"] ? (
+                                  <>
+                                    {" "}
+                                    -{" "}
+                                    {device["is_apple_silicon"] == "yes"
+                                      ? "mac"
+                                      : device["model"].startsWith("AppleTV")
+                                      ? "tv"
+                                      : "i"}
+                                    OS {device["ios_version"]}
+                                    <br />
+                                  </>
+                                ) : (
+                                  ""
+                                )}
+                              </>
+                            )}
+                            <br /> {device["udid"]}
+                          </button>
+                        </li>
+                      );
+                    } else {
+                      return (
+                        <li key={index}>
+                          <button
+                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-[100%] text-left overflow-hidden text-ellipsis text-xs"
+                            loader-ignore-click="true"
+                            onclick="setCookie('udid', '` + device['udid'] + `', 365);window.location.reload()"
+                          >
+                            {device["name"]} <br />
+                            {device["nice_idevice_model"] ? (
+                              device["nice_idevice_model"]
+                            ) : (
+                              <>
+                                {device["model"] ? device["model"] : device["udid"]}
+                                {device["ios_version"] ? (
+                                  <>
+                                    {" "}
+                                    -{" "}
+                                    {device["is_apple_silicon"] == "yes"
+                                      ? "mac"
+                                      : device["model"].startsWith("AppleTV")
+                                      ? "tv"
+                                      : "i"}
+                                    OS {device["ios_version"]}
+                                    <br />
+                                  </>
+                                ) : (
+                                  ""
+                                )}
+                              </>
+                            )}
+                          </button>
+                        </li>
+                      );
+                    }
                   }
-                }
-              })}
+                })}
+            </ul>
           </ul>
         </div>
         {/* When UDID Is Not Found */}

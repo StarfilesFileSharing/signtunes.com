@@ -232,7 +232,6 @@ export default function RootLayout({ children }) {
             ),
           }}
         />
-        <Script async src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js" />
 
         {/*Cloudflare Web Analytics*/}
         <Script
@@ -267,7 +266,6 @@ export default function RootLayout({ children }) {
       </head>
       <body className={inter.className + " dark:bg-[#13161f] dark:text-gray-200 bg-white text-black"}>
         <DefaultTheme>{children}</DefaultTheme>
-        <Script async src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js" />
       </body>
     </html>
   );
