@@ -311,7 +311,7 @@ function Header({ searchParams }) {
             <li className="dropdown">
               <button
                 id="help-dropdown-button"
-                data-dropdown-toggle="help-dropdown"
+                // data-dropdown-toggle="help-dropdown"
                 className="gap-0 p-2 active:bg-secondary"
                 loader-ignore-click="true"
               >
@@ -332,8 +332,8 @@ function Header({ searchParams }) {
               </button>
               <ul
                 aria-labelledby="help-dropdown-button"
-                id="help-dropdown"
-                className="menu dropdown-content absolute z-10 text-sm rounded-lg shadow-md bg-white border border-gray-100 text-gray-900 dark:bg-gray-700 dark:border-gray-700 text-gray-500 dark:text-gray-400"
+                // id="help-dropdown"
+                className="menu mt-2 dropdown-content absolute z-10 text-sm rounded-lg shadow-md bg-white border border-gray-100 text-gray-900 dark:bg-gray-700 dark:border-gray-700 text-gray-500 dark:text-gray-400"
               >
                 <li>
                   <a
@@ -455,10 +455,10 @@ function Header({ searchParams }) {
           <a
             className={`nav_btn ${
               document.cookie.indexOf("udid=") !== -1 ? "" : "hidden"
-            } btn rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 md:text-sm text-xs font-medium text-white shadow flex gap-1`}
+            }  rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 md:text-sm text-xs font-medium text-white shadow flex gap-1`}
             href={"#"}
-            id="dropdown_account_btn"
-            data-dropdown-toggle={"dropdown_account"}
+            // id="dropdown_account_btn"
+            // data-dropdown-toggle={"dropdown_account"}
             loader-ignore-click={"true"}
           >
             {document.cookie.indexOf("udid=") !== -1 ? (
@@ -481,7 +481,7 @@ function Header({ searchParams }) {
           </a>
           <ul
             id="dropdown_account"
-            className="z-10 shadow menu dropdown-content dark:border dark:border-light bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+            className="z-10 mt-2 shadow menu dropdown-content dark:border dark:border-light bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
           >
             <li>
               <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
