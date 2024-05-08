@@ -308,7 +308,7 @@ function Header({ searchParams }) {
                 {translationList?.blog}
               </a>
             </li> */}
-            <li>
+            <li className="dropdown">
               <button
                 id="help-dropdown-button"
                 data-dropdown-toggle="help-dropdown"
@@ -333,7 +333,7 @@ function Header({ searchParams }) {
               <ul
                 aria-labelledby="help-dropdown-button"
                 id="help-dropdown"
-                className="hidden absolute z-10 text-sm rounded-lg shadow-md bg-white border border-gray-100 text-gray-900 dark:bg-gray-700 dark:border-gray-700 text-gray-500 dark:text-gray-400"
+                className="menu dropdown-content absolute z-10 text-sm rounded-lg shadow-md bg-white border border-gray-100 text-gray-900 dark:bg-gray-700 dark:border-gray-700 text-gray-500 dark:text-gray-400"
               >
                 <li>
                   <a
