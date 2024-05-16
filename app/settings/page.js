@@ -52,7 +52,7 @@ function Settings({ searchParams }) {
 
   // Get Udid
   const getUdid = async () => {
-    if (document.cookie.indexOf("udid") !== -1) {
+    if (cookie("udid")) {
       setUdidExists(true);
       // Is pro
       const pro = await axios.get("https://api2.starfiles.co/pro?udid=" + cookie("udid"));
@@ -66,7 +66,7 @@ function Settings({ searchParams }) {
         if (perms.data) setPermissions(perms.data);
       }
     }
-    if (document.cookie.indexOf("udid=") === -1) setNoDeviceFound(true);
+    if (!cookie("udid")) setNoDeviceFound(true);
   };
 
   // Get Email For Configuration
@@ -86,7 +86,8 @@ function Settings({ searchParams }) {
   // Delete Cookie
   function deleteCookie(name) {
     // if (get_cookie(name)) {
-    document.cookie = name + "=" + ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+    // document.cookie = name + "=" + ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+    localStorage.removeItem(name);
     window.location.reload();
     // }
   }

@@ -102,7 +102,7 @@ export default function Home({ searchParams }) {
 
   // Get Stats
   const getStats = async () => {
-    if (document.cookie.indexOf("udid") === -1) {
+    if (!cookie("udid")) {
       try {
         const response = await axios.get("https://api2.starfiles.co/statistics?extension=ipa");
         setCount((prev) => {
@@ -232,7 +232,7 @@ export default function Home({ searchParams }) {
                   </a>
                 </div>
               </div>
-              {document.cookie.indexOf("udid") === -1 && (
+              {!cookie("udid") && (
                 <div className="alert alert-info shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium">
                   <div className="alert-child">
                     <svg
@@ -255,7 +255,7 @@ export default function Home({ searchParams }) {
                   </a>
                 </div>
               )}
-              {document.cookie.indexOf("udid") !== -1 && alertOptions.deviceExists === true ? (
+              {cookie("udid") && alertOptions.deviceExists === true ? (
                 !getUserLanguageCode().startsWith("en") ? (
                   <div className="alert alert-info shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium">
                     <div className="alert-child">
@@ -305,7 +305,7 @@ export default function Home({ searchParams }) {
               ) : (
                 <></>
               )}
-              {document.cookie.indexOf("udid") !== -1 && alertOptions.deviceExists !== true && (
+              {cookie("udid") && alertOptions.deviceExists !== true && (
                 <div
                   aria-hidden="true"
                   className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full bg-[#000000db] h-[100vh]"

@@ -30,8 +30,9 @@ function Header({ searchParams }) {
   }, []);
 
   useEffect(() => {
+    console.log("yes");
     checkCookie();
-  }, [document.cookie.indexOf("udid=")]);
+  }, [localStorage.getItem("udid")]);
 
   // Check Dark THeme
   const checkDarkTheme = async () => {
@@ -56,7 +57,7 @@ function Header({ searchParams }) {
 
   // Check Cookie If User Exists
   const checkCookie = async () => {
-    if (document.cookie.indexOf("udid=") !== 1) {
+    if (cookie("udid")) {
       console.log("test1");
       try {
         if (cookie("pro") === null) {
@@ -130,6 +131,8 @@ function Header({ searchParams }) {
       } catch (err) {
         console.error(err.message);
       }
+    } else {
+      console.log("cookie 2");
     }
     setCookieChecked(true);
   };
@@ -153,7 +156,7 @@ function Header({ searchParams }) {
             tabIndex="0"
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 bg-white dark:bg-gray-900"
           >
-            {document.cookie.indexOf("udid=") !== -1 && (
+            {cookie("udid") && (
               <li className="nav_btn customer_only" tabIndex="0">
                 <a className="p-2 active:bg-secondary" href="/signer">
                   {translationList?.signer}
@@ -165,7 +168,7 @@ function Header({ searchParams }) {
                 {translationList?.purchase}
               </a>
             </li>
-            {document.cookie.indexOf("udid=") === -1 && (
+            {!cookie("udid") && (
               <li className="nav_btn" tabIndex="0">
                 <a className="p-2 active:bg-secondary" href="/device_status" id="device_status_1">
                   {translationList?.device_status}
@@ -197,7 +200,7 @@ function Header({ searchParams }) {
                 {translationList?.blog}
               </a>
             </li>
-            {cookieChecked && document.cookie.indexOf("udid=") !== -1 && cookie("pro") === "false" && (
+            {cookieChecked && cookie("udid") && cookie("pro") === "false" && (
               <li className="nav_btn" id="upgrade_btn" tabIndex="0">
                 <a
                   className="rounded-xl px-2 py-1 font-medium text-white shadow bg-gradient-to-r from-sky-400 to-emerald-600 mb-2 m-0"
@@ -269,7 +272,7 @@ function Header({ searchParams }) {
       <div className="navbar-end w-max">
         <div className="hidden md:block">
           <ul className="menu menu-horizontal px-1 text-[16px]">
-            {document.cookie.indexOf("udid=") !== -1 && (
+            {cookie("udid") && (
               <li className="nav_btn customer_only">
                 <a className="p-2 active:bg-secondary" href="/signer">
                   {translationList?.signer}
@@ -281,7 +284,7 @@ function Header({ searchParams }) {
                 {translationList?.purchase}
               </a>
             </li>
-            {document.cookie.indexOf("udid=") === -1 && (
+            {!cookie("udid") && (
               <li className="nav_btn">
                 <a className="p-2 active:bg-secondary" href="/device_status" id="device_status_2">
                   {translationList?.device_status}
@@ -441,7 +444,7 @@ function Header({ searchParams }) {
             </svg>
           )}
         </button>
-        {cookieChecked && document.cookie.indexOf("udid=") !== -1 && cookie("pro") === "false" && (
+        {cookieChecked && cookie("udid") && cookie("pro") === "false" && (
           <a
             id="upgrade_btn_2"
             className="nav_btn rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 md:text-sm text-xs font-medium text-white mr-2 shadow bg-gradient-to-r from-sky-400 to-emerald-600 items-center"
@@ -454,14 +457,14 @@ function Header({ searchParams }) {
         <div className="dropdown dropdown-end">
           <a
             className={`nav_btn ${
-              document.cookie.indexOf("udid=") !== -1 ? "" : "hidden"
+              cookie("udid") ? "" : "hidden"
             }  rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 md:text-sm text-xs font-medium text-white shadow flex gap-1`}
             href={"#"}
             // id="dropdown_account_btn"
             // data-dropdown-toggle={"dropdown_account"}
             loader-ignore-click={"true"}
           >
-            {document.cookie.indexOf("udid=") !== -1 ? (
+            {cookie("udid") ? (
               <>
                 <span>{translationList?.my_devices}</span>
                 <svg
@@ -529,7 +532,7 @@ function Header({ searchParams }) {
               aria-labelledby="dropdown_account_btn"
               id="menubar_device_list"
             >
-              {document.cookie.indexOf("udid=") !== -1 &&
+              {cookie("udid") &&
                 devicesList.map((device, index) => {
                   if (device["udid"] !== cookie("udid")) {
                     if (device["name"] == device["udid"]) {
@@ -538,7 +541,10 @@ function Header({ searchParams }) {
                           <button
                             className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-[100%] text-left overflow-hidden text-ellipsis text-xs"
                             loader-ignore-click="true"
-                            onClick="setCookie('udid', '` + device['udid'] + `', 365);window.location.reload()"
+                            onClick={() => {
+                              setCookie("udid", device["udid"]);
+                              window.location.reload();
+                            }}
                           >
                             {device["nice_idevice_model"] ? (
                               device["nice_idevice_model"]
@@ -572,7 +578,10 @@ function Header({ searchParams }) {
                           <button
                             className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-[100%] text-left overflow-hidden text-ellipsis text-xs"
                             loader-ignore-click="true"
-                            onclick="setCookie('udid', '` + device['udid'] + `', 365);window.location.reload()"
+                            onClick={() => {
+                              setCookie("udid", device["udid"]);
+                              window.location.reload();
+                            }}
                           >
                             {device["name"]} <br />
                             {device["nice_idevice_model"] ? (
@@ -607,7 +616,7 @@ function Header({ searchParams }) {
           </ul>
         </div>
         {/* When UDID Is Not Found */}
-        {document.cookie.indexOf("udid=") === -1 && (
+        {!cookie("udid") && (
           <a
             className={`nav_btn rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 text-sm font-medium text-white shadow`}
             href={`/purchase${referral ? `?referral=${referral}` : ""}`}

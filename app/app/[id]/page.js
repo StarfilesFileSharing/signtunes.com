@@ -1,5 +1,6 @@
 "use client";
 import Header from "@/app/components/Layout/Header";
+import cookie from "@/utils/cookies";
 import { getTranslations } from "@/utils/getTranslation";
 import axios from "axios";
 import Link from "next/link";
@@ -320,7 +321,7 @@ function App({ params, searchParams }) {
                                 </p>
                               </div>
                               <div className="flex flex-col md:flex-row text-right gap-1">
-                                {document.cookie.indexOf("udid=") === -1 ? (
+                                {!cookie("udid") ? (
                                   <Link
                                     href="/purchase"
                                     type="button"

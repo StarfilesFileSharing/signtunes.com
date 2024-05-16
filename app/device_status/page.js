@@ -1,4 +1,5 @@
 "use client";
+import { setCookie } from "@/utils/cookies";
 import { getTranslations } from "@/utils/getTranslation";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -50,7 +51,8 @@ function DeviceStatus({ searchParams }) {
       d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000);
       // TODO uncomment first line
       // document.cookie = "udid=" + udid + ";expires=" + d.toUTCString() + ";path=/;domain=.signtunes.com";
-      document.cookie = "udid=" + udid + ";expires=" + d.toUTCString() + ";";
+      // document.cookie = "udid=" + udid + ";expires=" + d.toUTCString() + ";";
+      setCookie("udid", udid);
       setOutput("Checking Status");
       const response = await axios.get("https://api2.starfiles.co/check_enrolment/" + udid + "?organisation=2");
       const data = response.data;

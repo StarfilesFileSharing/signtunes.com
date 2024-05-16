@@ -1,5 +1,5 @@
 "use client";
-import cookie from "@/utils/cookies";
+import cookie, { setCookie } from "@/utils/cookies";
 import { getTranslations } from "@/utils/getTranslation";
 import { useRouter } from "next/navigation";
 import Script from "next/script";
@@ -81,7 +81,8 @@ function Signer({ searchParams }) {
       }
 
       function cookie(name) {
-        let match = document.cookie.match(RegExp("(?:^|;\\s*)" + name + "=([^;]*)"));
+        // let match = document.cookie.match(RegExp("(?:^|;\\s*)" + name + "=([^;]*)"));
+        let match = localStorage.getItem(RegExp("(?:^|;\\s*)" + name + "=([^;]*)"));
         return match ? match[1] : null;
       }
       setUdid(get("udid") ?? cookie("udid") ?? "");
@@ -98,7 +99,8 @@ function Signer({ searchParams }) {
       if (match) {
         const d = new Date();
         d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000);
-        document.cookie = "udid=" + this.value + ";expires=" + d.toUTCString() + ";path=/;domain=.signtunes.co";
+        // document.cookie = "udid=" + this.value + ";expires=" + d.toUTCString() + ";path=/;domain=.signtunes.co";
+        setCookie("udid", this.value);
         window.history.pushState("data" + this.value, "Signtunes", "/signer" + window.location.hash);
       }
     } catch (err) {
