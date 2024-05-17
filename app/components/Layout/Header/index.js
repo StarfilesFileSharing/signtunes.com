@@ -141,7 +141,7 @@ function Header({ searchParams }) {
     <header className="sticky navbar bg-white dark:text-white dark:bg-gray-800 px-2 md:px-12 py-0 justify-between top-0 z-10">
       <div className="navbar-start w-min">
         <div className="dropdown md:hidden">
-          <label tabIndex="0" className="btn btn-ghost">
+          <div role="button" tabindex="0" tabIndex="0" className="btn btn-ghost">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -151,7 +151,7 @@ function Header({ searchParams }) {
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" />
             </svg>
-          </label>
+          </div>
           <ul
             tabIndex="0"
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 bg-white dark:bg-gray-900"
@@ -312,7 +312,9 @@ function Header({ searchParams }) {
               </a>
             </li> */}
             <li className="dropdown">
-              <button
+              <div
+                role="button"
+                tabindex="0"
                 id="help-dropdown-button"
                 // data-dropdown-toggle="help-dropdown"
                 className="gap-0 p-2 active:bg-secondary"
@@ -332,7 +334,7 @@ function Header({ searchParams }) {
                     clipRule="evenodd"
                   />
                 </svg>
-              </button>
+              </div>
               <ul
                 aria-labelledby="help-dropdown-button"
                 // id="help-dropdown"
@@ -455,11 +457,12 @@ function Header({ searchParams }) {
         )}
         {/* When UDID Is Found */}
         <div className="dropdown dropdown-end">
-          <a
+          <div
+            role="button"
+            tabindex="0"
             className={`nav_btn ${
               cookie("udid") ? "" : "hidden"
             }  rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 md:text-sm text-xs font-medium text-white shadow flex gap-1`}
-            href={"#"}
             // id="dropdown_account_btn"
             // data-dropdown-toggle={"dropdown_account"}
             loader-ignore-click={"true"}
@@ -481,7 +484,7 @@ function Header({ searchParams }) {
             ) : (
               translationList?.get_started
             )}
-          </a>
+          </div>
           <ul
             id="dropdown_account"
             className="z-10 mt-2 shadow menu dropdown-content dark:border dark:border-light bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
