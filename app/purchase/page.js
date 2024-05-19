@@ -43,7 +43,7 @@ function PurchaseButton({ purchaseButton = <></>, redirect = null, searchParams,
                 "type":"text",
                 "placeholder":"UDID",
                 "required": true,
-                "text":"A UDID is your device identifier. We need your UDID to get your device registered with Apple.",
+                "text":"UDID (From https://udid.starfiles.co)",
                 "link":{
                     "text":"Get your UDID",
                     "url":"https:\/\/udid.starfiles.co"
@@ -51,8 +51,8 @@ function PurchaseButton({ purchaseButton = <></>, redirect = null, searchParams,
             }
         ]'
       />
-      <input type="hidden" name="cancel_return" value="https://signtunes.co" />
-      <input type="hidden" name="return" value="https://signtunes.co/success" />
+      <input type="hidden" name="cancel_return" value="https://signtunes.com" />
+      <input type="hidden" name="return" value="https://signtunes.com/success" />
 
       <input type="hidden" name="platform_name" value="Signtunes" />
       <input type="hidden" name="platform_colour" value="#343a40" />
