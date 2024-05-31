@@ -143,7 +143,7 @@ export default function Home({ searchParams }) {
         <div className="md:w-12/12 col-span-4 md:col-span-3 grid grid-cols-6">
           {alertsLoad && (
             <div className="col-span-6" id="alerts">
-              <div className="alert bg-teal-100 text-black shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium">
+              {/* <div className="alert bg-teal-100 text-black shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium">
                 <div className="alert-child">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="flex-shrink-0 w-6 h-6">
                     <linearGradient
@@ -202,7 +202,7 @@ export default function Home({ searchParams }) {
                     {translationList?.purchase}
                   </a>
                 </div>
-              </div>
+              </div> */}
               <div className="alert alert-info shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium bg-violet-500">
                 <div className="alert-child">
                   <svg
