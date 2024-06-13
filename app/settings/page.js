@@ -416,7 +416,7 @@ function Settings({ searchParams }) {
                       if (email?.trim().length === 0) alert("Email required");
                       else {
                         const res = await axios.get(
-                          "https://api.starfiles.co/device_enrolments/link_email?email=" +
+                          "https://api2.starfiles.co/link_email?email=" +
                             email +
                             "&current_email=" +
                             currentEmail +

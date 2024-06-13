@@ -337,7 +337,7 @@ export default function Home({ searchParams }) {
                                   alert("Email required");
                                 } else {
                                   const response = await axios.get(
-                                    "https://api.starfiles.co/device_enrolments/link_email?email=" +
+                                    "https://api2.starfiles.co/link_email?email=" +
                                       document.getElementById("email").value +
                                       "&udid=" +
                                       cookie("udid")
