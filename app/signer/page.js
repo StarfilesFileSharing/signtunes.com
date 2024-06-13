@@ -80,11 +80,11 @@ function Signer({ searchParams }) {
         return params[param];
       }
 
-      function cookie(name) {
-        // let match = document.cookie.match(RegExp("(?:^|;\\s*)" + name + "=([^;]*)"));
-        let match = localStorage.getItem(RegExp("(?:^|;\\s*)" + name + "=([^;]*)"));
-        return match ? match[1] : null;
-      }
+      // function cookie(name) {
+      //   // let match = document.cookie.match(RegExp("(?:^|;\\s*)" + name + "=([^;]*)"));
+      //   let match = localStorage.getItem(RegExp("(?:^|;\\s*)" + name + "=([^;]*)"));
+      //   return match ? match[1] : null;
+      // }
       setUdid(get("udid") ?? cookie("udid") ?? "");
       setNewsIcon(<img className="h-24 w-24 rounded-[24%]" src="//sts.st/i/5I6OvZzFTiLN" loading="lazy" />);
     } catch (err) {
