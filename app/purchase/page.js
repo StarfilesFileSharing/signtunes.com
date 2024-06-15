@@ -156,6 +156,7 @@ function Purchase({ params, searchParams }) {
           >
             Install Now
           </a>
+          <br />
           or
           <PurchaseButton
             params={params}
