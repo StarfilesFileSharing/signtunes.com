@@ -489,7 +489,7 @@ function Header({ searchParams }) {
             id="dropdown_account"
             className="z-10 mt-2 shadow menu dropdown-content dark:border dark:border-light bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
           >
-            <li>
+            <li className="w-40">
               <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
                 {!hideDeviceName && (
                   <div id="device_name" className="overflow-hidden text-ellipsis">
@@ -577,7 +577,7 @@ function Header({ searchParams }) {
                       );
                     } else {
                       return (
-                        <li key={index}>
+                        <li key={index} className="w-40">
                           <button
                             className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-[100%] text-left overflow-hidden text-ellipsis text-xs"
                             loader-ignore-click="true"

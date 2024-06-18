@@ -743,7 +743,7 @@ export default function Home({ searchParams }) {
               </div>
             </dl>
           )}
-          <div className="rounded-xl shadow-md bg-gray-100 dark:bg-gray-900 mb-4">
+          {/* <div className="rounded-xl shadow-md bg-gray-100 dark:bg-gray-900 mb-4">
             <div className="grid grid-cols-6">
               <Image
                 width={96}
@@ -780,8 +780,8 @@ export default function Home({ searchParams }) {
                 </a>
               </div>
             </div>
-          </div>
-          <div className="rounded-xl shadow-md bg-gray-100 dark:bg-gray-900 mb-4">
+          </div> */}
+          {/* <div className="rounded-xl shadow-md bg-gray-100 dark:bg-gray-900 mb-4">
             <div className="grid grid-cols-6">
               <Image
                 width={96}
@@ -886,7 +886,7 @@ export default function Home({ searchParams }) {
                 </a>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="card bg-gray-100 dark:bg-gray-900 shadow-xl mb-4">
             <div className="card-body p-4">
               <h3 className="card-title text-2xl text-gray-900 dark:text-white">
