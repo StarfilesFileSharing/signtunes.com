@@ -78,7 +78,7 @@ function Pro({ searchParams }) {
         <p className="text-center text-red-600 mb-4 text-sm">
           {translationList?.existing_signtunes_subscription_required}
         </p>
-        <ProPurchaseButton
+        {/* <ProPurchaseButton
           purchaseButton={
             <button
               className="flex m-auto mb-4 rounded-md hover:bg-[#023E8A] px-5 py-2.5 text-sm font-medium text-white shadow bg-primary"
@@ -88,7 +88,13 @@ function Pro({ searchParams }) {
             </button>
           }
           searchParams={searchParams}
-        />
+        /> */}
+        <a
+          className="flex m-auto mb-4 rounded-md hover:bg-[#023E8A] px-5 py-2.5 text-sm font-medium text-white shadow bg-primary"
+          href="https://buy.stripe.com/4gw3fL2Ew0KjbII14g"
+        >
+          <span>{translationList?.join_signtunes_pro}</span>&nbsp;${process.env.NEXT_PUBLIC_SIGNTUNES_PRO_PRICE}
+        </a>
         <div className="block lg:mx-96 mb-12 dark:text-gray-900 rounded-xl p-8 shadow-xl bg-bright">
           <h3 className="text-xl font-semibold">{translationList?.get_certificate_files}</h3>
           <p className="text-lg mb-4">{translationList?.pro_member_certificate_files_access}</p>
@@ -101,7 +107,7 @@ function Pro({ searchParams }) {
           <h3 className="text-xl font-semibold">{translationList?.special_discord_role}</h3>
           <p className="text-lg mb-4">{translationList?.pro_members_special_discord_role_details}</p>
           <div className="flex gap-1 justify-center">
-            <ProPurchaseButton
+            {/* <ProPurchaseButton
               purchaseButton={
                 <div className="flex justify-center">
                   <button
@@ -113,7 +119,13 @@ function Pro({ searchParams }) {
                 </div>
               }
               searchParams={searchParams}
-            />
+            /> */}
+            <a
+              className="rounded-md bg-primary hover:bg-[#023E8A] px-5 py-2.5 text-sm font-medium text-white shadow"
+              href="https://buy.stripe.com/4gw3fL2Ew0KjbII14g"
+            >
+              Signtunes Pro ${process.env.NEXT_PUBLIC_SIGNTUNES_PRO_PRICE}
+            </a>
           </div>
         </div>
       </div>
