@@ -89,7 +89,8 @@ function Footer() {
               !item.name.endsWith(".json") ||
               item.name === "en_source.json" ||
               item.name === "en-English (upside down).json"
-            ) return null;
+            )
+              return null;
             else {
               let language_name = item.name.split("-")[1].replace(".json", "");
               return (
@@ -101,11 +102,7 @@ function Footer() {
                     window.location.reload();
                   }}
                 >
-                  <img
-                    loading="lazy"
-                    src={`https://signtunes.com/localisations/${language_name}.svg`}
-                    className="w-8"
-                  />
+                  <img loading="lazy" src={`/assets/images/languages/${language_name}.svg`} className="w-8" />
                   {language_name}
                 </button>
               );

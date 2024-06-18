@@ -342,10 +342,10 @@ export default function Home({ searchParams }) {
                                       "&udid=" +
                                       cookie("udid")
                                   );
-                                  if (response?.length === 0) {
+                                  if (response?.data?.status) {
                                     setEmailSuccess({ success: true, message: "" });
                                   } else {
-                                    setEmailSuccess({ success: false, message: response.data });
+                                    setEmailSuccess({ success: false, message: response.data?.message });
                                   }
                                   setEmailSubmitted(true);
                                 }
@@ -367,7 +367,7 @@ export default function Home({ searchParams }) {
                         {emailSubmitted && !emailSuccess.success && (
                           <div id="error" className="m-0">
                             <h3 className="text-xl font-semibold">An Error Occurred</h3>
-                            <p id="error_message">{emailSuccess?.message}</p>
+                            {emailSuccess?.message && <p id="error_message">{emailSuccess?.message}</p>}
                             <a className={`btn btn-sm bg-primary hover:bg-secondary`} href="?">
                               Retry
                             </a>

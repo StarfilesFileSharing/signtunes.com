@@ -424,10 +424,10 @@ function Settings({ searchParams }) {
                             cookie("udid")
                         );
                         const response = res.data;
-                        if (response.length == 0) {
+                        if (response?.status) {
                           setEmailOutput("Email Successfully Changed");
                         } else {
-                          setEmailOutput(response);
+                          setEmailOutput(response?.message);
                         }
                       }
                     } catch (err) {
