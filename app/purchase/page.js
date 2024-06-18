@@ -122,7 +122,7 @@ function Purchase({ params, searchParams }) {
         /> */}
         <div className="dark:text-gray-900 block rounded-xl p-8 shadow-xl bg-bright md:w-64 text-center m-auto">
           <h3 className="text-xl font-bold">Signtunes</h3>
-          <p className="text-lg">
+          {/* <p className="text-lg">
             $
             {`${
               id && id !== "wicked"
@@ -130,13 +130,13 @@ function Purchase({ params, searchParams }) {
                 : process.env.NEXT_PUBLIC_SIGNTUNES_PRICE
             }`}
             <span>{translationList?.per_year}</span>
-          </p>
+          </p> */}
           <p className="mt-4 text-sm text-gray-300">
             {translationList && (
               <>
                 <span>{translationList["1_device"]}</span>
                 <br />
-                <span>{translationList["365_day_signer"]}</span>
+                <span>6 months access to signer</span>
                 <br />
                 <span>{translationList?.no_jailbreak}</span>
                 <br />
