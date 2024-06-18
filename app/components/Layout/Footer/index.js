@@ -102,7 +102,7 @@ function Footer() {
                     window.location.reload();
                   }}
                 >
-                  <img loading="lazy" src={`/assets/images/languages/${language_name}.svg`} className="w-8" />
+                  <Image width={40} height={40} src={`/assets/images/languages/${language_name}.svg`} className="w-8" />
                   {language_name}
                 </button>
               );

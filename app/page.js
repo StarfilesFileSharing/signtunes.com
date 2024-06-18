@@ -7,6 +7,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Header from "./components/Layout/Header";
+import Image from "next/image";
 
 export default function Home({ searchParams }) {
   const { referral } = searchParams;
@@ -530,14 +531,18 @@ export default function Home({ searchParams }) {
                               href={`/app/${app.id}`}
                               className="rounded-lg hover:shadow-xl transition-shadow duration-300 ease-in-out md:w-24 w-14"
                             >
-                              <img
-                                loading="lazy"
+                              <Image
+                                width={96}
+                                height={96}
                                 className="shadow rounded-[24%] w-14 h-14 md:!h-20 md:!w-20 xl:!h-24 xl:!w-24 align-middle border-none"
                                 alt=""
                                 src={`https://sts.st/bi/${app.bundle_id}`}
                                 onError={({ currentTarget }) => {
                                   currentTarget.onerror = null;
-                                  currentTarget.src = "https://cdn.starfiles.co/images/dark-icon.png";
+                                  setGenreData((prev) => {
+                                    prev.popular[index]["bundle_id"] = "https://cdn.starfiles.co/images/dark-icon.png";
+                                    return { ...prev };
+                                  });
                                 }}
                               />
                               <p
@@ -559,7 +564,7 @@ export default function Home({ searchParams }) {
                 <>
                   <h2 className="text-3xl font-semibold mb-2">{translationList?.recommended}</h2>
                   <div className="w-full">
-                    <div className="flex flex-wrap gap-x-3 gap-y-2 md:gap-x-4 md:gap-y-3" id="trending_apps">
+                    <div className="flex flex-wrap gap-x-2 gap-y-2 xl:gap-x-4 xl:gap-y-3" id="trending_apps">
                       {genreData.trending.map((app, index) => {
                         if (
                           app.bundle_id &&
@@ -571,18 +576,20 @@ export default function Home({ searchParams }) {
                             <Link
                               key={index}
                               href={`/app/${app.id}`}
-                              className="rounded-lg hover:shadow-xl transition-shadow duration-300 ease-in-out md:w-24 w-16"
+                              className="rounded-lg hover:shadow-xl transition-shadow duration-300 ease-in-out md:w-24 w-14"
                             >
-                              <img
-                                loading="lazy"
-                                className="shadow rounded-[24%] h-16 md:!h-24 md:!w-24
-                                w-16 align-middle
-                                border-none"
+                              <Image
+                                width={96}
+                                height={96}
+                                className="shadow rounded-[24%] w-14 h-14 md:!h-20 md:!w-20 xl:!h-24 xl:!w-24 align-middle border-none"
                                 alt=""
                                 src={`https://sts.st/bi/${app.bundle_id}`}
                                 onError={({ currentTarget }) => {
                                   currentTarget.onerror = null;
-                                  currentTarget.src = "https://cdn.starfiles.co/images/dark-icon.png";
+                                  setGenreData((prev) => {
+                                    prev.trending[index]["bundle_id"] = "https://cdn.starfiles.co/images/dark-icon.png";
+                                    return { ...prev };
+                                  });
                                 }}
                               />
                               <p
@@ -604,7 +611,7 @@ export default function Home({ searchParams }) {
                 <>
                   <h2 className="text-3xl font-semibold mb-2">{translationList?.new}</h2>
                   <div className="w-full">
-                    <div className="flex flex-wrap gap-x-3 gap-y-2 md:gap-x-4 md:gap-y-3" id="upload_time_apps">
+                    <div className="flex flex-wrap gap-x-2 gap-y-2 xl:gap-x-4 xl:gap-y-3" id="upload_time_apps">
                       {genreData.upload_time.map((app, index) => {
                         if (
                           app.bundle_id &&
@@ -616,18 +623,21 @@ export default function Home({ searchParams }) {
                             <Link
                               key={index}
                               href={`/app/${app.id}`}
-                              className="rounded-lg hover:shadow-xl transition-shadow duration-300 ease-in-out md:w-24 w-16"
+                              className="rounded-lg hover:shadow-xl transition-shadow duration-300 ease-in-out md:w-24 w-14"
                             >
-                              <img
-                                loading="lazy"
-                                className="shadow rounded-[24%] h-16 md:!h-24 md:!w-24
-                                w-16 align-middle
-                                border-none"
+                              <Image
+                                width={96}
+                                height={96}
+                                className="shadow rounded-[24%] w-14 h-14 md:!h-20 md:!w-20 xl:!h-24 xl:!w-24 align-middle border-none"
                                 alt=""
                                 src={`https://sts.st/bi/${app.bundle_id}`}
                                 onError={({ currentTarget }) => {
                                   currentTarget.onerror = null;
-                                  currentTarget.src = "https://cdn.starfiles.co/images/dark-icon.png";
+                                  setGenreData((prev) => {
+                                    prev.upload_time[index]["bundle_id"] =
+                                      "https://cdn.starfiles.co/images/dark-icon.png";
+                                    return { ...prev };
+                                  });
                                 }}
                               />
                               <p
@@ -649,7 +659,7 @@ export default function Home({ searchParams }) {
                 <>
                   <h2 className="text-3xl font-semibold mb-2">Apple TV</h2>
                   <div className="w-full">
-                    <div className="flex flex-wrap gap-x-3 gap-y-2 md:gap-x-4 md:gap-y-3" id="apple_tv_apps">
+                    <div className="flex flex-wrap gap-x-2 gap-y-2 xl:gap-x-4 xl:gap-y-3" id="apple_tv_apps">
                       {genreData.apple_tv_apps.map((app, index) => {
                         if (
                           app.bundle_id &&
@@ -661,18 +671,21 @@ export default function Home({ searchParams }) {
                             <Link
                               key={index}
                               href={`/app/${app.id}`}
-                              className="rounded-lg hover:shadow-xl transition-shadow duration-300 ease-in-out md:w-24 w-16"
+                              className="rounded-lg hover:shadow-xl transition-shadow duration-300 ease-in-out md:w-24 w-14"
                             >
-                              <img
-                                loading="lazy"
-                                className="shadow rounded-[24%] h-16 md:h-24 md:w-24
-                                w-16 align-middle
-                                border-none"
+                              <Image
+                                width={96}
+                                height={96}
+                                className="shadow rounded-[24%] w-14 h-14 md:!h-20 md:!w-20 xl:!h-24 xl:!w-24 align-middle border-none"
                                 alt=""
                                 src={`https://sts.st/bi/${app.bundle_id}`}
                                 onError={({ currentTarget }) => {
                                   currentTarget.onerror = null;
-                                  currentTarget.src = "https://cdn.starfiles.co/images/dark-icon.png";
+                                  setGenreData((prev) => {
+                                    prev.apple_tv_apps[index]["bundle_id"] =
+                                      "https://cdn.starfiles.co/images/dark-icon.png";
+                                    return { ...prev };
+                                  });
                                 }}
                               />
                               <p
@@ -732,13 +745,24 @@ export default function Home({ searchParams }) {
           )}
           <div className="rounded-xl shadow-md bg-gray-100 dark:bg-gray-900 mb-4">
             <div className="grid grid-cols-6">
-              <img loading="lazy" src="https://sts.st/bi/com.rockstargames.bully" className="w-[100%] rounded-tl-xl" />
-              <img loading="lazy" src="https://sts.st/bi/com.rockstargames.gtachinatownwars" className="w-[100%]" />
-              <img loading="lazy" src="https://sts.st/bi/com.rockstargames.gta3sa" className="w-[100%]" />
-              <img loading="lazy" src="https://sts.st/bi/com.rockstargames.gta3vc" className="w-[100%]" />
-              <img loading="lazy" src="https://sts.st/bi/com.rockstargames.gta3ios" className="w-[100%]" />
-              <img
-                loading="lazy"
+              <Image
+                width={96}
+                height={96}
+                src="https://sts.st/bi/com.rockstargames.bully"
+                className="w-[100%] rounded-tl-xl"
+              />
+              <Image
+                width={96}
+                height={96}
+                src="https://sts.st/bi/com.rockstargames.gtachinatownwars"
+                className="w-[100%]"
+              />
+              <Image width={96} height={96} src="https://sts.st/bi/com.rockstargames.gta3sa" className="w-[100%]" />
+              <Image width={96} height={96} src="https://sts.st/bi/com.rockstargames.gta3vc" className="w-[100%]" />
+              <Image width={96} height={96} src="https://sts.st/bi/com.rockstargames.gta3ios" className="w-[100%]" />
+              <Image
+                width={96}
+                height={96}
                 src="https://sts.st/bi/com.rockstargames.maxpayne"
                 className="w-[100%] rounded-tr-xl"
               />
@@ -759,17 +783,34 @@ export default function Home({ searchParams }) {
           </div>
           <div className="rounded-xl shadow-md bg-gray-100 dark:bg-gray-900 mb-4">
             <div className="grid grid-cols-6">
-              <img
-                loading="lazy"
+              <Image
+                width={96}
+                height={96}
                 src="https://sts.st/bi/com.lightricks.Enlight-Video"
                 className="w-[100%] rounded-tl-xl"
               />
-              <img loading="lazy" src="https://sts.st/bi/com.lightricks.Enlight-Phoenix" className="w-[100%]" />
-              <img loading="lazy" src="https://sts.st/bi/com.lightricks.Enlight-Editor" className="w-[100%]" />
-              <img loading="lazy" src="https://sts.st/bi/com.lightricks.Lightwave" className="w-[100%]" />
-              <img loading="lazy" src="https://sts.st/bi/com.lightricks.Enlight-Photos" className="w-[100%]" />
-              <img
-                loading="lazy"
+              <Image
+                width={96}
+                height={96}
+                src="https://sts.st/bi/com.lightricks.Enlight-Phoenix"
+                className="w-[100%]"
+              />
+              <Image
+                width={96}
+                height={96}
+                src="https://sts.st/bi/com.lightricks.Enlight-Editor"
+                className="w-[100%]"
+              />
+              <Image width={96} height={96} src="https://sts.st/bi/com.lightricks.Lightwave" className="w-[100%]" />
+              <Image
+                width={96}
+                height={96}
+                src="https://sts.st/bi/com.lightricks.Enlight-Photos"
+                className="w-[100%]"
+              />
+              <Image
+                width={96}
+                height={96}
                 src="https://sts.st/bi/com.lightricks.Enlight-Quickart"
                 className="w-[100%] rounded-tr-xl"
               />
@@ -795,26 +836,37 @@ export default function Home({ searchParams }) {
           </div>
           <div className="rounded-xl shadow-md bg-gray-100 dark:bg-gray-900 mb-4">
             <div className="grid grid-cols-8">
-              <img loading="lazy" src="https://sts.st/bi/com.google.ios.youtube" className="w-[100%] rounded-tl-xl" />
-              <img loading="lazy" src="https://sts.st/bi/com.firecore.infuse" className="w-[100%]" />
-              <img loading="lazy" src="https://sts.st/bi/science.xnu.undecimus" className="w-[100%]" />
-              <img loading="lazy" src="https://sts.st/bi/nz.co.codepoint.minimetro" className="w-[100%]" />
-              <img loading="lazy" src="https://sts.st/bi/com.burbn.instagram" className="w-[100%]" />
-              <img loading="lazy" src="https://sts.st/bi/ru.xitrix.iTorrent" className="w-[100%]" />
-              <img loading="lazy" src="https://sts.st/bi/com.odysseyteam.taurine" className="w-[100%]" />
-              <img
-                loading="lazy"
+              <Image
+                width={96}
+                height={96}
+                src="https://sts.st/bi/com.google.ios.youtube"
+                className="w-[100%] rounded-tl-xl"
+              />
+              <Image width={96} height={96} src="https://sts.st/bi/com.firecore.infuse" className="w-[100%]" />
+              <Image width={96} height={96} src="https://sts.st/bi/science.xnu.undecimus" className="w-[100%]" />
+              <Image width={96} height={96} src="https://sts.st/bi/nz.co.codepoint.minimetro" className="w-[100%]" />
+              <Image width={96} height={96} src="https://sts.st/bi/com.burbn.instagram" className="w-[100%]" />
+              <Image width={96} height={96} src="https://sts.st/bi/ru.xitrix.iTorrent" className="w-[100%]" />
+              <Image width={96} height={96} src="https://sts.st/bi/com.odysseyteam.taurine" className="w-[100%]" />
+              <Image
+                width={96}
+                height={96}
                 src="https://sts.st/bi/com.hammerandchisel.discord"
                 className="w-[100%] rounded-tr-xl"
               />
-              <img loading="lazy" src="https://sts.st/bi/net.Foddy.GettingOverIt" className="w-[100%]" />
-              <img loading="lazy" src="https://sts.st/bi/com.ustwo.monumentvalley2" className="w-[100%]" />
-              <img loading="lazy" src="https://sts.st/bi/com.mojang.minecraftpe" className="w-[100%]" />
-              <img loading="lazy" src="https://sts.st/bi/com.ndemiccreations.plagueinc" className="w-[100%]" />
-              <img loading="lazy" src="https://sts.st/bi/com.spotify.client" className="w-[100%]" />
-              <img loading="lazy" src="https://sts.st/bi/com.zhiliaoapp.musically" className="w-[100%]" />
-              <img loading="lazy" src="https://sts.st/bi/com.libretro.RetroArch" className="w-[100%]" />
-              <img loading="lazy" src="https://sts.st/bi/com.soundcloud.TouchApp" className="w-[100%]" />
+              <Image width={96} height={96} src="https://sts.st/bi/net.Foddy.GettingOverIt" className="w-[100%]" />
+              <Image width={96} height={96} src="https://sts.st/bi/com.ustwo.monumentvalley2" className="w-[100%]" />
+              <Image width={96} height={96} src="https://sts.st/bi/com.mojang.minecraftpe" className="w-[100%]" />
+              <Image
+                width={96}
+                height={96}
+                src="https://sts.st/bi/com.ndemiccreations.plagueinc"
+                className="w-[100%]"
+              />
+              <Image width={96} height={96} src="https://sts.st/bi/com.spotify.client" className="w-[100%]" />
+              <Image width={96} height={96} src="https://sts.st/bi/com.zhiliaoapp.musically" className="w-[100%]" />
+              <Image width={96} height={96} src="https://sts.st/bi/com.libretro.RetroArch" className="w-[100%]" />
+              <Image width={96} height={96} src="https://sts.st/bi/com.soundcloud.TouchApp" className="w-[100%]" />
             </div>
             <div className="p-4">
               <a href="/staff_picks/best_apps_to_sideload">
