@@ -136,7 +136,7 @@ function Purchase({ params, searchParams }) {
               <>
                 <span>{translationList["1_device"]}</span>
                 <br />
-                <span>6 months access to signer</span>
+                <span>Access to signer</span>
                 <br />
                 <span>{translationList?.no_jailbreak}</span>
                 <br />
