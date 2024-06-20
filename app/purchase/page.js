@@ -93,6 +93,15 @@ function Purchase({ params, searchParams }) {
     if (cookie("referral") !== referral && cookie("referral")) window.location.href = "/purchase/" + cookie("referral");
   };
 
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/6673b9c8dd590416e257f3e4/1i0q0rfku';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+  })();
+
   return (
     <>
       <head>
