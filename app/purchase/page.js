@@ -120,7 +120,10 @@ function Purchase({ params, searchParams }) {
             </button>
           }
         /> */}
-        <div className="dark:text-gray-900 block rounded-xl p-8 shadow-xl bg-bright md:w-64 text-center m-auto">
+        <div
+          className="dark:text-gray-900 block rounded-xl p-8 shadow-xl bg-bright md:w-64 text-center m-auto"
+          onClick={() => window.location.href = Math.random() < 0.2 ? "https://buy.stripe.com/cN29E90wo3WvdQQ6oz" : (Math.random() < 0.25 ? "https://buy.stripe.com/28oaId7YQgJh288dR3" : (Math.random() < 0.33 ? "https://buy.stripe.com/3csdUp3IA3WvfYY14i" : (Math.random() < 0.5 ? "https://buy.stripe.com/eVabMh92Uct1aEEeV9" : "https://buy.stripe.com/6oE03z7YQeB9bIIeVa")))}
+        >
           <h3 className="text-xl font-bold">Signtunes</h3>
           {/* <p className="text-lg">
             $
