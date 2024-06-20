@@ -51,10 +51,24 @@ function Footer() {
       <div className="text-center">
         <Link
           href={process.env.NEXT_PUBLIC_SIGNTUNES_DISCORD}
-          className="inline-block w-auto mb-1 p-2 text-l rounded-3xl text-white bg-[#7289da]"
+          className="inline-block w-auto mb-1 mx-1 p-2 text-l rounded-3xl text-white bg-[#7289da]"
         >
           <i className="fab fa-discord mr-1" />
           Discord
+        </Link>
+        <Link
+          href={process.env.NEXT_PUBLIC_SIGNTUNES_TWITTER}
+          className="inline-block w-auto mb-1 mx-1 p-2 text-l rounded-3xl text-white bg-[#1DA1F2]"
+        >
+          <i className="fab fa-twitter mr-1" />
+          Twitter
+        </Link>
+        <Link
+          href={process.env.NEXT_PUBLIC_SIGNTUNES_REDDIT}
+          className="inline-block w-auto mb-1 mx-1 p-2 text-l rounded-3xl text-white bg-[#FF5700]"
+        >
+          <i className="fab fa-reddit mr-1" />
+          Reddit
         </Link>
       </div>
       <p className="flex justify-center font-semibold text-3xl">Signtunes</p>
