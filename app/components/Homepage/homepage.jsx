@@ -531,12 +531,13 @@ export default function Homepage({ searchParams }) {
                               href={`/app/${app.id}`}
                               className="rounded-lg hover:shadow-xl transition-shadow duration-300 ease-in-out md:w-24 w-14"
                             >
-                              <Image
+                              <img
                                 width={96}
                                 height={96}
                                 className="shadow rounded-[24%] w-14 h-14 md:!h-20 md:!w-20 xl:!h-24 xl:!w-24 align-middle border-none"
                                 alt=""
                                 src={`https://sts.st/bi/${app.bundle_id}`}
+                                loading="lazy"
                                 onError={({ currentTarget }) => {
                                   currentTarget.onerror = null;
                                   setGenreData((prev) => {
@@ -578,12 +579,13 @@ export default function Homepage({ searchParams }) {
                               href={`/app/${app.id}`}
                               className="rounded-lg hover:shadow-xl transition-shadow duration-300 ease-in-out md:w-24 w-14"
                             >
-                              <Image
+                              <img
                                 width={96}
                                 height={96}
                                 className="shadow rounded-[24%] w-14 h-14 md:!h-20 md:!w-20 xl:!h-24 xl:!w-24 align-middle border-none"
                                 alt=""
                                 src={`https://sts.st/bi/${app.bundle_id}`}
+                                loading="lazy"
                                 onError={({ currentTarget }) => {
                                   currentTarget.onerror = null;
                                   setGenreData((prev) => {
@@ -625,12 +627,13 @@ export default function Homepage({ searchParams }) {
                               href={`/app/${app.id}`}
                               className="rounded-lg hover:shadow-xl transition-shadow duration-300 ease-in-out md:w-24 w-14"
                             >
-                              <Image
+                              <img
                                 width={96}
                                 height={96}
                                 className="shadow rounded-[24%] w-14 h-14 md:!h-20 md:!w-20 xl:!h-24 xl:!w-24 align-middle border-none"
                                 alt=""
                                 src={`https://sts.st/bi/${app.bundle_id}`}
+                                loading="lazy"
                                 onError={({ currentTarget }) => {
                                   currentTarget.onerror = null;
                                   setGenreData((prev) => {
@@ -673,12 +676,13 @@ export default function Homepage({ searchParams }) {
                               href={`/app/${app.id}`}
                               className="rounded-lg hover:shadow-xl transition-shadow duration-300 ease-in-out md:w-24 w-14"
                             >
-                              <Image
+                              <img
                                 width={96}
                                 height={96}
                                 className="shadow rounded-[24%] w-14 h-14 md:!h-20 md:!w-20 xl:!h-24 xl:!w-24 align-middle border-none"
                                 alt=""
                                 src={`https://sts.st/bi/${app.bundle_id}`}
+                                loading="lazy"
                                 onError={({ currentTarget }) => {
                                   currentTarget.onerror = null;
                                   setGenreData((prev) => {
@@ -745,22 +749,22 @@ export default function Homepage({ searchParams }) {
           )}
           {/* <div className="rounded-xl shadow-md bg-gray-100 dark:bg-gray-900 mb-4">
             <div className="grid grid-cols-6">
-              <Image
+              <img
                 width={96}
                 height={96}
                 src="https://sts.st/bi/com.rockstargames.bully"
                 className="w-[100%] rounded-tl-xl"
               />
-              <Image
+              <img
                 width={96}
                 height={96}
                 src="https://sts.st/bi/com.rockstargames.gtachinatownwars"
                 className="w-[100%]"
               />
-              <Image width={96} height={96} src="https://sts.st/bi/com.rockstargames.gta3sa" className="w-[100%]" />
-              <Image width={96} height={96} src="https://sts.st/bi/com.rockstargames.gta3vc" className="w-[100%]" />
-              <Image width={96} height={96} src="https://sts.st/bi/com.rockstargames.gta3ios" className="w-[100%]" />
-              <Image
+              <img width={96} height={96} src="https://sts.st/bi/com.rockstargames.gta3sa" className="w-[100%]" />
+              <img width={96} height={96} src="https://sts.st/bi/com.rockstargames.gta3vc" className="w-[100%]" />
+              <img width={96} height={96} src="https://sts.st/bi/com.rockstargames.gta3ios" className="w-[100%]" />
+              <img
                 width={96}
                 height={96}
                 src="https://sts.st/bi/com.rockstargames.maxpayne"
@@ -783,32 +787,32 @@ export default function Homepage({ searchParams }) {
           </div> */}
           {/* <div className="rounded-xl shadow-md bg-gray-100 dark:bg-gray-900 mb-4">
             <div className="grid grid-cols-6">
-              <Image
+              <img
                 width={96}
                 height={96}
                 src="https://sts.st/bi/com.lightricks.Enlight-Video"
                 className="w-[100%] rounded-tl-xl"
               />
-              <Image
+              <img
                 width={96}
                 height={96}
                 src="https://sts.st/bi/com.lightricks.Enlight-Phoenix"
                 className="w-[100%]"
               />
-              <Image
+              <img
                 width={96}
                 height={96}
                 src="https://sts.st/bi/com.lightricks.Enlight-Editor"
                 className="w-[100%]"
               />
-              <Image width={96} height={96} src="https://sts.st/bi/com.lightricks.Lightwave" className="w-[100%]" />
-              <Image
+              <img width={96} height={96} src="https://sts.st/bi/com.lightricks.Lightwave" className="w-[100%]" />
+              <img
                 width={96}
                 height={96}
                 src="https://sts.st/bi/com.lightricks.Enlight-Photos"
                 className="w-[100%]"
               />
-              <Image
+              <img
                 width={96}
                 height={96}
                 src="https://sts.st/bi/com.lightricks.Enlight-Quickart"
@@ -836,37 +840,37 @@ export default function Homepage({ searchParams }) {
           </div>
           <div className="rounded-xl shadow-md bg-gray-100 dark:bg-gray-900 mb-4">
             <div className="grid grid-cols-8">
-              <Image
+              <img
                 width={96}
                 height={96}
                 src="https://sts.st/bi/com.google.ios.youtube"
                 className="w-[100%] rounded-tl-xl"
               />
-              <Image width={96} height={96} src="https://sts.st/bi/com.firecore.infuse" className="w-[100%]" />
-              <Image width={96} height={96} src="https://sts.st/bi/science.xnu.undecimus" className="w-[100%]" />
-              <Image width={96} height={96} src="https://sts.st/bi/nz.co.codepoint.minimetro" className="w-[100%]" />
-              <Image width={96} height={96} src="https://sts.st/bi/com.burbn.instagram" className="w-[100%]" />
-              <Image width={96} height={96} src="https://sts.st/bi/ru.xitrix.iTorrent" className="w-[100%]" />
-              <Image width={96} height={96} src="https://sts.st/bi/com.odysseyteam.taurine" className="w-[100%]" />
-              <Image
+              <img width={96} height={96} src="https://sts.st/bi/com.firecore.infuse" className="w-[100%]" />
+              <img width={96} height={96} src="https://sts.st/bi/science.xnu.undecimus" className="w-[100%]" />
+              <img width={96} height={96} src="https://sts.st/bi/nz.co.codepoint.minimetro" className="w-[100%]" />
+              <img width={96} height={96} src="https://sts.st/bi/com.burbn.instagram" className="w-[100%]" />
+              <img width={96} height={96} src="https://sts.st/bi/ru.xitrix.iTorrent" className="w-[100%]" />
+              <img width={96} height={96} src="https://sts.st/bi/com.odysseyteam.taurine" className="w-[100%]" />
+              <img
                 width={96}
                 height={96}
                 src="https://sts.st/bi/com.hammerandchisel.discord"
                 className="w-[100%] rounded-tr-xl"
               />
-              <Image width={96} height={96} src="https://sts.st/bi/net.Foddy.GettingOverIt" className="w-[100%]" />
-              <Image width={96} height={96} src="https://sts.st/bi/com.ustwo.monumentvalley2" className="w-[100%]" />
-              <Image width={96} height={96} src="https://sts.st/bi/com.mojang.minecraftpe" className="w-[100%]" />
-              <Image
+              <img width={96} height={96} src="https://sts.st/bi/net.Foddy.GettingOverIt" className="w-[100%]" />
+              <img width={96} height={96} src="https://sts.st/bi/com.ustwo.monumentvalley2" className="w-[100%]" />
+              <img width={96} height={96} src="https://sts.st/bi/com.mojang.minecraftpe" className="w-[100%]" />
+              <img
                 width={96}
                 height={96}
                 src="https://sts.st/bi/com.ndemiccreations.plagueinc"
                 className="w-[100%]"
               />
-              <Image width={96} height={96} src="https://sts.st/bi/com.spotify.client" className="w-[100%]" />
-              <Image width={96} height={96} src="https://sts.st/bi/com.zhiliaoapp.musically" className="w-[100%]" />
-              <Image width={96} height={96} src="https://sts.st/bi/com.libretro.RetroArch" className="w-[100%]" />
-              <Image width={96} height={96} src="https://sts.st/bi/com.soundcloud.TouchApp" className="w-[100%]" />
+              <img width={96} height={96} src="https://sts.st/bi/com.spotify.client" className="w-[100%]" />
+              <img width={96} height={96} src="https://sts.st/bi/com.zhiliaoapp.musically" className="w-[100%]" />
+              <img width={96} height={96} src="https://sts.st/bi/com.libretro.RetroArch" className="w-[100%]" />
+              <img width={96} height={96} src="https://sts.st/bi/com.soundcloud.TouchApp" className="w-[100%]" />
             </div>
             <div className="p-4">
               <a href="/staff_picks/best_apps_to_sideload">
