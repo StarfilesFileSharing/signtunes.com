@@ -4,7 +4,7 @@ import { getTranslations } from "@/utils/getTranslation";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function Header({ searchParams }) {
+function WhenHeaderLoad({ searchParams }) {
   const referral = searchParams?.referral;
   // console.log("referral1", referral);
   const [translationList, setTranslationList] = useState(null);
@@ -138,7 +138,7 @@ function Header({ searchParams }) {
   };
 
   return (
-    <header className="sticky navbar bg-white dark:text-white dark:bg-gray-800 px-2 md:px-12 py-0 justify-between top-0 z-10">
+    <>
       <div className="navbar-start w-min">
         <div className="dropdown md:hidden">
           <div role="button" tabindex="0" tabIndex="0" className="btn btn-ghost">
@@ -619,7 +619,7 @@ function Header({ searchParams }) {
           </ul>
         </div>
         {/* When UDID Is Not Found */}
-        {!cookie("udid") && !window.location.pathname.startsWith('/purchase') && (
+        {!cookie("udid") && !window.location.pathname.startsWith("/purchase") && (
           <a
             className={`nav_btn rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 text-sm font-medium text-white shadow`}
             href={`/purchase${referral ? `?referral=${referral}` : ""}`}
@@ -631,6 +631,14 @@ function Header({ searchParams }) {
           </a>
         )}
       </div>
+    </>
+  );
+}
+
+function Header({ searchParams }) {
+  return (
+    <header className="sticky navbar bg-white dark:text-white dark:bg-gray-800 px-2 md:px-12 py-0 justify-between top-0 z-10">
+      {typeof window !== "undefined" ? <WhenHeaderLoad searchParams={searchParams} /> : <></>}
     </header>
   );
 }
