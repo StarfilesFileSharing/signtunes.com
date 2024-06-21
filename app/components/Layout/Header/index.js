@@ -619,7 +619,7 @@ function Header({ searchParams }) {
           </ul>
         </div>
         {/* When UDID Is Not Found */}
-        {!cookie("udid") && (
+        {!cookie("udid") && !window.location.pathname.startsWith('/purchase') && (
           <a
             className={`nav_btn rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 text-sm font-medium text-white shadow`}
             href={`/purchase${referral ? `?referral=${referral}` : ""}`}
