@@ -116,7 +116,7 @@ function Footer() {
                     window.location.reload();
                   }}
                 >
-                  <Image width={40} height={40} src={`/assets/images/languages/${language_name}.svg`} className="w-8" />
+                  <img width={40} height={40} src={`/assets/images/languages/${language_name}.svg`} className="w-8" />
                   {language_name}
                 </button>
               );

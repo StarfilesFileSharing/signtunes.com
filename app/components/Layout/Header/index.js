@@ -195,11 +195,11 @@ function WhenHeaderLoad({ searchParams }) {
                 {translationList?.support}
               </a>
             </li>
-            <li className="nav_btn" tabIndex="0">
+            {/* <li className="nav_btn" tabIndex="0">
               <a className="p-2 active:bg-secondary" href="/blog">
                 {translationList?.blog}
               </a>
-            </li>
+            </li> */}
             {cookieChecked && cookie("udid") && cookie("pro") === "false" && (
               <li className="nav_btn" id="upgrade_btn" tabIndex="0">
                 <a

@@ -84,7 +84,7 @@ function Pro({ searchParams }) {
               className="flex m-auto mb-4 rounded-md hover:bg-[#023E8A] px-5 py-2.5 text-sm font-medium text-white shadow bg-primary"
               type="submit"
             >
-              <span>{translationList?.join_signtunes_pro}</span>&nbsp;${process.env.NEXT_PUBLIC_SIGNTUNES_PRO_PRICE}
+              {translationList?.join_signtunes_pro}
             </button>
           }
           searchParams={searchParams}
@@ -94,7 +94,7 @@ function Pro({ searchParams }) {
             className="flex m-auto mb-4 rounded-md hover:bg-[#023E8A] px-5 py-2.5 text-sm font-medium text-white shadow bg-primary"
             href="https://buy.stripe.com/4gw3fL2Ew0KjbII14g"
           >
-            <span>{translationList?.join_signtunes_pro}</span>&nbsp;${process.env.NEXT_PUBLIC_SIGNTUNES_PRO_PRICE}
+            {translationList?.join_signtunes_pro}
           </a>
         </div>
         <div className="block lg:mx-96 mb-12 dark:text-gray-900 rounded-xl p-8 shadow-xl bg-bright">
@@ -116,7 +116,7 @@ function Pro({ searchParams }) {
                     className="rounded-md bg-primary hover:bg-[#023E8A] px-5 py-2.5 text-sm font-medium text-white shadow"
                     type="submit"
                   >
-                    Signtunes Pro ${process.env.NEXT_PUBLIC_SIGNTUNES_PRO_PRICE}
+                    Signtunes Pro
                   </button>
                 </div>
               }
@@ -126,7 +126,7 @@ function Pro({ searchParams }) {
               className="rounded-md bg-primary hover:bg-[#023E8A] px-5 py-2.5 text-sm font-medium text-white shadow"
               href="https://buy.stripe.com/4gw3fL2Ew0KjbII14g"
             >
-              Signtunes Pro ${process.env.NEXT_PUBLIC_SIGNTUNES_PRO_PRICE}
+              Signtunes Pro
             </a>
           </div>
         </div>
