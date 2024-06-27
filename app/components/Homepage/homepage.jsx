@@ -204,6 +204,29 @@ export default function Homepage({ searchParams }) {
                   </a>
                 </div>
               </div> */}
+              {!cookie("udid") && (
+                <div className="alert alert-info shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium">
+                  <div className="alert-child">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      className="stroke-current flex-shrink-0 w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      ></path>
+                    </svg>
+                    <span>{translationList?.welcome}</span>
+                  </div>
+                  <a className="alert-btn" href="/purchase">
+                    {translationList?.get_started}
+                  </a>
+                </div>
+              )}
               <div className="alert alert-info shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium bg-violet-500">
                 <div className="alert-child">
                   <svg
@@ -233,29 +256,6 @@ export default function Homepage({ searchParams }) {
                   </a>
                 </div>
               </div>
-              {!cookie("udid") && (
-                <div className="alert alert-info shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium">
-                  <div className="alert-child">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      className="stroke-current flex-shrink-0 w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      ></path>
-                    </svg>
-                    <span>{translationList?.welcome}</span>
-                  </div>
-                  <a className="alert-btn" href="/purchase">
-                    {translationList?.get_started}
-                  </a>
-                </div>
-              )}
               {cookie("udid") && alertOptions.deviceExists === true ? (
                 !getUserLanguageCode().startsWith("en") ? (
                   <div className="alert alert-info shadow-lg p-3 pb-2 md:p-2 gap-0 mb-4 font-medium">
