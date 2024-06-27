@@ -13,9 +13,6 @@ function Signer({ searchParams }) {
 
   const [translationList, setTranslationList] = useState(null);
 
-  const [showLinksNotReady, setShowLinksNotReady] = useState(false);
-  const [showProgress, setShowProgress] = useState(false);
-
   const [ipa, setIpa] = useState("");
   const [udid, setUdid] = useState("");
   const [customBundleID, setCustomBundleID] = useState("");
@@ -23,7 +20,6 @@ function Signer({ searchParams }) {
   const [customVersion, setCustomVersion] = useState("");
 
   const [newsIcon, setNewsIcon] = useState(<></>);
-  const [starfiles, setStarfiles] = useState({ local: true, public: true });
 
   const [isRemoveUiSupportedDevicesChecked, setIsRemoveUiSupportedDevicesChecked] = useState(true);
 
@@ -31,6 +27,8 @@ function Signer({ searchParams }) {
 
   useEffect(() => {
     if (!calledOnce) {
+      // Global variable
+      window.starfiles = { local: true, public: true };
       calledOnce = true;
       // Checks
       checks();
@@ -155,6 +153,7 @@ function Signer({ searchParams }) {
                   type="file"
                   className="hidden"
                   onChange={() => {
+                    console.log("changed");
                     let str =
                       "/signer-progress#?udid=" +
                       document.getElementById("udid").value +
@@ -238,30 +237,27 @@ function Signer({ searchParams }) {
                         ? "&provision_type=" + document.getElementById("provision_type").value
                         : "") +
                       "&ipa=";
-                    setStarfiles((prev) => ({ ...prev, local_path: str }));
+                    window.starfiles = { ...window.starfiles, local_path: str };
+                    // setStarfiles((prev) => ({ ...prev, local_path: str }));
                     udid !== "" ? uploadFile(false) : alert("Please enter your UDID");
                   }}
                 />
               </label>
-              {showLinksNotReady && (
-                <p id="link_not_ready" className="text-red-600">
-                  {translationList?.upload_not_complete}
-                </p>
-              )}
+              <p id="link_not_ready" style={{ display: "none" }} className="text-red-600">
+                {translationList?.upload_not_complete}
+              </p>
               <div id="preuploadoutput"></div>
-              {showProgress && (
-                <div id="progress">
-                  <div className="flex justify-between mb-1">
-                    <span className="text-base font-medium text-blue-700 dark:text-white" id="status"></span>
-                    <span className="text-sm font-medium text-blue-700 dark:text-white" id="eta"></span>
-                  </div>
-                  <div id="progressContainer" className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700"></div>
-                  <div className="flex justify-between my-1 text-xs">
-                    <div id="upload_speed"></div>
-                    <div id="remaining_size"></div>
-                  </div>
+              <div id="progress" style={{ display: "none" }}>
+                <div className="flex justify-between mb-1">
+                  <span className="text-base font-medium text-blue-700 dark:text-white" id="status"></span>
+                  <span className="text-sm font-medium text-blue-700 dark:text-white" id="eta"></span>
                 </div>
-              )}
+                <div id="progressContainer" className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700"></div>
+                <div className="flex justify-between my-1 text-xs">
+                  <div id="upload_speed"></div>
+                  <div id="remaining_size"></div>
+                </div>
+              </div>
               <div id="output"></div>
               <p className="font-semibold my-1 text-center">{translationList?.or}</p>
               <input
@@ -661,7 +657,14 @@ function Signer({ searchParams }) {
                   type="checkbox"
                   className="sr-only peer"
                   id="make_private"
-                  onChange={() => setStarfiles((prev) => ({ ...prev, public: !prev.public }))}
+                  onChange={
+                    () =>
+                      (window.starfiles = {
+                        ...window.starfiles,
+                        public: window?.starfiles?.public ? false : true,
+                      })
+                    // setStarfiles((prev) => ({ ...prev, public: !prev.public }
+                  }
                 />
                 <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#00ff40]"></div>
                 <span className="text-sm font-medium">{translationList?.make_ipa_private}</span>
