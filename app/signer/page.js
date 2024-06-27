@@ -13,9 +13,6 @@ function Signer({ searchParams }) {
 
   const [translationList, setTranslationList] = useState(null);
 
-  const [showLinksNotReady, setShowLinksNotReady] = useState(false);
-  const [showProgress, setShowProgress] = useState(false);
-
   const [ipa, setIpa] = useState("");
   const [udid, setUdid] = useState("");
   const [customBundleID, setCustomBundleID] = useState("");
@@ -30,8 +27,6 @@ function Signer({ searchParams }) {
 
   useEffect(() => {
     if (!calledOnce) {
-      // Setting Progress to none
-      document.getElementById("progress").style.display = "none";
       // Global variable
       window.starfiles = { local: true, public: true };
       calledOnce = true;
@@ -248,13 +243,11 @@ function Signer({ searchParams }) {
                   }}
                 />
               </label>
-              {showLinksNotReady && (
-                <p id="link_not_ready" className="text-red-600">
-                  {translationList?.upload_not_complete}
-                </p>
-              )}
+              <p id="link_not_ready" style={{ display: "none" }} className="text-red-600">
+                {translationList?.upload_not_complete}
+              </p>
               <div id="preuploadoutput"></div>
-              <div id="progress">
+              <div id="progress" style={{ display: "none" }}>
                 <div className="flex justify-between mb-1">
                   <span className="text-base font-medium text-blue-700 dark:text-white" id="status"></span>
                   <span className="text-sm font-medium text-blue-700 dark:text-white" id="eta"></span>
