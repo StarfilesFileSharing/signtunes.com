@@ -123,12 +123,7 @@ function PurchaseSection({ params, searchParams }) {
         <div
           className="dark:text-gray-900 block rounded-xl p-8 shadow-xl bg-bright md:w-64 text-center m-auto"
           onClick={() =>
-            (window.location.href =
-              Math.random() < 0.33
-                ? "https://buy.stripe.com/3csdUp3IA3WvfYY14i"
-                : Math.random() < 0.5
-                ? "https://buy.stripe.com/eVabMh92Uct1aEEeV9"
-                : "https://buy.stripe.com/6oE03z7YQeB9bIIeVa")
+            (window.location.href = Math.random() < 0.5 ? "https://buy.stripe.com/3csdUp3IA3WvfYY14i" : "https://buy.stripe.com/6oE03z7YQeB9bIIeVa")
           }
         >
           <h3 className="text-xl font-bold">Signtunes</h3>
