@@ -191,7 +191,7 @@ function SignerProgress({ searchParams }) {
     eventSource.onerror = function (error) {
       updateStatusText("Error: Disconnected from Signer (Retrying)");
       console.error(error);
-      setErrors((prev) => prev + " " + err.message);
+      setErrors((prev) => prev + " " + error.message);
       eventSource.close();
       setTimeout(connectEventSource, 2000);
     };
