@@ -62,7 +62,7 @@ function Settings({ searchParams }) {
         const deviceCerts = await axios.get("https://api2.starfiles.co/device_certificate/" + cookie("udid"));
         if (deviceCerts.data) setDeviceCertificate(deviceCerts.data);
         // Check for permissions
-        const perms = await axios.get(`https://api2.starfiles.co/check_enrolment/${cookie("udid")}?organisation=2`);
+        const perms = await axios.get(`https://api2.starfiles.co/device/${cookie("udid")}`);
         if (perms.data) setPermissions(perms.data);
       }
     }
@@ -98,7 +98,7 @@ function Settings({ searchParams }) {
     const devices = await response.data;
     let tempDevices = devices.slice(0);
     for (let i = 0; i < devices.length; i++) {
-      let res = await axios.get(`https://api2.starfiles.co/check_enrolment/${devices[i].udid}?organisation=2`);
+      let res = await axios.get(`https://api2.starfiles.co/device/${devices[i].udid}`);
       if (res.data) tempDevices[i] = { ...tempDevices[i], ...res.data };
     }
     return tempDevices;

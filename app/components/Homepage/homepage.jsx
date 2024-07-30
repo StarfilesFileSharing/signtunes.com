@@ -124,7 +124,7 @@ export default function Homepage({ searchParams }) {
     try {
       const isPro = await axios.get("https://api2.starfiles.co/pro?udid=" + cookie("udid"));
       const deviceExists = await axios.get(
-        "https://api2.starfiles.co/check_enrolment/" + cookie("udid") + "?organisation=2"
+        "https://api2.starfiles.co/device/" + cookie("udid")
       );
       setAlertOptions({
         isPro: isPro?.data?.status || false,
