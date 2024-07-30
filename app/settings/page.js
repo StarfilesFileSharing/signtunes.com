@@ -415,13 +415,13 @@ function Settings({ searchParams }) {
                     try {
                       if (email?.trim().length === 0) alert("Email required");
                       else {
-                        const res = await axios.get(
-                          "https://api2.starfiles.co/link_email?email=" +
-                            email +
-                            "&current_email=" +
-                            currentEmail +
-                            "&udid=" +
-                            cookie("udid")
+                        const res = await axios.post(
+                          "https://api2.starfiles.co/device/" +
+                            cookie("udid"),
+                            {
+                              email,
+                              current_email: currentEmail,
+                            }
                         );
                         const response = res.data;
                         if (response?.status) {

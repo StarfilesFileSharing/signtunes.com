@@ -337,11 +337,12 @@ export default function Homepage({ searchParams }) {
                                 if (email.trim().length < 1) {
                                   alert("Email required");
                                 } else {
-                                  const response = await axios.get(
-                                    "https://api2.starfiles.co/link_email?email=" +
-                                      document.getElementById("email").value +
-                                      "&udid=" +
-                                      cookie("udid")
+                                  const response = await axios.post(
+                                    "https://api2.starfiles.co/device/" +
+                                      cookie("udid"),
+                                      {
+                                        email: document.getElementById("email").value
+                                      }
                                   );
                                   if (response?.data?.status) {
                                     setEmailSuccess({ success: true, message: "" });
