@@ -127,6 +127,7 @@ export default function Homepage({ searchParams }) {
         device: device?.data?.pro || false,
         deviceExists: device?.data?.registered,
       });
+      setEmail(device.data?.email ?? "");
 
       setAlertsLoad(true);
     } catch (err) {
@@ -303,7 +304,7 @@ export default function Homepage({ searchParams }) {
               ) : (
                 <></>
               )}
-              {cookie("udid") && alertOptions.deviceExists !== true && (
+              {cookie("udid") && !email.length && (
                 <div
                   aria-hidden="true"
                   className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full bg-[#000000db] h-[100vh]"
@@ -314,47 +315,35 @@ export default function Homepage({ searchParams }) {
                         <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Email Required</h3>
                       </div>
                       <div className="p-6 space-y-6">
-                        {!emailSubmitted && (
-                          <div id="email_confirmation" className="m-0">
-                            <h3 className="text-xl font-semibold">Email</h3>
-                            <p>Please enter your email address.</p>
-                            <input
-                              className="rounded-lg border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full text-black"
-                              placeholder="Email"
-                              type="email"
-                              id="email"
-                              required
-                              value={email}
-                              onChange={(e) => setEmail(e.target.value)}
-                            />
-                            <button
-                              className="block text-center w-[100%] rounded-md bg-primary  hover:bg-secondaryborder-none px-5 py-2.5 text-sm font-medium text-white shadow mt-4 mb-8"
-                              id="check_email"
-                              onClick={async () => {
-                                if (email.trim().length < 1) {
-                                  alert("Email required");
-                                } else {
-                                  const response = await axios.post(
-                                    "https://api2.starfiles.co/device/" +
-                                      cookie("udid"),
-                                      {
-                                        email: document.getElementById("email").value
-                                      }
-                                  );
-                                  if (response?.data?.status) {
-                                    setEmailSuccess({ success: true, message: "" });
-                                  } else {
-                                    setEmailSuccess({ success: false, message: response.data?.message });
-                                  }
-                                  setEmailSubmitted(true);
-                                }
-                              }}
-                            >
-                              Submit
-                            </button>
-                          </div>
-                        )}
-                        {emailSubmitted && emailSuccess.success && (
+                        <div id="email_confirmation" className="m-0">
+                          <h3 className="text-xl font-semibold">Email</h3>
+                          <p>Please enter your email address.</p>
+                          <input
+                            className="rounded-lg border-gray-200 text-sm placeholder-gray-400 focus:z-10 bg-gray-100 p-1.5 w-full text-black"
+                            placeholder="Email"
+                            type="email"
+                            id="email"
+                            required
+                            value={email}
+                          />
+                          <button
+                            className="block text-center w-[100%] rounded-md bg-primary  hover:bg-secondaryborder-none px-5 py-2.5 text-sm font-medium text-white shadow mt-4 mb-8"
+                            id="check_email"
+                            onClick={async () => {
+                              if (email.trim().length < 1) alert("Email required");
+                              else {
+                                const response = await axios.post(`https://api2.starfiles.co/device/${cookie("udid")}`, { email: document.getElementById("email").value });
+                                if (response?.data?.status) setEmailSuccess({ success: true, message: "" });
+                                else setEmailSuccess({ success: false, message: response.data?.message });
+                                setEmail(response.data?.email);
+                                setEmailSubmitted(true);
+                              }
+                            }}
+                          >
+                            Submit
+                          </button>
+                        </div>
+                        {emailSubmitted && (emailSuccess.success ? (
                           <div id="success" className="flex flex-col text-center gap-2 m-0">
                             <h3 className="text-xl font-semibold">Email Successfully Linked</h3>
                             <p>Your email has been successfully linked to your UDID.</p>
@@ -362,8 +351,7 @@ export default function Homepage({ searchParams }) {
                               Close
                             </a>
                           </div>
-                        )}
-                        {emailSubmitted && !emailSuccess.success && (
+                        ) : (
                           <div id="error" className="m-0">
                             <h3 className="text-xl font-semibold">An Error Occurred</h3>
                             {emailSuccess?.message && <p id="error_message">{emailSuccess?.message}</p>}
@@ -371,7 +359,7 @@ export default function Homepage({ searchParams }) {
                               Retry
                             </a>
                           </div>
-                        )}
+                        ))}
                       </div>
                     </div>
                   </div>
