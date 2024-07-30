@@ -213,21 +213,34 @@ function SignerProgress({ searchParams }) {
       if (working) {
         setShowFeedback(true);
         await axios.post(
-          "https://api2.starfiles.co/ipa_feedback/" + ipa,
-          new URLSearchParams("udid=" + udid + "&working=true")
+          "https://api2.starfiles.co/file/" + ipa,
+          {
+            feedback: true,
+            working: true,
+            udid,
+          }
         );
       } else if (reason == null) {
         setShowAppFeedbackReason(true);
         await axios.post(
-          "https://api2.starfiles.co/ipa_feedback/" + ipa,
-          new URLSearchParams("udid=" + udid + "&working=false")
+          "https://api2.starfiles.co/file/" + ipa,
+          {
+            feedback: true,
+            working: false,
+            udid,
+          }
         );
       } else {
         setShowAppFeedbackReason(false);
         setShowFeedback(true);
         await axios.post(
-          "https://api2.starfiles.co/ipa_feedback/" + ipa,
-          new URLSearchParams("udid=" + udid + "&working=false&reason=" + reason)
+          "https://api2.starfiles.co/file/" + ipa,
+          {
+            feedback: true,
+            working: false,
+            udid,
+            reason,
+          }
         );
       }
     } catch (err) {
