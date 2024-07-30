@@ -72,7 +72,7 @@ function Settings({ searchParams }) {
   // Get Email For Configuration
   const getEmail = async () => {
     try {
-      const response = await axios.get("https://api2.starfiles.co/device_email?udid=" + cookie("udid"));
+      const response = await axios.get("https://api2.starfiles.co/device/" + cookie("udid"));
       const data = response.data;
       if (data.status == true) {
         setEmail(data.email);
