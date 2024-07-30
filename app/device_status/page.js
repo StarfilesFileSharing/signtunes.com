@@ -54,7 +54,7 @@ function DeviceStatus({ searchParams }) {
       // document.cookie = "udid=" + udid + ";expires=" + d.toUTCString() + ";";
       setCookie("udid", udid);
       setOutput("Checking Status");
-      const response = await axios.get("https://api2.starfiles.co/check_enrolment/" + udid + "?organisation=2");
+      const response = await axios.get("https://api2.starfiles.co/device/" + udid);
       const data = response.data;
 
       if (!data.developer_account) router.push("/purchase");
