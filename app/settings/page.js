@@ -18,7 +18,7 @@ function Settings({ searchParams }) {
   const [noDeviceFound, setNoDeviceFound] = useState(false);
   const [devices, setDevices] = useState([]);
   const [deviceCertificate, setDeviceCertificate] = useState(null);
-  const [permissions, setPermissions] = useState(null);
+  const [device, setDevice] = useState(null);
 
   let isCalled = false;
 
@@ -28,7 +28,7 @@ function Settings({ searchParams }) {
       // Get Translations
       getTranslationList();
       // Check Udid Exists
-      getUdid();
+      getDevice();
       // Get Data
       getData();
     }
@@ -50,20 +50,17 @@ function Settings({ searchParams }) {
     }
   };
 
-  // Get Udid
-  const getUdid = async () => {
+  // Get Device
+  const getDevice = async () => {
     if (cookie("udid")) {
       setUdidExists(true);
       // Is pro
-      const pro = await axios.get("https://api2.starfiles.co/pro?udid=" + cookie("udid"));
-      if (pro.data["status"]) {
-        setIsPro(true);
-        // Check for certificates
-        const deviceCerts = await axios.get("https://api2.starfiles.co/device_certificate/" + cookie("udid"));
-        if (deviceCerts.data) setDeviceCertificate(deviceCerts.data);
-        // Check for permissions
-        const perms = await axios.get(`https://api2.starfiles.co/device/${cookie("udid")}`);
-        if (perms.data) setPermissions(perms.data);
+      const device = await axios.get("https://api2.starfiles.co/device/" + cookie("udid"));
+      if (device.data) {
+        setDeviceCertificate(device.data.certificates);
+        setDevice(device.data);
+
+        if (device.data["pro"]) setIsPro(true);
       }
     }
     if (!cookie("udid")) setNoDeviceFound(true);
@@ -72,11 +69,9 @@ function Settings({ searchParams }) {
   // Get Email For Configuration
   const getEmail = async () => {
     try {
-      const response = await axios.get("https://api2.starfiles.co/device_email?udid=" + cookie("udid"));
-      const data = response.data;
-      if (data.status == true) {
-        setEmail(data.email);
-        setCurrentEmail(data.email);
+      if (device.status == true) {
+        setEmail(device.email);
+        setCurrentEmail(device.email);
       }
     } catch (err) {
       console.error(err.message);
@@ -415,13 +410,13 @@ function Settings({ searchParams }) {
                     try {
                       if (email?.trim().length === 0) alert("Email required");
                       else {
-                        const res = await axios.get(
-                          "https://api2.starfiles.co/link_email?email=" +
-                            email +
-                            "&current_email=" +
-                            currentEmail +
-                            "&udid=" +
-                            cookie("udid")
+                        const res = await axios.post(
+                          "https://api2.starfiles.co/device/" +
+                            cookie("udid"),
+                            {
+                              email,
+                              current_email: currentEmail,
+                            }
                         );
                         const response = res.data;
                         if (response?.status) {
@@ -445,7 +440,7 @@ function Settings({ searchParams }) {
             {currentSetting === "certificates" && udidExists ? (
               <div id="certificates_content">
                 {isPro ? (
-                  !permissions?.registered || !permissions.enrolled || !permissions.signed ? (
+                  !device?.registered || !device.enrolled || !device.signed ? (
                     <div className="mx-auto">
                       <a
                         className="rounded-md bg-[#0077B6] hover:bg-[#023E8A] px-2.5 py-2.5 text-lg font-medium text-white shadow"

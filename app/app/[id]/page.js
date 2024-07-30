@@ -62,8 +62,6 @@ function App({ params, searchParams }) {
       calledOnce = true;
       // Get Translations
       getTranslationList();
-      // Check Title
-      checkTitle();
       // Get Data
       getData();
     }
@@ -74,16 +72,6 @@ function App({ params, searchParams }) {
     try {
       const translations = await getTranslations();
       setTranslationList(translations);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-  // Check Title
-  const checkTitle = async () => {
-    try {
-      const res = await axios.get("https://api2.starfiles.co/file/" + id);
-      setTitle(res.data?.clean_name ?? "Signtunes");
     } catch (err) {
       console.error(err.message);
     }
