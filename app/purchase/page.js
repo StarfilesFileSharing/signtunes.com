@@ -158,10 +158,8 @@ function PurchaseSection({ params, searchParams }) {
           <a
             className="mt-6 text-white bg-primary hover:bg-[#023E8A] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-block"
             href={
-              Math.random() < 0.33
+              Math.random() < 0.5
                 ? "https://buy.stripe.com/3csdUp3IA3WvfYY14i"
-                : Math.random() < 0.5
-                ? "https://buy.stripe.com/eVabMh92Uct1aEEeV9"
                 : "https://buy.stripe.com/6oE03z7YQeB9bIIeVa"
             }
           >
