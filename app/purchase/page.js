@@ -123,7 +123,12 @@ function PurchaseSection({ params, searchParams }) {
         <div
           className="dark:text-gray-900 block rounded-xl p-8 shadow-xl bg-bright md:w-64 text-center m-auto"
           onClick={() =>
-            (window.location.href = Math.random() < 0.5 ? "https://buy.stripe.com/3csdUp3IA3WvfYY14i" : "https://buy.stripe.com/6oE03z7YQeB9bIIeVa")
+            (window.location.href = 
+              Math.random() < 0.33
+                ? "https://buy.stripe.com/3csdUp3IA3WvfYY14i"
+                : Math.random() < 0.5
+                ? "https://buy.stripe.com/eVabMh92Uct1aEEeV9"
+                : "https://buy.stripe.com/6oE03z7YQeB9bIIeVa")
           }
         >
           <h3 className="text-xl font-bold">Signtunes</h3>
@@ -158,8 +163,10 @@ function PurchaseSection({ params, searchParams }) {
           <a
             className="mt-6 text-white bg-primary hover:bg-[#023E8A] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-block"
             href={
-              Math.random() < 0.5
+              Math.random() < 0.33
                 ? "https://buy.stripe.com/3csdUp3IA3WvfYY14i"
+                : Math.random() < 0.5
+                ? "https://buy.stripe.com/eVabMh92Uct1aEEeV9"
                 : "https://buy.stripe.com/6oE03z7YQeB9bIIeVa"
             }
           >
