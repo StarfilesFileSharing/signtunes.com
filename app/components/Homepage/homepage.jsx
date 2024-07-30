@@ -122,13 +122,10 @@ export default function Homepage({ searchParams }) {
   // Get Alerts
   const getAlerts = async () => {
     try {
-      const isPro = await axios.get("https://api2.starfiles.co/pro?udid=" + cookie("udid"));
-      const deviceExists = await axios.get(
-        "https://api2.starfiles.co/device/" + cookie("udid")
-      );
+      const device = await axios.get("https://api2.starfiles.co/device/" + cookie("udid"));
       setAlertOptions({
-        isPro: isPro?.data?.status || false,
-        deviceExists: deviceExists?.data?.registered,
+        device: device?.data?.pro || false,
+        deviceExists: device?.data?.registered,
       });
 
       setAlertsLoad(true);
