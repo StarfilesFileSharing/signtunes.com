@@ -119,7 +119,7 @@ function Claim({ searchParams }) {
               </button>
             </div>
           )}
-          {showNext && (
+          {allDone && (
             <div id="ready">
               <h3 className="text-xl font-semibold">You're all set!</h3>
               <p>
