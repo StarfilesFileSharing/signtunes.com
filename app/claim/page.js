@@ -43,7 +43,7 @@ function Claim({ searchParams }) {
           return;
         } else {
           const data = await r.json();
-          if (data.error) {
+          if (!data.status) {
             setError(data.message);
             return;
           } else {
