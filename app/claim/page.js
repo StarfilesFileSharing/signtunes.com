@@ -33,6 +33,11 @@ function Claim({ searchParams }) {
 
   const submitIosUdid = async () => {
     console.log("submitting UDID");
+    //Use regex to check if UDID is valid. ^([a-fA-F0-9]{40}|[0-9]{8}-[a-fA-F0-9]{16})$
+    if (!/^[a-fA-F0-9]{40}$/.test(udid)) {
+      setError("Invalid UDID");
+      return;
+    }
     setLoading(true);
     try {
       fetch(`https://api2.starfiles.co/claim_gift_code/${codeInput}?udid=${udid}`, {
