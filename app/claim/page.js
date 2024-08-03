@@ -40,7 +40,7 @@ function Claim({ searchParams }) {
     }
     setLoading(true);
     try {
-      fetch(`https://api2.starfiles.co/claim_gift_code/?code=${codeInput}&udid=${udid}`, {
+      fetch(`https://api2.starfiles.co/gift_code/${codeInput}?udid=${udid}`, {
         method: "POST"
       }).then(async (r) => {
         if (r.status !== 200 && r.status !== 203) {
