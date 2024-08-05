@@ -90,11 +90,11 @@ function Settings({ searchParams }) {
   // Auxillary Functions
   async function listDevices() {
     const response = await axios.get("https://api2.starfiles.co/devices/" + cookie("udid"));
-    const devices = await response.data;
+    const devices = await response.data.result;
     let tempDevices = devices.slice(0);
     for (let i = 0; i < devices.length; i++) {
       let res = await axios.get(`https://api2.starfiles.co/device/${devices[i].udid}`);
-      if (res.data) tempDevices[i] = { ...tempDevices[i], ...res.data };
+      if (res.data) tempDevices[i] = { ...tempDevices[i], ...res.data.result };
     }
     return tempDevices;
   }

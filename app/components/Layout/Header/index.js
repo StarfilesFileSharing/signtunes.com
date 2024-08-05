@@ -67,9 +67,9 @@ function WhenHeaderLoad({ searchParams }) {
         console.log("test2");
         const devices = await axios.get("https://api2.starfiles.co/devices/" + cookie("udid"));
         setDevicesList(devices.data.result);
-        if (devices.data?.length === 0) setDeviceName("");
+        if (devices.data.result?.length === 0) setDeviceName("");
         else {
-          for (let device of devices.data) {
+          for (let device of devices.data.result) {
             if (device["udid"] == cookie("udid")) {
               if (device["name"] == device["udid"]) {
                 setDeviceName(
