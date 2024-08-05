@@ -61,7 +61,7 @@ export default function Homepage({ searchParams }) {
           }`
         );
         setGenreData((prev) => {
-          prev[gt] = response.data;
+          prev[gt] = response.data.result;
           return { ...prev };
         });
         if (gt === "trending") {
@@ -71,7 +71,7 @@ export default function Homepage({ searchParams }) {
             }`
           );
           setGenreData((prev) => {
-            prev["apple_tv_apps"] = response.data;
+            prev["apple_tv_apps"] = response.data.result;
             return { ...prev };
           });
         }
