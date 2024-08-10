@@ -107,9 +107,9 @@ export default function Homepage({ searchParams }) {
       try {
         const response = await axios.get("https://api2.starfiles.co/statistics?extension=ipa");
         setCount((prev) => {
-          prev["uploadCount"] = formatNumber(response.data.upload_count);
-          prev["downloadCount"] = formatNumber(response.data.download_count);
-          prev["sizeUpload"] = formatSize(response.data?.bits_uploaded / 8);
+          prev["uploadCount"] = formatNumber(response.data.result.upload_count);
+          prev["downloadCount"] = formatNumber(response.data.result.download_count);
+          prev["sizeUpload"] = formatSize(response.data.result.bits_uploaded / 8);
           return { ...prev };
         });
         setStatsLoad(true);
