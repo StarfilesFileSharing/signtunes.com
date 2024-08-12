@@ -325,6 +325,7 @@ export default function Homepage({ searchParams }) {
                             id="email"
                             required
                             value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                           />
                           <button
                             className="block text-center w-[100%] rounded-md bg-primary  hover:bg-secondaryborder-none px-5 py-2.5 text-sm font-medium text-white shadow mt-4 mb-8"
