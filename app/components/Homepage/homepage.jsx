@@ -32,11 +32,11 @@ export default function Homepage({ searchParams }) {
   const [isRegistered, setIsRegistered] = useState(false);
   const defaultIconUrl = "https://cdn.starfiles.co/images/dark-icon.png"
   let isCalled = false;
-const uuid = cookie("udid")
+const udid  = cookie("udid")
   useEffect(() => {
     if (!isCalled) {
       isCalled = true;
-      if(uuid){
+      if(udid){
         checkDeviceRegistration()
       }
       // Revealing main content once the site is loaded
@@ -52,7 +52,7 @@ const uuid = cookie("udid")
       // Alerts
       getAlerts();
     }
-  }, [uuid]);
+  }, [udid]);
 
   async function checkDeviceRegistration() {
     try {
