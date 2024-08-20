@@ -21,5 +21,5 @@ export function setCookie(name, value, days) {
   // TODO uncomment first line
   // document.cookie = name + "=" + (value || "") + expires + "; path=/;domain=.signtunes.com";
   // document.cookie = name + "=" + (value || "") + expires;
-  localStorage.setItem(name, value || "");
+  localStorage.setItem(name, value ?? "");
 }

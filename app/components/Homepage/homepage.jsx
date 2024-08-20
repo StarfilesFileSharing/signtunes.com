@@ -29,6 +29,7 @@ export default function Homepage({ searchParams }) {
   const [translationList, setTranslationList] = useState(null);
   const [count, setCount] = useState({ uploadCount: "", downloadCount: "", sizeUpload: "" });
   const [currentClicked, setCurrentClicked] = useState("All");
+  const defaultIconUrl = "https://cdn.starfiles.co/images/dark-icon.png"
 
   let isCalled = false;
 
@@ -107,9 +108,9 @@ export default function Homepage({ searchParams }) {
       try {
         const response = await axios.get("https://api2.starfiles.co/statistics?extension=ipa");
         setCount((prev) => {
-          prev["uploadCount"] = formatNumber(response.data.upload_count);
-          prev["downloadCount"] = formatNumber(response.data.download_count);
-          prev["sizeUpload"] = formatSize(response.data?.bits_uploaded / 8);
+          prev["uploadCount"] = formatNumber(response.data.result.upload_count);
+          prev["downloadCount"] = formatNumber(response.data.result.download_count);
+          prev["sizeUpload"] = formatSize(response.data.result.bits_uploaded / 8);
           return { ...prev };
         });
         setStatsLoad(true);
@@ -304,7 +305,7 @@ export default function Homepage({ searchParams }) {
               ) : (
                 <></>
               )}
-              {cookie("udid") && !email.length && (
+              {cookie("udid") && cookie("registed") != "false" | "" && !email.length && (
                 <div
                   aria-hidden="true"
                   className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full bg-[#000000db] h-[100vh]"
@@ -447,7 +448,7 @@ export default function Homepage({ searchParams }) {
                 </dl>
               )}
               <ul
-                className="flex flex-row gap-x-2 gap-y-2 text-sm font-medium block xl:hidden col-span-4 py-1 px-2 flex-wrap rounded-lg"
+                className="flex flex-row gap-x-2 gap-y-2 text-sm font-medium  xl:hidden col-span-4 py-1 px-2 flex-wrap rounded-lg"
                 id="categories_mobile"
               >
                 <li>
@@ -525,11 +526,8 @@ export default function Homepage({ searchParams }) {
                                 src={`https://sts.st/bi/${app.bundle_id}`}
                                 loading="lazy"
                                 onError={({ currentTarget }) => {
-                                  currentTarget.onerror = null;
-                                  setGenreData((prev) => {
-                                    prev.popular[index]["bundle_id"] = "https://cdn.starfiles.co/images/dark-icon.png";
-                                    return { ...prev };
-                                  });
+                                  currentTarget.onerror = null; // Prevent infinite loop if fallback URL also fails
+                                  currentTarget.src = defaultIconUrl; // Set to fallback URL directly
                                 }}
                               />
                               <p
@@ -573,11 +571,8 @@ export default function Homepage({ searchParams }) {
                                 src={`https://sts.st/bi/${app.bundle_id}`}
                                 loading="lazy"
                                 onError={({ currentTarget }) => {
-                                  currentTarget.onerror = null;
-                                  setGenreData((prev) => {
-                                    prev.trending[index]["bundle_id"] = "https://cdn.starfiles.co/images/dark-icon.png";
-                                    return { ...prev };
-                                  });
+                                  currentTarget.onerror = null; // Prevent infinite loop if fallback URL also fails
+                                  currentTarget.src = defaultIconUrl; // Set to fallback URL directly
                                 }}
                               />
                               <p
@@ -621,12 +616,8 @@ export default function Homepage({ searchParams }) {
                                 src={`https://sts.st/bi/${app.bundle_id}`}
                                 loading="lazy"
                                 onError={({ currentTarget }) => {
-                                  currentTarget.onerror = null;
-                                  setGenreData((prev) => {
-                                    prev.upload_time[index]["bundle_id"] =
-                                      "https://cdn.starfiles.co/images/dark-icon.png";
-                                    return { ...prev };
-                                  });
+                                  currentTarget.onerror = null; // Prevent infinite loop if fallback URL also fails
+                                  currentTarget.src = defaultIconUrl; // Set to fallback URL directly
                                 }}
                               />
                               <p
@@ -670,12 +661,8 @@ export default function Homepage({ searchParams }) {
                                 src={`https://sts.st/bi/${app.bundle_id}`}
                                 loading="lazy"
                                 onError={({ currentTarget }) => {
-                                  currentTarget.onerror = null;
-                                  setGenreData((prev) => {
-                                    prev.apple_tv_apps[index]["bundle_id"] =
-                                      "https://cdn.starfiles.co/images/dark-icon.png";
-                                    return { ...prev };
-                                  });
+                                  currentTarget.onerror = null; // Prevent infinite loop if fallback URL also fails
+                                  currentTarget.src = defaultIconUrl; // Set to fallback URL directly
                                 }}
                               />
                               <p
