@@ -29,13 +29,16 @@ export default function Homepage({ searchParams }) {
   const [translationList, setTranslationList] = useState(null);
   const [count, setCount] = useState({ uploadCount: "", downloadCount: "", sizeUpload: "" });
   const [currentClicked, setCurrentClicked] = useState("All");
+  const [isRegistered, setIsRegistered] = useState(false);
   const defaultIconUrl = "https://cdn.starfiles.co/images/dark-icon.png"
-
   let isCalled = false;
-
+const uuid = cookie("udid")
   useEffect(() => {
     if (!isCalled) {
       isCalled = true;
+      if(uuid){
+        checkDeviceRegistration()
+      }
       // Revealing main content once the site is loaded
       setMainContentLoad(true);
       // Get genre
@@ -49,8 +52,23 @@ export default function Homepage({ searchParams }) {
       // Alerts
       getAlerts();
     }
-  }, []);
+  }, [uuid]);
 
+  async function checkDeviceRegistration() {
+    try {
+      const response = await axios.get(`https://api2.starfiles.co/device/${udid}`);
+      const data = response.data;
+
+      if (data.result && data.result.registered !== undefined) {
+        setIsRegistered(data.result.registered);
+      } else {
+        throw new Error("Device registration status is undefined");
+      }
+    } catch (error) {
+      console.error("Error checking device registration:", error);
+      setIsRegistered(false); // or null to indicate the status couldn't be determined
+    }
+  }
   // Get Genre
   const getGenre = async (genre) => {
     const genreTypes = ["popular", "trending", "upload_time"];
@@ -305,7 +323,7 @@ export default function Homepage({ searchParams }) {
               ) : (
                 <></>
               )}
-              {cookie("udid") && cookie("registed") != "false" | "" && !email.length && (
+              {cookie("udid") && isRegistered && !email.length && (
                 <div
                   aria-hidden="true"
                   className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full bg-[#000000db] h-[100vh]"
