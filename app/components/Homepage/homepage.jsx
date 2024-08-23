@@ -55,6 +55,7 @@ export default function Homepage({ searchParams }) {
     }
   }, [udid]);
 
+  
   async function checkDeviceRegistration() {
     try {
       const response = await axios.get(`https://api2.starfiles.co/device/${udid}`);
