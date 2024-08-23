@@ -5,7 +5,7 @@ import { getTranslations } from "@/utils/getTranslation";
 import getUserLanguageCode from "@/utils/userLanguageCode";
 import axios from "axios";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "../Layout/Header";
 import Image from "next/image";
 
@@ -30,13 +30,14 @@ export default function Homepage({ searchParams }) {
   const [count, setCount] = useState({ uploadCount: "", downloadCount: "", sizeUpload: "" });
   const [currentClicked, setCurrentClicked] = useState("All");
   const [isRegistered, setIsRegistered] = useState(false);
+  
   const defaultIconUrl = "https://cdn.starfiles.co/images/dark-icon.png"
-  let isCalled = false;
-const uuid = cookie("udid")
+  const isCalled = useRef(false); // Use useRef to persist across renders
+  const udid  = cookie("udid")
   useEffect(() => {
-    if (!isCalled) {
-      isCalled = true;
-      if(uuid){
+    if (!isCalled.current) {
+      isCalled.current = true;
+      if(udid){
         checkDeviceRegistration()
       }
       // Revealing main content once the site is loaded
@@ -52,8 +53,9 @@ const uuid = cookie("udid")
       // Alerts
       getAlerts();
     }
-  }, [uuid]);
+  }, [udid]);
 
+  
   async function checkDeviceRegistration() {
     try {
       const response = await axios.get(`https://api2.starfiles.co/device/${udid}`);

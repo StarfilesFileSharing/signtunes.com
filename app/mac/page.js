@@ -36,7 +36,7 @@ function Mac({ searchParams }) {
             <span>{translationList?.mac_udid_grabber}</span>
           </h1>
         </div>
-        <div className="block rounded-xl p-8 shadow-xl bg-bright dark:text-black lg:mx-96 mb-12 dark:text-gray-900">
+        <div className="block rounded-xl p-8 shadow-xl bg-bright dark:text-black lg:mx-96 mb-12">
           {!UDID ? (
             <div>
               <h3 className="text-xl font-semibold">

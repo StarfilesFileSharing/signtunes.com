@@ -2,7 +2,7 @@
 import cookie, { setCookie } from "@/utils/cookies";
 import { getTranslations } from "@/utils/getTranslation";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function WhenHeaderLoad({ searchParams }) {
   const referral = searchParams?.referral;
@@ -15,24 +15,17 @@ function WhenHeaderLoad({ searchParams }) {
   const [hideDeviceName, setHideDeviceName] = useState(false);
   const [deviceInfo, setDeviceInfo] = useState(null);
 
-  let isCalled = false;
+  const isCalled = useRef(false); // Use useRef to persist across renders
+
 
   useEffect(() => {
-    if (!isCalled) {
-      isCalled = true;
-      // Check Dark Theme
+    if (!isCalled.current) {
+      isCalled.current = true;
       checkDarkTheme();
-      // Get Translations
       getTranslationList();
-      // Check Cookie
       checkCookie();
     }
   }, []);
-
-  useEffect(() => {
-    console.log("yes");
-    checkCookie();
-  }, [localStorage.getItem("udid")]);
 
   // Check Dark THeme
   const checkDarkTheme = async () => {
@@ -154,7 +147,7 @@ function WhenHeaderLoad({ searchParams }) {
           </div>
           <ul
             tabIndex="0"
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 bg-white dark:bg-gray-900"
+            className="menu menu-compact dropdown-content mt-3 p-2 shadow  rounded-box w-52 bg-white dark:bg-gray-900"
           >
             {cookie("udid") && (
               <li className="nav_btn customer_only" tabIndex="0">
@@ -214,7 +207,7 @@ function WhenHeaderLoad({ searchParams }) {
               <form className="flex p-0" action="/search">
                 <div className="relative">
                   <input
-                    className="h-10 rounded-lg border-gray-200 pr-10 text-sm placeholder-gray-400 focus:z-10 bg-gray-200 p-4 w-48 dark:bg-gray-600 dark:text-gray-200 dark:border-none dark:text-black"
+                    className="h-10 rounded-lg border-gray-200 pr-10 text-sm placeholder-gray-400 focus:z-10 bg-gray-200 p-4 w-48 dark:bg-gray-600  dark:border-none dark:text-black"
                     placeholder={translationList?.search}
                     type="text"
                     name="q"
@@ -249,7 +242,7 @@ function WhenHeaderLoad({ searchParams }) {
         <form className="mb-0 ml-4 hidden lg:flex" action="/search">
           <div className="relative">
             <input
-              className="h-10 rounded-lg border-gray-200 pr-10 text-sm placeholder-gray-400 focus:z-10 bg-gray-200 p-4 dark:bg-gray-600 dark:text-gray-200 dark:border-none dark:text-black"
+              className="h-10 rounded-lg border-gray-200 pr-10 text-sm placeholder-gray-400 focus:z-10 bg-gray-200 p-4 dark:bg-gray-600  dark:border-none dark:text-black"
               placeholder={translationList?.search}
               type="text"
               name="q"
@@ -338,7 +331,7 @@ function WhenHeaderLoad({ searchParams }) {
               <ul
                 aria-labelledby="help-dropdown-button"
                 // id="help-dropdown"
-                className="menu mt-2 dropdown-content absolute z-10 text-sm rounded-lg shadow-md bg-white border border-gray-100 text-gray-900 dark:bg-gray-700 dark:border-gray-700 text-gray-500 dark:text-gray-400"
+                className="menu mt-2 dropdown-content absolute z-10 text-sm rounded-lg shadow-md bg-white border border-gray-100  dark:bg-gray-700 dark:border-gray-700 text-gray-500 dark:text-gray-400"
               >
                 <li>
                   <a
@@ -487,7 +480,7 @@ function WhenHeaderLoad({ searchParams }) {
           </div>
           <ul
             id="dropdown_account"
-            className="z-10 mt-2 shadow menu dropdown-content dark:border dark:border-light bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+            className="z-10 mt-2  menu dropdown-content dark:border dark:border-light bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
           >
             <li className="w-40">
               <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
@@ -635,10 +628,17 @@ function WhenHeaderLoad({ searchParams }) {
   );
 }
 
+
 function Header({ searchParams }) {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true); // Set state to true after component mounts
+  }, []);
+
   return (
     <header className="sticky navbar bg-white dark:text-white dark:bg-gray-800 px-2 md:px-12 py-0 justify-between top-0 z-10">
-      {typeof window !== "undefined" ? <WhenHeaderLoad searchParams={searchParams} /> : <></>}
+      {isClient && typeof window !== "undefined"  ? <WhenHeaderLoad searchParams={searchParams} /> : null}
     </header>
   );
 }
