@@ -12,6 +12,7 @@ export default function cookie(name) {
   return null;
 }
 export function setCookie(name, value, days) {
+  
   // var expires = "";
   // if (days) {
   // var date = new Date();
