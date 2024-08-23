@@ -6,6 +6,7 @@ import TitleTags from "./components/Title";
 import "./globals.css";
 import TagManager from "react-gtm-module";
 import { Suspense } from "react";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 export const runtime = "edge";
@@ -17,7 +18,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <head>
+      <Head>
         <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -264,7 +265,7 @@ export default function RootLayout({ children }) {
             document.documentElement.classList.remove('dark');`,
           }}
         />
-      </head>
+      </Head>
       <body className={inter.className + " dark:bg-[#13161f] dark:text-gray-200 bg-white text-black"}>
         <DefaultTheme>{children}</DefaultTheme>
       </body>
