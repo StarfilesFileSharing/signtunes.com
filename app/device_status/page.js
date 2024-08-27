@@ -55,7 +55,7 @@ function DeviceStatus({ searchParams }) {
       setCookie("udid", udid);
       setOutput("Checking Status");
       const response = await axios.get("https://api2.starfiles.co/device/" + udid);
-      const data = response.data;
+      const data = response.data?.result;
 
       if (!data.developer_account) router.push("/purchase");
 
