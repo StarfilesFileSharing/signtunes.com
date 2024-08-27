@@ -3,9 +3,10 @@ import { setCookie } from "@/utils/cookies";
 import { getTranslations } from "@/utils/getTranslation";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
+import Head from 'next/head';
 
 function DeviceStatus({ searchParams }) {
   const [translationList, setTranslationList] = useState(null);
@@ -13,15 +14,12 @@ function DeviceStatus({ searchParams }) {
   const router = useRouter();
   const [output, setOutput] = useState("");
   const [hideButton, setHideButton] = useState(false);
-  let isCalled = false;
+  const isCalled = useRef(false); // Use useRef to persist across renders
 
   useEffect(() => {
-    if (!isCalled) {
-      isCalled = true;
-      // Get Translations
+    if (!isCalled.current) {
+      isCalled.current = true;
       getTranslationList();
-      // Check Cookie
-      //checkCookie();
     }
   }, []);
 
@@ -41,7 +39,8 @@ function DeviceStatus({ searchParams }) {
   // };
 
   // On Check
-  const onCheck = async () => {
+  const onCheck = async (e) => {
+    e.preventDefault()
     try {
       if (!udid.match(/^([a-fA-F0-9]{40}|[0-9]{8}-[a-fA-F0-9]{16})$/)) {
         setOutput("Invalid UDID");
@@ -242,9 +241,9 @@ function DeviceStatus({ searchParams }) {
 
   return (
     <>
-      <head>
+      <Head>
         <TitleTags title="Device Status" />
-      </head>
+      </Head>
       <Header searchParams={searchParams} />
       <div className="mx-5 md:mx-10 mt-5" id="device_status">
         <div className="lg:mx-96 mb-8 flex items-center">

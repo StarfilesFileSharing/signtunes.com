@@ -3,20 +3,23 @@ import cookie, { setCookie } from "@/utils/cookies";
 import { getTranslations } from "@/utils/getTranslation";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function Footer() {
   const [translationList, setTranslationList] = useState(null);
   const [translationButtons, setTranslationButtons] = useState([]);
-  let initialRun = false;
+  // let initialRun = false;
+  const initialRun = useRef(false); // Use useRef to persist across renders
 
   useEffect(() => {
-    if (!initialRun) {
-      // Get Translations
-      getTranslationList();
-      // Check Cookie
-      checkCookie();
-      initialRun = true;
+    if (typeof window !== 'undefined') {
+      if (!initialRun.current) {
+        // Get Translations
+        getTranslationList();
+        // Check Cookie
+        checkCookie();
+        initialRun.current = true;
+      }
     }
   }, []);
 

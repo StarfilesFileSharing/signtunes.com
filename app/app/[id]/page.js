@@ -94,7 +94,7 @@ function App({ params, searchParams }) {
       let appdb_data = {};
       let appdb_checked = true;
       const res = await axios.get("https://api2.starfiles.co/file/" + id);
-      const data = res.data;
+      const data = res.data.result;
       if (typeof data.name == "undefined") {
         setName("File not found");
         setShowIcon(false);
@@ -121,7 +121,7 @@ function App({ params, searchParams }) {
             });
 
             let appstoreRes = await axios.get("https://api2.starfiles.co/appstore_lookup?bundleId=" + data.bundle_id);
-            let appstore_data = appstoreRes.data;
+            let appstore_data = appstoreRes.data.result;
             if (appstore_data?.resultCount >= 1) {
               appstore_data = appstore_data.results[0];
               setName(appstore_data.trackName);
@@ -283,7 +283,7 @@ function App({ params, searchParams }) {
         }
 
         await axios.get("https://api2.starfiles.co/bundle_id/" + data.bundle_id).then((bundleData) => {
-          let bundle_id_data = bundleData.data;
+          let bundle_id_data = bundleData.data.result;
           let highestVersion = null;
           setDownloadLinks(
             <>

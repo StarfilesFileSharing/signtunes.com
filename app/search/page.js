@@ -2,20 +2,21 @@
 import { getTranslations } from "@/utils/getTranslation";
 import axios from "axios";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
+import Head from "next/head";
 
 function Search({ searchParams }) {
   const { q } = searchParams;
   const [translationList, setTranslationList] = useState(null);
-  const [searchData, setSearchData] = useState(null);
+  const [searchData, setSearchData] = useState([]);
 
-  let isCalled = false;
+  const isCalled = useRef(false); // Use useRef to persist across renders
 
   useEffect(() => {
-    if (!isCalled) {
-      isCalled = true;
+    if (!isCalled.current) {
+      isCalled.current = true;
       // Get Translations
       getTranslationList();
       // Get Search Data
@@ -41,7 +42,7 @@ function Search({ searchParams }) {
           q ? q : ""
         }`
       );
-      setSearchData(res.data ?? []);
+      setSearchData(res?.data?.result ?? []);
     } catch (err) {
       console.error(err.message);
     }
@@ -49,9 +50,9 @@ function Search({ searchParams }) {
 
   return (
     <>
-      <head>
+      <Head>
         <TitleTags title="Search" />
-      </head>
+      </Head>
       <Header searchParams={searchParams} />
       <div className="mx-5 md:mx-10 mt-5">
         <form className="p-0 hidden md:flex lg:hidden" action="/search">
@@ -75,9 +76,9 @@ function Search({ searchParams }) {
         </form>
         <h1 className="text-3xl font-semibold mb-2">{translationList?.search_results}</h1>
         <div className="grid grid-cols-3 md:grid-cols-4 lg:md:grid-cols-8 gap-2" id="apps">
-          {searchData ? (
+          {searchData&&searchData ? (
             <>
-              {searchData.map((app, index) => {
+              {searchData?.map((app, index) => {
                 let name =
                   app.package_name !== null && app.package_name.length > 0
                     ? app.package_name
