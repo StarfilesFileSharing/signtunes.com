@@ -57,10 +57,10 @@ function Settings({ searchParams }) {
       // Is pro
       const device = await axios.get("https://api2.starfiles.co/device/" + cookie("udid"));
       if (device.data) {
-        setDeviceCertificate(device.data.certificates);
+        setDeviceCertificate(device.data.result.certificates);
         setDevice(device.data.result);
 
-        if (device.data["pro"]) setIsPro(true);
+        if (device.data.result["pro"]) setIsPro(true);
       }
     }
     if (!cookie("udid")) setNoDeviceFound(true);
