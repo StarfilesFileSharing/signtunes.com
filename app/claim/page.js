@@ -47,7 +47,7 @@ function Claim({ searchParams }) {
           setError(`Server returned status code ${r.status}`);
           return;
         } else {
-          const data = await r.json();
+          const data = (await r.json()).result;
           if (!data.status) {
             setError(data.message);
             return;

@@ -55,7 +55,7 @@ function WhenHeaderLoad({ searchParams }) {
       try {
         if (cookie("pro") === null) {
           const response = await axios.get("https://api2.starfiles.co/device/" + cookie("udid"));
-          setCookie("pro", response.data["pro"], 7);
+          setCookie("pro", response.data.result["pro"], 7);
         }
         console.log("test2");
         const devices = await axios.get("https://api2.starfiles.co/devices/" + cookie("udid"));

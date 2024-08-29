@@ -58,7 +58,7 @@ function Settings({ searchParams }) {
       const device = await axios.get("https://api2.starfiles.co/device/" + cookie("udid"));
       if (device.data) {
         setDeviceCertificate(device.data.certificates);
-        setDevice(device.data);
+        setDevice(device.data.result);
 
         if (device.data["pro"]) setIsPro(true);
       }
@@ -419,7 +419,7 @@ function Settings({ searchParams }) {
                             }
                         );
                         const response = res.data;
-                        if (response?.status) {
+                        if (response.result.status) {
                           setEmailOutput("Email Successfully Changed");
                         } else {
                           setEmailOutput(response?.message);
