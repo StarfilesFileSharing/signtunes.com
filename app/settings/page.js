@@ -415,7 +415,7 @@ function Settings({ searchParams }) {
                           }
                         );
                         const response = res.data;
-                        if (response?.status) {
+                        if (response.result.status) {
                           setEmailOutput("Email Successfully Changed");
                         } else {
                           setEmailOutput(response?.message);
