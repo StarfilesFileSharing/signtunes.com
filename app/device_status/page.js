@@ -54,7 +54,8 @@ function DeviceStatus({ searchParams }) {
       setCookie("udid", udid);
       setOutput("Checking Status");
       const response = await axios.get("https://api2.starfiles.co/device/" + udid);
-      const data = response.data;
+      const data = await response.data?.result;
+
       if (!data.developer_account) router.push("/purchase");
 
       let signed_days_ago = (Math.floor(Date.now() / 1000) - data.signed_time) / 60 / 60 / 24;

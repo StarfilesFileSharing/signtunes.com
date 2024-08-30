@@ -55,7 +55,7 @@ function WhenHeaderLoad({ searchParams }) {
       try {
         if (cookie("pro") === null) {
           const response = await axios.get("https://api2.starfiles.co/device/" + cookie("udid"));
-          setCookie("pro", response.data.result["pro"], 7);
+          setCookie("pro", response.data?.result?.["pro"], 7);
         }
         console.log("test2");
         const devices = await axios.get("https://api2.starfiles.co/devices/" + cookie("udid"));
@@ -78,8 +78,8 @@ function WhenHeaderLoad({ searchParams }) {
                           {device["is_apple_silicon"] == "yes"
                             ? "mac"
                             : device["model"].startsWith("AppleTV")
-                            ? "tv"
-                            : "i"}
+                              ? "tv"
+                              : "i"}
                           OS {device["ios_version"]}
                           <br />
                         </>
@@ -106,8 +106,8 @@ function WhenHeaderLoad({ searchParams }) {
                           {device["is_apple_silicon"] == "yes"
                             ? "mac"
                             : device["model"].startsWith("AppleTV")
-                            ? "tv"
-                            : "i"}
+                              ? "tv"
+                              : "i"}
                           OS {device["ios_version"]}
                           <br />
                         </>
@@ -453,9 +453,8 @@ function WhenHeaderLoad({ searchParams }) {
           <div
             role="button"
             tabindex="0"
-            className={`nav_btn ${
-              cookie("udid") ? "" : "hidden"
-            }  rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 md:text-sm text-xs font-medium text-white shadow flex gap-1`}
+            className={`nav_btn ${cookie("udid") ? "" : "hidden"
+              }  rounded-md bg-primary hover:bg-secondary px-2.5 py-2.5 md:text-sm text-xs font-medium text-white shadow flex gap-1`}
             // id="dropdown_account_btn"
             // data-dropdown-toggle={"dropdown_account"}
             loader-ignore-click={"true"}
@@ -554,8 +553,8 @@ function WhenHeaderLoad({ searchParams }) {
                                     {device["is_apple_silicon"] == "yes"
                                       ? "mac"
                                       : device["model"].startsWith("AppleTV")
-                                      ? "tv"
-                                      : "i"}
+                                        ? "tv"
+                                        : "i"}
                                     OS {device["ios_version"]}
                                     <br />
                                   </>
@@ -592,8 +591,8 @@ function WhenHeaderLoad({ searchParams }) {
                                     {device["is_apple_silicon"] == "yes"
                                       ? "mac"
                                       : device["model"].startsWith("AppleTV")
-                                      ? "tv"
-                                      : "i"}
+                                        ? "tv"
+                                        : "i"}
                                     OS {device["ios_version"]}
                                     <br />
                                   </>
