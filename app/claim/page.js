@@ -12,7 +12,7 @@ function Claim({ searchParams }) {
   const [codeInput, setCodeInput] = useState(code ? code : "");
   const [showNext, setShowNext] = useState(code ? code : false);
   const [udid, setUdid] = useState("");
-  const [workingOnIt, setLoading] = useState("");
+  const [workingOnIt, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [allDone, setAllDone] = useState(false);
 
@@ -34,17 +34,21 @@ function Claim({ searchParams }) {
   const submitIosUdid = async () => {
     console.log("submitting UDID");
     //Use regex to check if UDID is valid. ^([a-fA-F0-9]{40}|[0-9]{8}-[a-fA-F0-9]{16})$ for regex.
-    if(!/^([a-fA-F0-9]{40}|[0-9]{8}-[a-fA-F0-9]{16})$/.test(udid)) {
+    if (!/^([a-fA-F0-9]{40}|[0-9]{8}-[a-fA-F0-9]{16})$/.test(udid)) {
       setError("Invalid UDID");
       return;
     }
     setLoading(true);
     try {
-      fetch(`https://api2.starfiles.co/gift_code/${codeInput}?udid=${udid}`, {
-        method: "POST"
-      }).then(async (r) => {
+      fetch(`https://api2.starfiles.co/gift_code/${codeInput}?udid=${udid}`).then(async (r) => {
         if (r.status !== 200 && r.status !== 203) {
-          setError(`Server returned status code ${r.status}`);
+          let error;
+          try {
+            error = (await r.json()).message;
+          } catch (e) {
+            error = "Unknown error";
+          }
+          setError(`Server returned status code ${r.status}. Error: ${error}`);
           return;
         } else {
           const data = (await r.json()).result;
@@ -120,7 +124,7 @@ function Claim({ searchParams }) {
                 onClick={submitIosUdid}
                 disabled={workingOnIt}
               >
-                {workingOnIt ? "Checking" : !error ? translationList?.next : "Retry"}
+                {workingOnIt ? translationList.Checking : !error ? translationList?.next : translationList.Retry}
               </button>
             </div>
           )}
