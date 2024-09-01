@@ -99,6 +99,10 @@ function Claim({ searchParams }) {
                 type="submit"
                 id="check_code"
                 onClick={() => {
+                  if (!codeInput) {
+                    setError("Please enter a code");
+                    return;
+                  }
                   setShowNext(true);
                 }}
               >
