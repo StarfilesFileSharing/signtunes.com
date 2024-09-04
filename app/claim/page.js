@@ -39,34 +39,32 @@ function Claim({ searchParams }) {
       return;
     }
     setLoading(true);
-    try {
-      fetch(`https://api2.starfiles.co/gift_code/${codeInput}?udid=${udid}`).then(async (r) => {
-        if (r.status !== 200 && r.status !== 203) {
-          let error;
-          try {
-            error = (await r.json()).message;
-          } catch (e) {
-            error = "Unknown error";
-          }
-          setError(`Server returned status code ${r.status}. Error: ${error}`);
+    fetch(`https://api2.starfiles.co/gift_code/${codeInput}?udid=${udid}`).then(async (r) => {
+      if (r.status !== 200 && r.status !== 203) {
+        let error;
+        try {
+          error = (await r.json()).message;
+        } catch (e) {
+          error = "Unknown error";
+        }
+        setError(`Server returned status code ${r.status}. Error: ${error}`);
+        return;
+      } else {
+        const data = (await r.json()).result;
+        if (!data.status) {
+          setError(data.message);
           return;
         } else {
-          const data = (await r.json()).result;
-          if (!data.status) {
-            setError(data.message);
-            return;
-          } else {
-            setError("");
-            setAllDone(true);
-            setShowNext(false);
-          }
+          setError("");
+          setAllDone(true);
+          setShowNext(false);
         }
-      })
-    } catch (e) {
+      }
+    }).catch((e) => {
       setError(e.message);
-    } finally {
+    }).finally(() => {
       setLoading(false);
-    }
+    });
   };
 
   return (
@@ -99,6 +97,10 @@ function Claim({ searchParams }) {
                 type="submit"
                 id="check_code"
                 onClick={() => {
+                  if (!codeInput) {
+                    setError("Please enter a code");
+                    return;
+                  }
                   setShowNext(true);
                 }}
               >
