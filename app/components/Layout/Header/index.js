@@ -634,7 +634,7 @@ function Header({ searchParams }) {
   useEffect(() => {
     setIsClient(true); // Set state to true after component mounts
   }, []);
-
+  if (!isClient) return null; // Prevent rendering until client-side
   return (
     <header className="sticky navbar bg-white dark:text-white dark:bg-gray-800 px-2 md:px-12 py-0 justify-between top-0 z-10">
       {isClient && typeof window !== "undefined"  ? <WhenHeaderLoad searchParams={searchParams} /> : null}

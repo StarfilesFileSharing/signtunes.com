@@ -5,8 +5,9 @@ import { getTranslations } from "@/utils/getTranslation";
 import axios from "axios";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TitleTags from "../../components/Title";
+import Head from "next/head";
 
 function App({ params, searchParams }) {
   const { id } = params;
@@ -55,11 +56,11 @@ function App({ params, searchParams }) {
   const [advisories, setAdvisories] = useState(null);
   const [screenshots, setScreenshots] = useState(null);
   const [downloadLinks, setDownloadLinks] = useState(null);
-  let calledOnce = false;
+  let calledOnce = useRef(false);
 
   useEffect(() => {
-    if (!calledOnce) {
-      calledOnce = true;
+    if (!calledOnce.current) {
+      calledOnce.current = true;
       // Get Translations
       getTranslationList();
       // Get Data
@@ -360,7 +361,7 @@ function App({ params, searchParams }) {
 
   return (
     <>
-      <head>
+      <Head>
         <TitleTags title={title} />
         <meta name="twitter:image" content={`https://cdn.starfiles.co/file/icon/${id}`} />
         <meta name="twitter:image:src" content={`https://cdn.starfiles.co/file/icon/${id}`} />
@@ -370,7 +371,7 @@ function App({ params, searchParams }) {
         <meta property="og:image" content={`https://cdn.starfiles.co/file/icon/${id}`} />
         <meta property="og:image:url" content={`https://cdn.starfiles.co/file/icon/${id}`} />
         <meta property="og:image:secure_url" content={`https://cdn.starfiles.co/file/icon/${id}`} />
-      </head>
+      </Head>
       <Header searchParams={searchParams} />
       <div className="md:mx-12 md:my-12 mx-5 my-6">
         <div className="flex items-center mb-8 max-w-2xl">

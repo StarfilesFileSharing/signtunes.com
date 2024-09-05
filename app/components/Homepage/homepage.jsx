@@ -148,8 +148,7 @@ export default function Homepage({ searchParams }) {
         device: device?.data?.pro || false,
         deviceExists: device?.data?.registered,
       });
-      setEmail(device.data?.result?.email ?? "");
-
+      setEmail(device?.data?.result?.email);
       setAlertsLoad(true);
     } catch (err) {
       console.error(err.message);
@@ -325,7 +324,7 @@ export default function Homepage({ searchParams }) {
               ) : (
                 <></>
               )}
-              {cookie("udid") && isRegistered && email?.length>0 && (
+              {cookie("udid") && isRegistered && email?.length > 0 && (
                 <div
                   aria-hidden="true"
                   className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full bg-[#000000db] h-[100vh]"
@@ -355,7 +354,6 @@ export default function Homepage({ searchParams }) {
                               if (email.trim().length < 1) alert("Email required");
                               else {
                                 const response = await axios.post(`https://api2.starfiles.co/device/${cookie("udid")}`, { email: document.getElementById("email").value });
-                                console.log(response.data,"response.data")
                                 if (response.data.status) setEmailSuccess({ success: true, message: "" });
                                 else setEmailSuccess({ success: false, message: response.data?.message });
                                 setEmail(response.data?.email);

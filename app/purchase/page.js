@@ -4,6 +4,7 @@ import { getTranslations } from "@/utils/getTranslation";
 import { useEffect, useState } from "react";
 import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
+import Head from "next/head";
 
 function PurchaseButton({ purchaseButton = <></>, redirect = null, searchParams, params }) {
   const { id } = searchParams;
@@ -95,9 +96,9 @@ function PurchaseSection({ params, searchParams }) {
 
   return (
     <>
-      <head>
+      <Head>
         <TitleTags title="Purchase Signtunes" />
-      </head>
+      </Head>
       <Header searchParams={searchParams} />
       <div className="mx-5 md:mx-10 mt-5">
         <div className="px-4 py-4 sm:px-6 md:px-12 lg:px-24 lg:py-8 flex flex-col mb-4 md:mb-12 text-center">
@@ -317,8 +318,17 @@ function PurchaseSection({ params, searchParams }) {
   );
 }
 
+
 function Purchase({ params, searchParams }) {
-  if (typeof window !== "undefined") return <PurchaseSection params={params} searchParams={searchParams} />;
-  else return <></>;
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true); // Update state to true after component mounts on the client
+  }, []);
+
+  if (!isClient) return null; // Render nothing until it's client-side
+
+  return <PurchaseSection params={params} searchParams={searchParams} />;
 }
+
 export default Purchase;
