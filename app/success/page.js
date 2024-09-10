@@ -3,6 +3,7 @@ import { getTranslations } from "@/utils/getTranslation";
 import { useEffect, useState } from "react";
 import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
+import Head from "next/head";
 
 function ProPurchaseButton({ purchaseButton = <></>, searchParams }) {
   const { referral } = searchParams;
@@ -53,9 +54,9 @@ function Success({ searchParams }) {
 
   return (
     <>
-      <head>
+      <Head>
         <TitleTags title="Purchase Successfully Completed" />
-      </head>
+      </Head>
       <Header searchParams={searchParams} />
       <div className="mx-5 md:mx-10 mt-5">
         <div className="flex flex-col py-4 lg:pt-8 text-center">

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
+import Head from "next/head";
 
 function ProPurchaseButton({ purchaseButton = <></>, searchParams }) {
   const { referral } = searchParams;
@@ -251,9 +252,9 @@ function SignerProgress({ searchParams }) {
 
   return (
     <>
-      <head>
+      <Head>
         <TitleTags title="Signer" />
-      </head>
+      </Head>
       <Header searchParams={searchParams} />
       <div className="mx-5 mt-24 mb-12" id="signer-progress">
         <div className="text-center">
