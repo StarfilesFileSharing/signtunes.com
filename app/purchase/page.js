@@ -88,6 +88,7 @@ function PurchaseSection({ params, searchParams }) {
     }
   };
 
+  
   // Save Referral
   const saveReferral = async () => {
     if (referral !== "purchase" && cookie("referral") == null) setCookie("referral", referral, 7);
