@@ -5,6 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
+import Head from "next/head";
 
 function Settings({ searchParams }) {
   const { current } = searchParams;
@@ -128,9 +129,9 @@ function Settings({ searchParams }) {
 
   return (
     <>
-      <head>
+      <Head>
         <TitleTags title="Settings - Signtunes" />
-      </head>
+      </Head>
       <Header searchParams={searchParams} />
       <div className="mx-5 md:mx-10 mt-5">
         <div className="grid grid-cols-6 gap-4">

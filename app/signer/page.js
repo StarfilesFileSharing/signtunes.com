@@ -6,6 +6,7 @@ import Script from "next/script";
 import { useEffect, useState } from "react";
 import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
+import Head from "next/head";
 
 function Signer({ searchParams }) {
   const router = useRouter();
@@ -108,7 +109,7 @@ function Signer({ searchParams }) {
 
   return (
     <>
-      <head>
+      <Head>
         <TitleTags title="Signer" />
         <Script
           data-cfasync="false"
@@ -116,7 +117,7 @@ function Signer({ searchParams }) {
           defer
           src="//cdn.jsdelivr.net/combine/gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/functions.min.js,npm/jszip@3/dist/jszip.min.js,gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/upload.min.js,npm/crypto-js@4/crypto-js.min.js"
         />
-      </head>
+      </Head>
       <Header searchParams={searchParams} />
       <div id="signer" className="mx-5 mb-12 mt-8">
         <div className="grid grid-cols-2 gap-4 pb-8">
