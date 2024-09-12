@@ -242,7 +242,7 @@ function Signer({ searchParams }) {
                       "&ipa=";
                     window.starfiles = { ...window.starfiles, local_path: str };
                     // setStarfiles((prev) => ({ ...prev, local_path: str }));
-                    udid !== ""&&scriptloaded ? uploadFile(false) : alert("Please enter your UDID");
+                    udid !== "" ? uploadFile(false) : alert("Please enter your UDID");
                   }}
                 />
               </label>
