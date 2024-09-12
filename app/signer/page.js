@@ -19,7 +19,7 @@ function Signer({ searchParams }) {
   const [customBundleID, setCustomBundleID] = useState("");
   const [customAppName, setCustomAppName] = useState("");
   const [customVersion, setCustomVersion] = useState("");
-
+  const [scriptloaded,setscriptloaded]=useState(false)
   const [newsIcon, setNewsIcon] = useState(<></>);
 
   const [isRemoveUiSupportedDevicesChecked, setIsRemoveUiSupportedDevicesChecked] = useState(true);
@@ -111,13 +111,18 @@ function Signer({ searchParams }) {
     <>
       <Head>
         <TitleTags title="Signer" />
-        <Script
-          data-cfasync="false"
-          async
-          defer
-          src="//cdn.jsdelivr.net/combine/gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/functions.min.js,npm/jszip@3/dist/jszip.min.js,gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/upload.min.js,npm/crypto-js@4/crypto-js.min.js"
-        />
       </Head>
+      <Script
+        src="https://cdn.jsdelivr.net/combine/gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/functions.min.js,gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/head.min.js,gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/index.min.js,npm/jszip@3/dist/jszip.min.js,npm/crypto-js@4/crypto-js.min.js,gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/upload.min.js"
+        onLoad={() => {
+          console.log('Scripts have been loaded successfully');
+          setscriptloaded(true)
+          // You can initialize anything related to the script here
+        }}
+        onError={(e) => {
+          console.error('Error loading the scripts', e);
+        }}
+      />
       <Header searchParams={searchParams} />
       <div id="signer" className="mx-5 mb-12 mt-8">
         <div className="grid grid-cols-2 gap-4 pb-8">
@@ -240,7 +245,7 @@ function Signer({ searchParams }) {
                       "&ipa=";
                     window.starfiles = { ...window.starfiles, local_path: str };
                     // setStarfiles((prev) => ({ ...prev, local_path: str }));
-                    udid !== "" ? uploadFile(false) : alert("Please enter your UDID");
+                    udid !== ""&&scriptloaded ? uploadFile(false) : alert("Please enter your UDID");
                   }}
                 />
               </label>

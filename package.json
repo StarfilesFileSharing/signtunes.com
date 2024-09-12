@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.11.0",
+    "@types/react": "18.3.5",
     "autoprefixer": "^10.0.1",
     "daisyui": "^4.7.3",
     "postcss": "^8",
