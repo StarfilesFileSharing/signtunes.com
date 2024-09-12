@@ -19,7 +19,7 @@ function Signer({ searchParams }) {
   const [customBundleID, setCustomBundleID] = useState("");
   const [customAppName, setCustomAppName] = useState("");
   const [customVersion, setCustomVersion] = useState("");
-
+  const [scriptloaded,setscriptloaded]=useState(false)
   const [newsIcon, setNewsIcon] = useState(<></>);
 
   const [isRemoveUiSupportedDevicesChecked, setIsRemoveUiSupportedDevicesChecked] = useState(true);
@@ -241,7 +241,7 @@ function Signer({ searchParams }) {
                       "&ipa=";
                     window.starfiles = { ...window.starfiles, local_path: str };
                     // setStarfiles((prev) => ({ ...prev, local_path: str }));
-                    udid !== "" ? uploadFile(false) : alert("Please enter your UDID");
+                    udid !== ""&&scriptloaded ? uploadFile(false) : alert("Please enter your UDID");
                   }}
                 />
               </label>
