@@ -19,7 +19,7 @@ function Signer({ searchParams }) {
   const [customBundleID, setCustomBundleID] = useState("");
   const [customAppName, setCustomAppName] = useState("");
   const [customVersion, setCustomVersion] = useState("");
-
+  const [scriptloaded,setscriptloaded]=useState(false)
   const [newsIcon, setNewsIcon] = useState(<></>);
 
   const [isRemoveUiSupportedDevicesChecked, setIsRemoveUiSupportedDevicesChecked] = useState(true);
@@ -107,17 +107,19 @@ function Signer({ searchParams }) {
     }
   }
 
+  
   return (
     <>
       <Head>
         <TitleTags title="Signer" />
-        <Script
+      </Head>
+      <Script
           data-cfasync="false"
           async
           defer
-          src="//cdn.jsdelivr.net/combine/gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/functions.min.js,npm/jszip@3/dist/jszip.min.js,gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/upload.min.js,npm/crypto-js@4/crypto-js.min.js"
+          // src="//cdn.jsdelivr.net/combine/gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/functions.min.js,npm/jszip@3/dist/jszip.min.js,gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/upload.min.js,npm/crypto-js@4/crypto-js.min.js"
+          src="https://cdn.jsdelivr.net/combine/gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/functions.min.js,gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/head.min.js,gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/index.min.js,npm/jszip@3/dist/jszip.min.js,npm/crypto-js@4/crypto-js.min.js,gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/upload.min.js"
         />
-      </Head>
       <Header searchParams={searchParams} />
       <div id="signer" className="mx-5 mb-12 mt-8">
         <div className="grid grid-cols-2 gap-4 pb-8">
