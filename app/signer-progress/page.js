@@ -348,18 +348,18 @@ function SignerProgress({ searchParams }) {
             </div>
           )}
          
-          {errors?.trim()?.length > 0 && (
+          {/* {errors?.trim()?.length > 0 && (
             <button
               onClick={() => setShowError((prev) => !prev)}
               className="rounded-md mt-5 inline-block bg-red-600 hover:bg-red-400 px-2.5 py-2.5 text-lg text-white shadow"
             >
               Show Error
             </button>
-          )}
+          )} */}
 
-<button  onClick={()=>settoggle(!toggleUrl)} className="rounded-md m-4 mr-4 inline-block bg-gray-600 hover:bg-red-400 px-2.5 py-2.5 text-lg text-white shadow"
+<button  onClick={()=>settoggle(!toggleUrl)} className="rounded-md m-4 bg-primary mr-4 inline-block hover:bg-red-400 px-2.5 py-2.5 text-lg text-white shadow"
 >
-         {toggleUrl?"Use Stable":" Use beta signer"}
+         {toggleUrl?"Use Beta Signer":"Use Old Signer"}
           </button>
           {showError && <code className="p-3 mt-10 inline-block bg-gray-200 rounded-lg mx-[10%]">{errors}</code>}
         </div>
