@@ -1,7 +1,7 @@
 "use client";
 import { getTranslations } from "@/utils/getTranslation";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "../components/Layout/Header";
 import TitleTags from "../components/Title";
 import Head from "next/head";
@@ -71,21 +71,20 @@ function SignerProgress({ searchParams }) {
   const [log, setLog] = useState(<></>);
   const [progressWidth, setProgressWidth] = useState("0");
   const [wired, setWired] = useState(<></>);
-
+  const [toggleUrl,settoggle ]=useState(false)
   const [showError, setShowError] = useState(false);
   const [errors, setErrors] = useState("");
-
-  let calledOnce = false;
-
+  let queryParams = window.location.hash.split("?")[1];
+  let baseUrl = "https://api2.starfiles.co/sign_ipa?stream";
+  let baseUrlB="https://sign-microservice.starfiles.co"
+  // let calledOnce = useRef(false);
   useEffect(() => {
-    if (!calledOnce) {
-      calledOnce = true;
+ 
       // Get Translations
       getTranslationList();
       // Connect Event Source
       connectEventSource();
-    }
-  }, []);
+  }, [toggleUrl]);
 
   // Get Translations
   const getTranslationList = async () => {
@@ -114,7 +113,9 @@ function SignerProgress({ searchParams }) {
 
   function connectEventSource() {
     let eventSource = new EventSource(
-      "https://sign-microservice.starfiles.co?service=signtunes&stream&" + window.location.hash.split("?")[1]
+      !toggleUrl 
+      ? `${baseUrl}&${queryParams}`
+      : `${baseUrlB}&service=signtunes&${queryParams}`
     );
     setShowLog(true);
     eventSource.onmessage = function (event) {
@@ -346,6 +347,7 @@ function SignerProgress({ searchParams }) {
               {log}
             </div>
           )}
+         
           {errors?.trim()?.length > 0 && (
             <button
               onClick={() => setShowError((prev) => !prev)}
@@ -354,8 +356,14 @@ function SignerProgress({ searchParams }) {
               Show Error
             </button>
           )}
+
+<button  onClick={()=>settoggle(!toggleUrl)} className="rounded-md m-4 mr-4 inline-block bg-gray-600 hover:bg-red-400 px-2.5 py-2.5 text-lg text-white shadow"
+>
+         {toggleUrl?"Use Stable":" Use beta signer"}
+          </button>
           {showError && <code className="p-3 mt-10 inline-block bg-gray-200 rounded-lg mx-[10%]">{errors}</code>}
         </div>
+        
       </div>
     </>
   );
