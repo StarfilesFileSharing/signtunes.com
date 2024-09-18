@@ -73,8 +73,26 @@ function SignerProgress({ searchParams }) {
   const [wired, setWired] = useState(<></>);
   const [showError, setShowError] = useState(false);
   const [errors, setErrors] = useState("");
-  let queryParams = window.location.hash.split("?")[1];
-  // let calledOnce = useRef(false);
+  // let queryParams = window.location.hash.split("?")[1];
+  // let baseUrl = "https://api2.starfiles.co/sign_ipa?stream";
+  // let baseUrlB="https://sign-microservice.starfiles.co"
+  // // let calledOnce = useRef(false);
+  const [queryParams, setQueryParams] = useState("");
+  const [baseUrl, setBaseUrl] = useState("");
+  const [baseUrlB, setBaseUrlB] = useState("");
+
+  useEffect(() => {
+    // Check if the window object is available (client-side only)
+    if (typeof window !== "undefined") {
+      // Safely access window.location.hash
+      const hashQueryParams = window.location.hash.split("?")[1];
+      setQueryParams(hashQueryParams);
+      // Set base URL (if needed dynamically)
+      setBaseUrl("https://api2.starfiles.co/sign_ipa?stream");
+      setBaseUrlB("https://sign-microservice.starfiles.co");
+    }
+  }, []); // Runs only once when the component is mounted
+
   useEffect(() => {
       // Get Translations
       getTranslationList();
