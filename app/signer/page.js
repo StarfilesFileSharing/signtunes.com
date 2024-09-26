@@ -324,7 +324,12 @@ function Signer({ searchParams }) {
                       return;
                     }
                     if (ipa === "") {
-                      router.push(document.querySelector("#output a")?.getAttribute("href"));
+                      const link = document.querySelector("#output a")?.getAttribute("href");
+                      if (!link) {
+                        console.error("No link found in #output element");
+                        return;
+                      }
+                      router.push(link);
                       return;
                     }
 
