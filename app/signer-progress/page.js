@@ -126,7 +126,7 @@ function SignerProgress({ searchParams }) {
   }
 
   function connectEventSource() {
-    let eventSource = new EventSource(`https://api2.starfiles.co/sign_ipa?stream&${queryParams}`);
+    let eventSource = new EventSource(`https://api2.starfiles.co/sign_ipa?stream&${window.location.hash.split("?")[1]}`);
     setShowLog(true);
     eventSource.onmessage = function (event) {
       if (event.data == "Connected") return;
