@@ -324,7 +324,7 @@ export default function Homepage({ searchParams }) {
               ) : (
                 <></>
               )}
-              {cookie("udid") && isRegistered && email?.length > 0 && (
+              {cookie("udid") && isRegistered && !email?.length > 0 && (
                 <div
                   aria-hidden="true"
                   className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full bg-[#000000db] h-[100vh]"
