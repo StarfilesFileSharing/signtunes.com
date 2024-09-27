@@ -118,7 +118,7 @@ function Signer({ searchParams }) {
           async
           defer
           // src="//cdn.jsdelivr.net/combine/gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/functions.min.js,npm/jszip@3/dist/jszip.min.js,gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/upload.min.js,npm/crypto-js@4/crypto-js.min.js"
-          src="https://cdn.jsdelivr.net/combine/gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/functions.min.js,gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/head.min.js,gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/index.min.js,npm/jszip@3/dist/jszip.min.js,npm/crypto-js@4/crypto-js.min.js,gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/upload.min.js"
+          src="https://cdn.jsdelivr.net/combine/gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/functions.min.js,gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/head.min.js,gh/QuixThe2nd/Starfiles-JSDelivr@latest/js/index.min.js,npm/jszip@3/dist/jszip.min.js,npm/crypto-js@4/crypto-js.min.js,gh/QuixThe2nd/Starfiles-JSDelivr@25/js/upload.min.js"
         />
       <Header searchParams={searchParams} />
       <div id="signer" className="mx-5 mb-12 mt-8">
